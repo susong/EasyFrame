@@ -9,7 +9,6 @@ local.properties
 # Log Files
 *.log
 
-/.idea/workspace.xml
-/.idea/libraries
+/.idea
 EasyFrame.iml
 app-release.apk

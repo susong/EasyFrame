@@ -12,42 +12,25 @@ repositories {
 }
 
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
-    signingConfigs {
-        dream {
-            keyAlias 'dream'
-            keyPassword '123456'
-            storePassword '123456'
-            storeFile file('/Users/SuSong/Developer/Android/WorkSpace/AndroidStudioProjects/EasyFrame/dream.jks')
-        }
-    }
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
+
     defaultConfig {
-        applicationId "com.dream.easy"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        signingConfig signingConfigs.dream
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.dream
-        }
-        debug {
-            signingConfig signingConfigs.dream
         }
     }
-    packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-    }
-    productFlavors {
-    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -57,8 +40,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':library')
-    compile project(':resource')
-    compile project(':data')
     compile project(':domain')
     testCompile 'junit:junit:4.12'
 }
