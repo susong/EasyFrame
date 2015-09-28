@@ -36,13 +36,24 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.0.1'
+    // https://github.com/google/gson
     compile 'com.google.code.gson:gson:2.3.1'
+    // https://github.com/JakeWharton/butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
+    // https://github.com/google/dagger
+    // Android依赖注入dagger
     compile 'com.google.dagger:dagger:2.0.1'
     apt 'com.google.dagger:dagger-compiler:2.0.1'
+    // http://square.github.io/okhttp/
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+    // http://square.github.io/retrofit/
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta1'
+    // https://github.com/ReactiveX/RxJava
     compile 'io.reactivex:rxjava:1.0.14'
+    // https://github.com/ReactiveX/RxAndroid
     compile 'io.reactivex:rxandroid:1.0.1'
+    // http://facebook.github.io/stetho/
+    // facebook的Android调试工具Stetho
     compile 'com.facebook.stetho:stetho:1.2.0'
     compile 'com.facebook.stetho:stetho-okhttp:1.2.0'
     compile 'javax.annotation:javax.annotation-api:1.2'
