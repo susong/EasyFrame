@@ -2,15 +2,18 @@ package com.dream.easy;
 
 import android.app.Application;
 
+import com.dream.library.AbApplication;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 
 
 /**
- * EasyFrame
- * Created by Su on 15/9/28 下午2:08.
+ * Author:      SuSong
+ * Email:       751971697@qq.com | susong0618@163.com
+ * Date:        15/9/28 下午3:25
+ * Description: EasyFrame
  */
-public class App extends Application {
+public class App extends AbApplication {
 
     public static final String APP_NAME = "EasyFrame";
 
@@ -20,10 +23,16 @@ public class App extends Application {
         init();
     }
 
+    /**
+     * 初始化
+     */
     private void init() {
         initLogger();
     }
 
+    /**
+     * 初始化日志打印工具类
+     */
     private void initLogger() {
         Logger
             .init(APP_NAME)               // default PRETTYLOGGER or use just init()

@@ -1,9 +1,7 @@
-package com.dream.easy;
+package com.dream.library;
 
 import android.os.Bundle;
-
-import com.dream.library.AbBaseActivity;
-import com.dream.library.utils.AbToastUtil;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Author:      SuSong
@@ -11,12 +9,11 @@ import com.dream.library.utils.AbToastUtil;
  * Date:        15/9/28 下午3:25
  * Description: EasyFrame
  */
-public class MainActivity extends AbBaseActivity {
+public abstract class AbBaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        AbToastUtil.show("d");
     }
+
 }

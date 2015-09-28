@@ -30,6 +30,6 @@
                 android:hint="Password" />
         </android.support.design.widget.TextInputLayout>
 
-        <include layout="@layout/long_content" />
+        <include layout="@layout/activity_material_design_long_content" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
