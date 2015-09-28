@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -112,6 +113,14 @@ final class LoggerPrinter implements Printer {
   @Override
   public void e(String message, Object... args) {
     e(null, message, args);
+  }
+
+  @Override
+  public void e(Exception e, Object... args) {
+//        e(e.getCause(), e.getMessage(), args);
+    StringWriter writer = new StringWriter();
+    e.printStackTrace(new PrintWriter(writer));
+    log(Log.ERROR, writer.toString(), args);
   }
 
   @Override

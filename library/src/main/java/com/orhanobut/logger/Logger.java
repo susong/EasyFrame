@@ -53,6 +53,10 @@ public final class Logger {
     printer.e(null, message, args);
   }
 
+  public static void e(Exception e, Object... args) {
+    printer.e(e, args);
+  }
+
   public static void e(Throwable throwable, String message, Object... args) {
     printer.e(throwable, message, args);
   }

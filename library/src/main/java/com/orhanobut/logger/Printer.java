@@ -15,6 +15,8 @@ public interface Printer {
 
   void e(String message, Object... args);
 
+  void e(Exception e, Object... args);
+
   void e(Throwable throwable, String message, Object... args);
 
   void w(String message, Object... args);
