@@ -2,6 +2,8 @@ package com.dream.library;
 
 import android.app.Application;
 
+import com.dream.library.volley.VolleyHelper;
+
 /**
  * Author:      SuSong
  * Email:       751971697@qq.com | susong0618@163.com
@@ -15,7 +17,7 @@ public class AbApplication extends Application {
     /**
      * 获得当前app运行的AppContext
      *
-     * @return
+     * @return AbApplication
      */
     public static AbApplication getInstance() {
         return instance;
@@ -25,5 +27,11 @@ public class AbApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        init();
+    }
+
+    private void init() {
+        // 初始化Volley
+        VolleyHelper.getInstance().init(this);
     }
 }

@@ -1,10 +1,8 @@
 package com.dream.easy;
 
-import android.app.Application;
-
 import com.dream.library.AbApplication;
+import com.orhanobut.logger.AbLog;
 import com.orhanobut.logger.LogLevel;
-import com.orhanobut.logger.Logger;
 
 
 /**
@@ -34,7 +32,7 @@ public class App extends AbApplication {
      * 初始化日志打印工具类
      */
     private void initLogger() {
-        Logger
+        AbLog
             .init(APP_NAME)               // default PRETTYLOGGER or use just init()
 //            .setMethodCount(2)          // default 2
 //            .hideThreadInfo()           // default shown

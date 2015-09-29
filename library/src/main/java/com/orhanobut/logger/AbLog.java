@@ -6,13 +6,13 @@ package com.orhanobut.logger;
  *
  * @author Orhan Obut
  */
-public final class Logger {
+public final class AbLog {
 
   private static final Printer printer = new LoggerPrinter();
   private static final String DEFAULT_TAG = "PRETTYLOGGER";
 
   //no instance
-  private Logger() {
+  private AbLog() {
   }
 
   /**

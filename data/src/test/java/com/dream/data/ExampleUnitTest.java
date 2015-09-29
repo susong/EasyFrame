@@ -1,6 +1,4 @@
-package com.dream.domain;
-
-import com.dream.data.Test;
+package com.dream.data;
 
 import org.junit.Test;
 

@@ -378,7 +378,7 @@ final class LoggerPrinter implements Printer {
     for (int i = MIN_STACK_OFFSET; i < trace.length; i++) {
       StackTraceElement e = trace[i];
       String name = e.getClassName();
-      if (!name.equals(LoggerPrinter.class.getName()) && !name.equals(Logger.class.getName())) {
+      if (!name.equals(LoggerPrinter.class.getName()) && !name.equals(AbLog.class.getName())) {
         return --i;
       }
     }
