@@ -1,5 +1,6 @@
 # Gradle files
-.gradle/
+.gradle
+.idea
 build/
 /*/build/
 
@@ -9,6 +10,5 @@ local.properties
 # Log Files
 *.log
 
-/.idea
 EasyFrame.iml
 app-release.apk

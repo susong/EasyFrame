@@ -8,6 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.orhanobut.logger.AbLog;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -144,7 +145,8 @@ public class CustomRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         String parsed;
         try {
-            parsed = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+            parsed = new String(response.data, HttpHeaderParser.parseCharset(response.headers)).trim();
+            AbLog.json(parsed);
             if (parsed.startsWith("[") && type != null) {
                 return (Response<T>) Response.success(gson.fromJson(parsed, type),
                     HttpHeaderParser.parseCacheHeaders(response));

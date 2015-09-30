@@ -1,16 +1,19 @@
 package com.dream.easy;
 
+import android.app.Activity;
+import android.app.Application;
 import android.os.Bundle;
 
-import com.android.volley.Response;
-import com.dream.library.AbBaseActivity;
-import com.dream.library.utils.AbToastUtil;
-import com.dream.library.volley.CustomRequest;
-import com.dream.library.volley.VolleyHelper;
-import com.google.gson.reflect.TypeToken;
+import com.dream.data.api.Api;
+import com.dream.easy.base.AbDaggerBaseActivity;
+import com.dream.easy.dagger.components.DaggerMainActivityComponent;
+import com.dream.easy.dagger.components.MainActivityComponent;
+import com.dream.easy.dagger.modules.MainActivityModule;
+import com.dream.library.dagger.ForActivity;
+import com.dream.library.dagger.ForApplication;
 import com.orhanobut.logger.AbLog;
 
-import java.util.List;
+import javax.inject.Inject;
 
 /**
  * Author:      SuSong
@@ -18,50 +21,27 @@ import java.util.List;
  * Date:        15/9/28 下午3:25
  * Description: EasyFrame
  */
-public class MainActivity extends AbBaseActivity {
+public class MainActivity extends AbDaggerBaseActivity {
+
+    @Inject Api mApi;
+    @Inject @ForApplication Application mApplication;
+    @Inject @ForActivity Activity mActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivityComponent mainActivityComponent = DaggerMainActivityComponent.builder()
+            .applicationComponent(getApplicationComponent())
+            .mainActivityModule(new MainActivityModule(this))
+            .build();
+        mainActivityComponent.inject(this);
 
-        AbToastUtil.show("d");
 
-        VolleyHelper.getInstance()
-            .addRequest(new CustomRequest<String>(new CustomRequest.RequestBuilder()
-                .url("https://api.github.com/users/susong0618/repos")
-                .successListener(new com.android.volley.Response.Listener() {
-                    @Override
-                    public void onResponse(Object response) {
-                        AbLog.json((String) response);
-                    }
-                })));
+        AbLog.d(mApi.toString());
+        AbLog.d(mApplication.toString());
+        AbLog.d(mActivity.toString());
 
-        VolleyHelper.getInstance()
-            .addRequest(new CustomRequest<List<Bean>>(new CustomRequest.RequestBuilder()
-                .url("https://api.github.com/users/susong0618/repos")
-                .type(new TypeToken<List<Bean>>() {
-                }.getType())
-                .successListener(new com.android.volley.Response.Listener() {
-                    @Override
-                    public void onResponse(Object response) {
-                        List<Bean> response1 = (List<Bean>) response;
-                        for (Bean bean : response1) {
-                            AbLog.i(bean.name);
-                        }
-                    }
-                })));
-
-        VolleyHelper.getInstance().getRequestQueue().add(new CustomRequest<List<Bean>>("https://api.github.com/users/susong0618/repos",
-            new TypeToken<List<Bean>>() {
-            }.getType(),
-            null, response -> {
-                for (Bean bean : response) {
-                    AbLog.i(bean.name);
-                }
-            }, null));
+//        mApi.getImagesList("美女", 1);
     }
 
-    public class Bean {
-        private String name;
-    }
 }

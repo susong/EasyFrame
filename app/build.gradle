@@ -5,6 +5,7 @@ buildscript {
 
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:3.2.2'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
     }
 }
 repositories {
@@ -13,6 +14,7 @@ repositories {
 
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     signingConfigs {
@@ -60,5 +62,11 @@ dependencies {
     compile project(':resource')
     compile project(':data')
     compile project(':domain')
+
+    // https://github.com/google/dagger
+    // Android依赖注入dagger
+    compile 'com.google.dagger:dagger:2.0.1'
+    apt 'com.google.dagger:dagger-compiler:2.0.1'
+
     testCompile 'junit:junit:4.12'
 }

@@ -10,7 +10,7 @@ import com.dream.library.volley.VolleyHelper;
  * Date:        15/9/28 下午3:55
  * Description: EasyFrame
  */
-public class AbApplication extends Application {
+public abstract class AbApplication extends Application {
 
     private static AbApplication instance;
 

@@ -1,6 +1,6 @@
 package com.dream.easy;
 
-import com.dream.library.AbApplication;
+import com.dream.easy.base.AbDaggerApplication;
 import com.orhanobut.logger.AbLog;
 import com.orhanobut.logger.LogLevel;
 
@@ -11,7 +11,7 @@ import com.orhanobut.logger.LogLevel;
  * Date:        15/9/28 下午3:25
  * Description: EasyFrame
  */
-public class App extends AbApplication {
+public class App extends AbDaggerApplication {
 
     public static final String APP_NAME = "EasyFrame";
 
