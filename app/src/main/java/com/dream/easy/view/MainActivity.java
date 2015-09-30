@@ -1,4 +1,4 @@
-package com.dream.easy;
+package com.dream.easy.view;
 
 import android.app.Activity;
 import android.app.Application;
@@ -41,7 +41,6 @@ public class MainActivity extends AbDaggerBaseActivity {
         AbLog.d(mApplication.toString());
         AbLog.d(mActivity.toString());
 
-//        mApi.getImagesList("美女", 1);
     }
 
 }

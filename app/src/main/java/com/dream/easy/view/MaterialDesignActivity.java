@@ -1,4 +1,4 @@
-package com.dream.easy;
+package com.dream.easy.view;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.dream.easy.R;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
