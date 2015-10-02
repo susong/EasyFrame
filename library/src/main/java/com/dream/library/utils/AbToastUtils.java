@@ -16,9 +16,9 @@ import com.dream.library.AbApplication;
  * Date:        15/9/28 下午3:25
  * Description: Toast 工具类
  */
-public class AbToastUtil {
+public class AbToastUtils {
 
-    private AbToastUtil() {
+    private AbToastUtils() {
         throw new AssertionError();
     }
 

@@ -16,11 +16,9 @@
   -->
 
 <resources>
-
-    <string name="app_name">library</string>
-    <string name="common_loading_message">Loading...</string>
-    <string name="common_empty_msg">Oops, failed to resolve data\nPlease hit the screen and try again~</string>
-    <string name="common_error_msg">Oops, something wrong!\nPlease hit the screen and try again~</string>
-    <string name="common_no_network_msg">No network connected!\nPlease hit the screen and try again after connecting~</string>
-
+    <dimen name="common_load_more_progress_size">30dp</dimen>
+    <dimen name="common_load_more_padding">20dp</dimen>
+    <dimen name="common_loading_progress_size">35dp</dimen>
+    <dimen name="common_loading_text_margin">10dp</dimen>
+    <dimen name="common_loading_text_lines_spacing">5dp</dimen>
 </resources>

@@ -57,16 +57,14 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':library')
     compile project(':resource')
     compile project(':data')
     compile project(':domain')
-
     // https://github.com/google/dagger
     // Android依赖注入dagger
     compile 'com.google.dagger:dagger:2.0.1'
     apt 'com.google.dagger:dagger-compiler:2.0.1'
-
     testCompile 'junit:junit:4.12'
 }

@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.dream.data.api.Api;
+import com.dream.easy.R;
 import com.dream.easy.base.AbDaggerBaseActivity;
 import com.dream.easy.dagger.components.DaggerMainActivityComponent;
 import com.dream.easy.dagger.components.MainActivityComponent;
@@ -30,6 +31,7 @@ public class MainActivity extends AbDaggerBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         MainActivityComponent mainActivityComponent = DaggerMainActivityComponent.builder()
             .applicationComponent(getApplicationComponent())
             .mainActivityModule(new MainActivityModule(this))
