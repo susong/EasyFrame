@@ -1,4 +1,4 @@
-package com.dream.library.loading;
+package com.dream.library.empty;
 
 import android.content.Context;
 import android.view.View;
@@ -12,12 +12,12 @@ import android.widget.FrameLayout;
  * Date:        15/10/3 上午12:13
  * Description: EasyFrame
  */
-public class VaryViewHelperX implements IVaryViewHelper {
+public class EmptyViewHelperX implements IEmptyViewHelper {
 
-  private IVaryViewHelper helper;
+  private IEmptyViewHelper helper;
   private View view;
 
-  public VaryViewHelperX(View view) {
+  public EmptyViewHelperX(View view) {
     super();
     this.view = view;
     ViewGroup group = (ViewGroup) view.getParent();
@@ -30,7 +30,7 @@ public class VaryViewHelperX implements IVaryViewHelper {
     View floatView = new View(view.getContext());
     frameLayout.addView(view, params);
     frameLayout.addView(floatView, params);
-    helper = new VaryViewHelper(floatView);
+    helper = new EmptyViewHelper(floatView);
   }
 
   @Override

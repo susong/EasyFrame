@@ -31,7 +31,7 @@ import android.view.WindowManager;
 
 import com.dream.library.R;
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.loading.VaryViewHelperController;
+import com.dream.library.empty.EmptyViewHelperController;
 import com.dream.library.netstatus.NetChangeObserver;
 import com.dream.library.netstatus.NetStateReceiver;
 import com.dream.library.netstatus.NetUtils;
@@ -73,9 +73,9 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
   protected NetChangeObserver mNetChangeObserver = null;
 
   /**
-   * loading view controller
+   * il_loading view controller
    */
-  private VaryViewHelperController mVaryViewHelperController = null;
+  private EmptyViewHelperController mEmptyViewHelperController = null;
 
   /**
    * overridePendingTransition mode
@@ -172,7 +172,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     super.setContentView(layoutResID);
     ButterKnife.bind(this);
     if (null != getLoadingTargetView()) {
-      mVaryViewHelperController = new VaryViewHelperController(getLoadingTargetView());
+      mEmptyViewHelperController = new EmptyViewHelperController(getLoadingTargetView());
     }
   }
 
@@ -375,14 +375,14 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
    * @param toggle
    */
   protected void toggleShowLoading(boolean toggle, String msg) {
-    if (null == mVaryViewHelperController) {
+    if (null == mEmptyViewHelperController) {
       throw new IllegalArgumentException("You must return a right target view for loading");
     }
 
     if (toggle) {
-      mVaryViewHelperController.showLoading(msg);
+      mEmptyViewHelperController.showLoading(msg);
     } else {
-      mVaryViewHelperController.restore();
+      mEmptyViewHelperController.restore();
     }
   }
 
@@ -392,14 +392,14 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
    * @param toggle
    */
   protected void toggleShowEmpty(boolean toggle, String msg, View.OnClickListener onClickListener) {
-    if (null == mVaryViewHelperController) {
+    if (null == mEmptyViewHelperController) {
       throw new IllegalArgumentException("You must return a right target view for loading");
     }
 
     if (toggle) {
-      mVaryViewHelperController.showEmpty(msg, onClickListener);
+      mEmptyViewHelperController.showEmpty(msg, onClickListener);
     } else {
-      mVaryViewHelperController.restore();
+      mEmptyViewHelperController.restore();
     }
   }
 
@@ -409,14 +409,14 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
    * @param toggle
    */
   protected void toggleShowError(boolean toggle, String msg, View.OnClickListener onClickListener) {
-    if (null == mVaryViewHelperController) {
-      throw new IllegalArgumentException("You must return a right target view for loading");
+    if (null == mEmptyViewHelperController) {
+      throw new IllegalArgumentException("You must return a right target view for il_loading");
     }
 
     if (toggle) {
-      mVaryViewHelperController.showError(msg, onClickListener);
+      mEmptyViewHelperController.showError(msg, onClickListener);
     } else {
-      mVaryViewHelperController.restore();
+      mEmptyViewHelperController.restore();
     }
   }
 
@@ -426,14 +426,14 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
    * @param toggle
    */
   protected void toggleNetworkError(boolean toggle, View.OnClickListener onClickListener) {
-    if (null == mVaryViewHelperController) {
-      throw new IllegalArgumentException("You must return a right target view for loading");
+    if (null == mEmptyViewHelperController) {
+      throw new IllegalArgumentException("You must return a right target view for il_loading");
     }
 
     if (toggle) {
-      mVaryViewHelperController.showNetworkError(onClickListener);
+      mEmptyViewHelperController.showNetworkError(onClickListener);
     } else {
-      mVaryViewHelperController.restore();
+      mEmptyViewHelperController.restore();
     }
   }
 

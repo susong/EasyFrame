@@ -1,4 +1,4 @@
-package com.dream.library.loading;
+package com.dream.library.empty;
 
 import android.content.Context;
 import android.view.View;
@@ -9,7 +9,7 @@ import android.view.View;
  * Date:        15/10/3 上午12:13
  * Description: EasyFrame
  */
-public interface IVaryViewHelper {
+public interface IEmptyViewHelper {
 
   View getCurrentLayout();
 

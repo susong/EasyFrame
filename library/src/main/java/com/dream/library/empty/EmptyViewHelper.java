@@ -1,4 +1,4 @@
-package com.dream.library.loading;
+package com.dream.library.empty;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,14 +11,14 @@ import android.view.ViewGroup;
  * Date:        15/10/3 上午12:13
  * Description: EasyFrame
  */
-public class VaryViewHelper implements IVaryViewHelper {
+public class EmptyViewHelper implements IEmptyViewHelper {
   private View view;
   private ViewGroup parentView;
   private int viewIndex;
   private ViewGroup.LayoutParams params;
   private View currentView;
 
-  public VaryViewHelper(View view) {
+  public EmptyViewHelper(View view) {
     super();
     this.view = view;
   }

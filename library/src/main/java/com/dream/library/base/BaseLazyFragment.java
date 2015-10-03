@@ -30,7 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.loading.VaryViewHelperController;
+import com.dream.library.empty.EmptyViewHelperController;
 import com.dream.library.utils.AbCommonUtils;
 
 import java.lang.reflect.Field;
@@ -68,7 +68,7 @@ public abstract class BaseLazyFragment extends Fragment {
   private boolean isFirstInvisible = true;
   private boolean isPrepared;
 
-  private VaryViewHelperController mVaryViewHelperController = null;
+  private EmptyViewHelperController mEmptyViewHelperController = null;
 
   @Override
   public void onAttach(Activity activity) {
@@ -100,7 +100,7 @@ public abstract class BaseLazyFragment extends Fragment {
     ButterKnife.bind(this, view);
 
     if (null != getLoadingTargetView()) {
-      mVaryViewHelperController = new VaryViewHelperController(getLoadingTargetView());
+      mEmptyViewHelperController = new EmptyViewHelperController(getLoadingTargetView());
     }
 
     DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -326,14 +326,14 @@ public abstract class BaseLazyFragment extends Fragment {
    * @param toggle
    */
   protected void toggleShowLoading(boolean toggle, String msg) {
-    if (null == mVaryViewHelperController) {
+    if (null == mEmptyViewHelperController) {
       throw new IllegalArgumentException("You must return a right target view for loading");
     }
 
     if (toggle) {
-      mVaryViewHelperController.showLoading(msg);
+      mEmptyViewHelperController.showLoading(msg);
     } else {
-      mVaryViewHelperController.restore();
+      mEmptyViewHelperController.restore();
     }
   }
 
@@ -343,14 +343,14 @@ public abstract class BaseLazyFragment extends Fragment {
    * @param toggle
    */
   protected void toggleShowEmpty(boolean toggle, String msg, View.OnClickListener onClickListener) {
-    if (null == mVaryViewHelperController) {
-      throw new IllegalArgumentException("You must return a right target view for loading");
+    if (null == mEmptyViewHelperController) {
+      throw new IllegalArgumentException("You must return a right target view for il_loading");
     }
 
     if (toggle) {
-      mVaryViewHelperController.showEmpty(msg, onClickListener);
+      mEmptyViewHelperController.showEmpty(msg, onClickListener);
     } else {
-      mVaryViewHelperController.restore();
+      mEmptyViewHelperController.restore();
     }
   }
 
@@ -360,14 +360,14 @@ public abstract class BaseLazyFragment extends Fragment {
    * @param toggle
    */
   protected void toggleShowError(boolean toggle, String msg, View.OnClickListener onClickListener) {
-    if (null == mVaryViewHelperController) {
-      throw new IllegalArgumentException("You must return a right target view for loading");
+    if (null == mEmptyViewHelperController) {
+      throw new IllegalArgumentException("You must return a right target view for il_loading");
     }
 
     if (toggle) {
-      mVaryViewHelperController.showError(msg, onClickListener);
+      mEmptyViewHelperController.showError(msg, onClickListener);
     } else {
-      mVaryViewHelperController.restore();
+      mEmptyViewHelperController.restore();
     }
   }
 
@@ -377,14 +377,14 @@ public abstract class BaseLazyFragment extends Fragment {
    * @param toggle
    */
   protected void toggleNetworkError(boolean toggle, View.OnClickListener onClickListener) {
-    if (null == mVaryViewHelperController) {
-      throw new IllegalArgumentException("You must return a right target view for loading");
+    if (null == mEmptyViewHelperController) {
+      throw new IllegalArgumentException("You must return a right target view for il_loading");
     }
 
     if (toggle) {
-      mVaryViewHelperController.showNetworkError(onClickListener);
+      mEmptyViewHelperController.showNetworkError(onClickListener);
     } else {
-      mVaryViewHelperController.restore();
+      mEmptyViewHelperController.restore();
     }
   }
 

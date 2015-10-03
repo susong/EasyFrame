@@ -1,4 +1,4 @@
-package com.dream.library.loading;
+package com.dream.library.empty;
 
 
 import android.view.View;
@@ -14,26 +14,26 @@ import com.dream.library.utils.AbCommonUtils;
  * Date:        15/10/3 上午12:13
  * Description: EasyFrame
  */
-public class VaryViewHelperController {
+public class EmptyViewHelperController {
 
-  private IVaryViewHelper helper;
+  private IEmptyViewHelper helper;
 
-  public VaryViewHelperController(View view) {
-    this(new VaryViewHelper(view));
+  public EmptyViewHelperController(View view) {
+    this(new EmptyViewHelper(view));
   }
 
-  public VaryViewHelperController(IVaryViewHelper helper) {
+  public EmptyViewHelperController(IEmptyViewHelper helper) {
     super();
     this.helper = helper;
   }
 
   public void showNetworkError(View.OnClickListener onClickListener) {
-    View layout = helper.inflate(R.layout.message);
+    View layout = helper.inflate(R.layout.il_empty);
     TextView textView = (TextView) layout.findViewById(R.id.message_info);
     textView.setText(helper.getContext().getResources().getString(R.string.common_no_network_msg));
 
     ImageView imageView = (ImageView) layout.findViewById(R.id.message_icon);
-    imageView.setImageResource(R.drawable.ic_exception);
+    imageView.setImageResource(R.drawable.ic_empty_icon_network);
 
     if (null != onClickListener) {
       layout.setOnClickListener(onClickListener);
@@ -43,7 +43,7 @@ public class VaryViewHelperController {
   }
 
   public void showError(String errorMsg, View.OnClickListener onClickListener) {
-    View layout = helper.inflate(R.layout.message);
+    View layout = helper.inflate(R.layout.il_empty);
     TextView textView = (TextView) layout.findViewById(R.id.message_info);
     if (!AbCommonUtils.isEmpty(errorMsg)) {
       textView.setText(errorMsg);
@@ -52,7 +52,7 @@ public class VaryViewHelperController {
     }
 
     ImageView imageView = (ImageView) layout.findViewById(R.id.message_icon);
-    imageView.setImageResource(R.drawable.ic_error);
+    imageView.setImageResource(R.drawable.ic_empty_icon_error);
 
     if (null != onClickListener) {
       layout.setOnClickListener(onClickListener);
@@ -62,7 +62,7 @@ public class VaryViewHelperController {
   }
 
   public void showEmpty(String emptyMsg, View.OnClickListener onClickListener) {
-    View layout = helper.inflate(R.layout.message);
+    View layout = helper.inflate(R.layout.il_empty);
     TextView textView = (TextView) layout.findViewById(R.id.message_info);
     if (!AbCommonUtils.isEmpty(emptyMsg)) {
       textView.setText(emptyMsg);
@@ -71,7 +71,7 @@ public class VaryViewHelperController {
     }
 
     ImageView imageView = (ImageView) layout.findViewById(R.id.message_icon);
-    imageView.setImageResource(R.drawable.ic_exception);
+    imageView.setImageResource(R.drawable.ic_empty_icon_empty);
 
     if (null != onClickListener) {
       layout.setOnClickListener(onClickListener);
@@ -81,7 +81,7 @@ public class VaryViewHelperController {
   }
 
   public void showLoading(String msg) {
-    View layout = helper.inflate(R.layout.loading);
+    View layout = helper.inflate(R.layout.il_empty_loading);
     if (!AbCommonUtils.isEmpty(msg)) {
       TextView textView = (TextView) layout.findViewById(R.id.loading_msg);
       textView.setText(msg);

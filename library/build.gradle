@@ -35,7 +35,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':resource')
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.0.1'
     compile 'javax.annotation:javax.annotation-api:1.2'
@@ -61,7 +60,6 @@ dependencies {
     compile 'io.reactivex:rxjava:1.0.14'
     // https://github.com/ReactiveX/RxAndroid
     compile 'io.reactivex:rxandroid:1.0.1'
-
     compile 'com.nineoldandroids:library:2.4.0'
     // http://facebook.github.io/stetho/
     // facebook的Android调试工具Stetho
