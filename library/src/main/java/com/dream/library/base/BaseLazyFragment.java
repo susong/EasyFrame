@@ -344,7 +344,7 @@ public abstract class BaseLazyFragment extends Fragment {
    */
   protected void toggleShowEmpty(boolean toggle, String msg, View.OnClickListener onClickListener) {
     if (null == mEmptyViewHelperController) {
-      throw new IllegalArgumentException("You must return a right target view for il_loading");
+      throw new IllegalArgumentException("You must return a right target view for loading");
     }
 
     if (toggle) {
@@ -361,7 +361,7 @@ public abstract class BaseLazyFragment extends Fragment {
    */
   protected void toggleShowError(boolean toggle, String msg, View.OnClickListener onClickListener) {
     if (null == mEmptyViewHelperController) {
-      throw new IllegalArgumentException("You must return a right target view for il_loading");
+      throw new IllegalArgumentException("You must return a right target view for loading");
     }
 
     if (toggle) {
@@ -378,7 +378,7 @@ public abstract class BaseLazyFragment extends Fragment {
    */
   protected void toggleNetworkError(boolean toggle, View.OnClickListener onClickListener) {
     if (null == mEmptyViewHelperController) {
-      throw new IllegalArgumentException("You must return a right target view for il_loading");
+      throw new IllegalArgumentException("You must return a right target view for loading");
     }
 
     if (toggle) {

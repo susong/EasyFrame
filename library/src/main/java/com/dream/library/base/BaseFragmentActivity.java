@@ -73,7 +73,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
   protected NetChangeObserver mNetChangeObserver = null;
 
   /**
-   * il_loading view controller
+   * loading view controller
    */
   private EmptyViewHelperController mEmptyViewHelperController = null;
 
@@ -410,7 +410,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
    */
   protected void toggleShowError(boolean toggle, String msg, View.OnClickListener onClickListener) {
     if (null == mEmptyViewHelperController) {
-      throw new IllegalArgumentException("You must return a right target view for il_loading");
+      throw new IllegalArgumentException("You must return a right target view for loading");
     }
 
     if (toggle) {
@@ -427,7 +427,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
    */
   protected void toggleNetworkError(boolean toggle, View.OnClickListener onClickListener) {
     if (null == mEmptyViewHelperController) {
-      throw new IllegalArgumentException("You must return a right target view for il_loading");
+      throw new IllegalArgumentException("You must return a right target view for loading");
     }
 
     if (toggle) {
