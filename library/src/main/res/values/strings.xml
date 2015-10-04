@@ -17,7 +17,6 @@
 
 <resources>
 
-    <string name="app_name">library</string>
     <string name="common_loading_message">Loading...</string>
     <string name="common_empty_msg">Oops, failed to resolve data\nPlease hit the screen and try again~</string>
     <string name="common_error_msg">Oops, something wrong!\nPlease hit the screen and try again~</string>

@@ -1,1 +1,1 @@
-include ':app', ':library', ':data', ':domain', ':resource'
+include ':app', ':library', ':data', ':domain', ':resource', ':material-dialogs'
