@@ -80,6 +80,6 @@ public class XSwipeRefreshLayout extends SwipeRefreshLayout {
     }
 
     public interface OnScrollViewScrollListener {
-        public void onScrollChanged(int x, int y, int oldX, int oldY);
+        void onScrollChanged(int x, int y, int oldX, int oldY);
     }
 }

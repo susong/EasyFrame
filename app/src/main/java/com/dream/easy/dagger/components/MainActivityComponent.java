@@ -1,7 +1,7 @@
 package com.dream.easy.dagger.components;
 
-import com.dream.easy.view.MainActivity;
 import com.dream.easy.dagger.modules.MainActivityModule;
+import com.dream.easy.view.MainActivity;
 
 import javax.inject.Singleton;
 
