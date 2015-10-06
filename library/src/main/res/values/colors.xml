@@ -15,9 +15,9 @@
   -->
 
 <resources>
-    <color name="sr_color_primary">#FF4E3E7F</color>
-    <color name="sr_color_primary_dark">#FF4E3E7F</color>
-    <color name="sr_window_background">#FFFEFEFE</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
 
     <color name="default_image_background">#FFDEDEDE</color>
     <color name="transparent">#00000000</color>

@@ -29,8 +29,8 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".view.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoneTranslucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

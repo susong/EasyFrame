@@ -14,14 +14,14 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.dream.library.R;
-import com.dream.library.eventbus.EventCenter;
 import com.dream.library.empty.EmptyViewHelperController;
+import com.dream.library.eventbus.EventCenter;
 import com.dream.library.netstatus.NetChangeObserver;
 import com.dream.library.netstatus.NetStateReceiver;
 import com.dream.library.netstatus.NetUtils;
 import com.dream.library.utils.AbCommonUtils;
 import com.dream.library.utils.AbSmartBarUtils;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.dream.library.utils.AbSystemBarTintManager;
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
@@ -442,7 +442,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
    */
   protected void setSystemBarTintDrawable(Drawable tintDrawable) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      SystemBarTintManager mTintManager = new SystemBarTintManager(this);
+      AbSystemBarTintManager mTintManager = new AbSystemBarTintManager(this);
       if (tintDrawable != null) {
         mTintManager.setStatusBarTintEnabled(true);
         mTintManager.setTintDrawable(tintDrawable);
