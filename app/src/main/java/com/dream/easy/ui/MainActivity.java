@@ -3,7 +3,6 @@ package com.dream.easy.ui;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +28,6 @@ import butterknife.Bind;
  */
 public class MainActivity extends BaseActivity implements IMainView {
 
-    @Bind(R.id.common_toolbar) protected Toolbar mCommonToolbar;
     @Bind(R.id.main_container) XViewPager mMainContainer;
     @Bind(R.id.main_navigation_list) ListView mMainNavigationList;
     @Bind(R.id.main_drawer) DrawerLayout mMainDrawer;
@@ -66,9 +64,6 @@ public class MainActivity extends BaseActivity implements IMainView {
     }
 
     private void init() {
-        setSupportActionBar(mCommonToolbar);
-//        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mMainDrawer, mCommonToolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -82,7 +77,6 @@ public class MainActivity extends BaseActivity implements IMainView {
             }
         };
         mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);
-
         mMainDrawer.setDrawerListener(mActionBarDrawerToggle);
         mActionBarDrawerToggle.syncState();
     }

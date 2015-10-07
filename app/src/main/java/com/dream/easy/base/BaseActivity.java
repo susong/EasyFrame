@@ -1,12 +1,16 @@
 package com.dream.easy.base;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.dream.easy.App;
 import com.dream.easy.R;
 import com.dream.easy.dagger.components.ApplicationComponent;
 import com.dream.easy.view.base.IBaseView;
 import com.dream.library.base.BaseAppCompatActivity;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Author:      SuSong
@@ -16,7 +20,7 @@ import com.dream.library.base.BaseAppCompatActivity;
  */
 public abstract class BaseActivity extends BaseAppCompatActivity implements IBaseView {
 
-
+    @Bind(R.id.common_toolbar) protected Toolbar mCommonToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,12 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IBas
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+        mCommonToolbar = ButterKnife.findById(this, R.id.common_toolbar);
+        if (null != mCommonToolbar) {
+            setSupportActionBar(mCommonToolbar);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     protected ApplicationComponent getApplicationComponent() {

@@ -78,5 +78,7 @@ dependencies {
     compile 'com.github.siyamed:android-shape-imageview:0.9.2@aar'
     // https://github.com/chrisbanes/PhotoView
     compile 'com.github.chrisbanes.photoview:library:1.2.2'
+    // https://github.com/square/picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
     testCompile 'junit:junit:4.12'
 }
