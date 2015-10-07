@@ -19,6 +19,7 @@ import com.dream.library.eventbus.EventCenter;
 import com.dream.library.netstatus.NetChangeObserver;
 import com.dream.library.netstatus.NetStateReceiver;
 import com.dream.library.netstatus.NetUtils;
+import com.dream.library.utils.AbAppManager;
 import com.dream.library.utils.AbCommonUtils;
 import com.dream.library.utils.AbSmartBarUtils;
 import com.dream.library.utils.AbSystemBarTintManager;
@@ -107,7 +108,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
     mContext = this;
     TAG_LOG = this.getClass().getSimpleName();
-    BaseAppManager.getInstance().addActivity(this);
+    AbAppManager.getInstance().addActivity(this);
 
     DisplayMetrics displayMetrics = new DisplayMetrics();
     getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -163,7 +164,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
   @Override
   public void finish() {
     super.finish();
-    BaseAppManager.getInstance().removeActivity(this);
+    AbAppManager.getInstance().removeActivity(this);
     if (toggleOverridePendingTransition()) {
       switch (getOverridePendingTransitionMode()) {
         case LEFT:

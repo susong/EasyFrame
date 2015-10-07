@@ -1,4 +1,4 @@
-package com.dream.library.base;
+package com.dream.library.utils;
 
 import android.app.Activity;
 
@@ -11,26 +11,26 @@ import java.util.List;
  * Date:        15/10/2 下午9:57
  * Description: EasyFrame
  */
-public class BaseAppManager {
+public class AbAppManager {
 
-  private static final String TAG = BaseAppManager.class.getSimpleName();
+  private static final String TAG = AbAppManager.class.getSimpleName();
 
-  private static BaseAppManager instance = null;
+  private static AbAppManager mInstance = null;
   private static List<Activity> mActivities = new LinkedList<Activity>();
 
-  private BaseAppManager() {
+  private AbAppManager() {
 
   }
 
-  public static BaseAppManager getInstance() {
-    if (null == instance) {
-      synchronized (BaseAppManager.class) {
-        if (null == instance) {
-          instance = new BaseAppManager();
+  public static AbAppManager getInstance() {
+    if (null == mInstance) {
+      synchronized (AbAppManager.class) {
+        if (null == mInstance) {
+          mInstance = new AbAppManager();
         }
       }
     }
-    return instance;
+    return mInstance;
   }
 
   public int size() {

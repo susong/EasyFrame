@@ -1,4 +1,4 @@
-package com.dream.library;
+package com.dream.library.base;
 
 import android.app.Application;
 
@@ -10,16 +10,16 @@ import com.dream.library.volley.VolleyHelper;
  * Date:        15/9/28 下午3:55
  * Description: EasyFrame
  */
-public abstract class AbApplication extends Application {
+public abstract class BaseApplication extends Application {
 
-    private static AbApplication instance;
+    private static BaseApplication instance;
 
     /**
      * 获得当前app运行的AppContext
      *
-     * @return AbApplication
+     * @return BaseApplication
      */
-    public static AbApplication getInstance() {
+    public static BaseApplication getInstance() {
         return instance;
     }
 

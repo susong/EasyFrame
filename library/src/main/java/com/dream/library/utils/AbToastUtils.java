@@ -7,7 +7,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.dream.library.AbApplication;
+import com.dream.library.base.BaseApplication;
 
 
 /**
@@ -39,11 +39,11 @@ public class AbToastUtils {
     }
 
     public static void show(int resId, int duration, Object... args) {
-        show(AbApplication.getInstance(), resId, duration, args);
+        show(BaseApplication.getInstance(), resId, duration, args);
     }
 
     public static void show(String text, int duration, Object... args) {
-        show(AbApplication.getInstance(), text, duration, args);
+        show(BaseApplication.getInstance(), text, duration, args);
     }
 
     public static void show(Context context, int resId, Object... args) {
@@ -93,11 +93,11 @@ public class AbToastUtils {
     }
 
     public static void showInThread(int resId) {
-        showInThread(AbApplication.getInstance(),resId, Toast.LENGTH_SHORT);
+        showInThread(BaseApplication.getInstance(),resId, Toast.LENGTH_SHORT);
     }
 
     public static void showInThread(String text) {
-        showInThread(AbApplication.getInstance(),text, Toast.LENGTH_SHORT);
+        showInThread(BaseApplication.getInstance(),text, Toast.LENGTH_SHORT);
     }
 
     private static final Handler baseHandler = new MyHandler();

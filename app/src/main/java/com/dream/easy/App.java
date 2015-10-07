@@ -1,8 +1,8 @@
 package com.dream.easy;
 
 import com.dream.easy.base.AbDaggerApplication;
-import com.orhanobut.logger.AbLog;
-import com.orhanobut.logger.LogLevel;
+import com.dream.library.logger.AbLog;
+import com.dream.library.logger.LogLevel;
 
 
 /**

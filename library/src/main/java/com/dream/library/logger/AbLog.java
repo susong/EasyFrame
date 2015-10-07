@@ -1,4 +1,4 @@
-package com.orhanobut.logger;
+package com.dream.library.logger;
 
 /**
  * Logger is a wrapper of {@link android.util.Log}
