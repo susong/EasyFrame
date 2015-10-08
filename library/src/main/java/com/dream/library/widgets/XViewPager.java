@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2015 [1076559197@qq.com | tchen0707@gmail.com]
- *
- * Licensed under the Apache License, Version 2.0 (the "License”);
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.dream.library.widgets;
 
 import android.content.Context;
@@ -22,17 +6,26 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * Author:  Tau.Chen
- * Email:   1076559197@qq.com | tauchen1990@gmail.com
- * Date:    2014/11/25.
- * Description: customize ViewPager did scroll enable or not
+ * Author:      SuSong
+ * Email:       751971697@qq.com | susong0618@163.com
+ * GitHub:      https://github.com/susong0618
+ * Date:        15/10/8 上午11:34
+ * Description: http://stackoverflow.com/questions/7814017/is-it-possible-to-disable-scrolling-on-a-viewpager
  */
 public class XViewPager extends ViewPager {
 
-    private boolean isEnableScroll = true;
+    private boolean isLocked = false;
 
-    public void setEnableScroll(boolean isEnableScroll) {
-        this.isEnableScroll = isEnableScroll;
+    public void setLocked(boolean isLocked) {
+        this.isLocked = isLocked;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void toogleLock() {
+        isLocked = !isLocked;
     }
 
     public XViewPager(Context context) {
@@ -45,17 +38,11 @@ public class XViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (!isEnableScroll) {
-            return false;
-        }
-        return super.onInterceptTouchEvent(ev);
+        return !isLocked && super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if (!isEnableScroll) {
-            return false;
-        }
-        return super.onTouchEvent(ev);
+        return !isLocked && super.onTouchEvent(ev);
     }
 }

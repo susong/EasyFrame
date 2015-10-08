@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2015 [1076559197@qq.com | tchen0707@gmail.com]
- *
- * Licensed under the Apache License, Version 2.0 (the "License”);
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.dream.library.base;
 
 import android.os.Bundle;
@@ -29,10 +13,10 @@ import com.dream.library.widgets.BrowserLayout;
 import butterknife.ButterKnife;
 
 /**
- * Author:  Tau.Chen
- * Email:   1076559197@qq.com | tauchen1990@gmail.com
- * Date:    15/7/24
- * Description:
+ * Author:      SuSong
+ * Email:       751971697@qq.com | susong0618@163.com
+ * Date:        15/9/30 下午5:38
+ * Description: EasyFrame
  */
 public class BaseWebActivity extends BaseSwipeBackCompatActivity {
 
@@ -43,7 +27,6 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
     private String mWebUrl = null;
     private String mWebTitle = null;
     private boolean isShowBottomBar = true;
-
     private Toolbar mToolBar = null;
     private BrowserLayout mBrowserLayout = null;
 
@@ -55,7 +38,7 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
     }
 
     @Override
-    protected int getContentViewLayoutID() {
+    protected int getContentViewLayoutId() {
         return R.layout.activity_common_web;
     }
 
@@ -71,6 +54,7 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
 
     @Override
     protected void initViewsAndEvents() {
+        //noinspection deprecation
         setSystemBarTintDrawable(getResources().getDrawable(R.drawable.sr_primary));
 
         mToolBar = ButterKnife.findById(this, R.id.common_toolbar);
@@ -78,6 +62,7 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
 
         if (null != mToolBar) {
             setSupportActionBar(mToolBar);
+            //noinspection ConstantConditions
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

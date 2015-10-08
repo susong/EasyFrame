@@ -1,9 +1,20 @@
 package com.dream.easy.ui.fragment;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 
+import com.dream.easy.R;
 import com.dream.easy.base.BaseFragment;
+import com.dream.easy.bean.BaseEntity;
 import com.dream.library.eventbus.EventCenter;
+import com.dream.library.widgets.XViewPager;
+
+import java.util.List;
+
+import butterknife.Bind;
 
 /**
  * Author:      SuSong
@@ -12,6 +23,20 @@ import com.dream.library.eventbus.EventCenter;
  * Description: EasyFrame
  */
 public class ImagesContainerFragment extends BaseFragment {
+
+    @Bind(R.id.tabLayout) TabLayout mTabLayout;
+    @Bind(R.id.viewPager) XViewPager mViewPager;
+
+    @Override
+    protected int getContentViewLayoutId() {
+        return R.layout.fragment_images_container;
+    }
+
+    @Override
+    protected void initViewsAndEvents() {
+//        mTabLayout.setupWithViewPager(mViewPager);
+    }
+
     @Override
     protected void onFirstUserVisible() {
 
@@ -33,16 +58,6 @@ public class ImagesContainerFragment extends BaseFragment {
     }
 
     @Override
-    protected void initViewsAndEvents() {
-
-    }
-
-    @Override
-    protected int getContentViewLayoutID() {
-        return 0;
-    }
-
-    @Override
     protected void onEventComing(EventCenter eventCenter) {
 
     }
@@ -50,5 +65,30 @@ public class ImagesContainerFragment extends BaseFragment {
     @Override
     protected boolean isBindEventBus() {
         return false;
+    }
+
+    private class ImagesContainerPagerAdaper extends FragmentPagerAdapter {
+
+        private List<BaseEntity> mEntityList;
+
+        public ImagesContainerPagerAdaper(FragmentManager fm, List<BaseEntity> entityList) {
+            super(fm);
+            this.mEntityList = entityList;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return new ImagesListFragment();
+        }
+
+        @Override
+        public int getCount() {
+            return mEntityList == null ? 0 : mEntityList.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mEntityList == null ? null : mEntityList.get(position).getName();
+        }
     }
 }

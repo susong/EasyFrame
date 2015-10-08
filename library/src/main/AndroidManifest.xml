@@ -1,5 +1,12 @@
-<manifest package="com.dream.library">
+<manifest
+    package="com.dream.library"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <application />
+    <application android:allowBackup="true"
+        android:fullBackupContent="true">
+        <activity
+            android:name=".base.BaseWebActivity"
+            android:screenOrientation="portrait" />
+    </application>
 
 </manifest>

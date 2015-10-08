@@ -37,7 +37,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/banner" />
+                android:src="@drawable/ic_nav_header_bg" />
 
             <ListView
                 android:id="@+id/main_navigation_list"

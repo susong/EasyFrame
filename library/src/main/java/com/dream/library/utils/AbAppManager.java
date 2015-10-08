@@ -2,8 +2,7 @@ package com.dream.library.utils;
 
 import android.app.Activity;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Stack;
 
 /**
  * Author:      SuSong
@@ -11,61 +10,125 @@ import java.util.List;
  * Date:        15/10/2 下午9:57
  * Description: EasyFrame
  */
+@SuppressWarnings("unused")
 public class AbAppManager {
 
-  private static final String TAG = AbAppManager.class.getSimpleName();
+    private static final String TAG = AbAppManager.class.getSimpleName();
 
-  private static AbAppManager mInstance = null;
-  private static List<Activity> mActivities = new LinkedList<Activity>();
+    private static AbAppManager mInstance = null;
+    private static Stack<Activity> mActivityStack = new Stack<>();
 
-  private AbAppManager() {
+    private AbAppManager() {
 
-  }
+    }
 
-  public static AbAppManager getInstance() {
-    if (null == mInstance) {
-      synchronized (AbAppManager.class) {
+    /**
+     * 单一实例
+     */
+    public static AbAppManager getInstance() {
         if (null == mInstance) {
-          mInstance = new AbAppManager();
+            synchronized (AbAppManager.class) {
+                if (null == mInstance) {
+                    mInstance = new AbAppManager();
+                }
+            }
         }
-      }
+        return mInstance;
     }
-    return mInstance;
-  }
 
-  public int size() {
-    return mActivities.size();
-  }
-
-  public synchronized Activity getForwardActivity() {
-    return size() > 0 ? mActivities.get(size() - 1) : null;
-  }
-
-  public synchronized void addActivity(Activity activity) {
-    mActivities.add(activity);
-  }
-
-  public synchronized void removeActivity(Activity activity) {
-    if (mActivities.contains(activity)) {
-      mActivities.remove(activity);
+    public int size() {
+        return mActivityStack.size();
     }
-  }
 
-  public synchronized void clear() {
-    for (int i = mActivities.size() - 1; i > -1; i--) {
-      Activity activity = mActivities.get(i);
-      removeActivity(activity);
-      activity.finish();
-      i = mActivities.size();
+    /**
+     * 添加Activity到堆栈
+     */
+    public synchronized void addActivity(Activity activity) {
+        if (activity != null) {
+            mActivityStack.add(activity);
+        }
     }
-  }
 
-  public synchronized void clearToTop() {
-    for (int i = mActivities.size() - 2; i > -1; i--) {
-      Activity activity = mActivities.get(i);
-      removeActivity(activity);
-      activity.finish();
-      i = mActivities.size() - 1;
+    /**
+     * 获取当前Activity（堆栈中最后一个压入的）
+     */
+    public Activity currentActivity() {
+        return size() > 0 ? mActivityStack.lastElement() : null;
     }
-  }
+
+    /**
+     * 获取指定的Activity
+     */
+    public Activity getActivity(Class<?> cls) {
+        if (mActivityStack != null)
+            for (Activity activity : mActivityStack) {
+                if (activity.getClass().equals(cls)) {
+                    return activity;
+                }
+            }
+        return null;
+    }
+
+    /**
+     * 结束当前Activity（堆栈中最后一个压入的）
+     */
+    public void finishCurrentActivity() {
+        finishActivity(mActivityStack.lastElement());
+    }
+
+    /**
+     * 结束指定的Activity
+     */
+    public void finishActivity(Activity activity) {
+        if (activity != null && !activity.isFinishing()) {
+            mActivityStack.remove(activity);
+            activity.finish();
+        }
+    }
+
+    /**
+     * 结束指定类名的Activity，可能为多个
+     */
+    public void finishActivity(Class<?> cls) {
+        Stack<Activity> activityStackTemp = new Stack<>();
+        for (Activity activity : mActivityStack) {
+            if (activity.getClass().getName().equals(cls.getName())) {
+                activityStackTemp.add(activity);
+            }
+        }
+        mActivityStack.removeAll(activityStackTemp);
+        for (Activity activity : activityStackTemp) {
+            if (activity != null && !activity.isFinishing()) {
+                activity.finish();
+            }
+        }
+        activityStackTemp.clear();
+    }
+
+    /**
+     * 结束所有Activity
+     */
+    public void finishAllActivity() {
+        for (int i = 0, size = mActivityStack.size(); i < size; i++) {
+            Activity activity = mActivityStack.get(i);
+            if (activity != null && !activity.isFinishing()) {
+                activity.finish();
+            }
+        }
+        mActivityStack.clear();
+    }
+
+    /**
+     * 退出应用程序
+     */
+    public void AppExit() {
+        try {
+            finishAllActivity();
+            // 杀死该应用进程
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

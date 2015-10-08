@@ -28,6 +28,7 @@ import de.greenrobot.event.EventBus;
  * Date:        15/9/30 下午5:38
  * Description: EasyFrame
  */
+@SuppressWarnings("unused")
 public abstract class BaseLazyFragment extends Fragment {
 
     /**
@@ -54,6 +55,7 @@ public abstract class BaseLazyFragment extends Fragment {
 
     private EmptyViewHelperController mEmptyViewHelperController = null;
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -71,8 +73,8 @@ public abstract class BaseLazyFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (getContentViewLayoutID() != 0) {
-            return inflater.inflate(getContentViewLayoutID(), container, false);
+        if (getContentViewLayoutId() != 0) {
+            return inflater.inflate(getContentViewLayoutId(), container, false);
         } else {
             return super.onCreateView(inflater, container, savedInstanceState);
         }
@@ -119,9 +121,7 @@ public abstract class BaseLazyFragment extends Fragment {
             childFragmentManager.setAccessible(true);
             childFragmentManager.set(this, null);
 
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -181,6 +181,18 @@ public abstract class BaseLazyFragment extends Fragment {
     }
 
     /**
+     * bind layout resource file
+     *
+     * @return id of layout resource
+     */
+    protected abstract int getContentViewLayoutId();
+
+    /**
+     * init all views and add events
+     */
+    protected abstract void initViewsAndEvents();
+
+    /**
      * when fragment is visible for the first time, here we can do some initialized work or refresh data only once
      */
     protected abstract void onFirstUserVisible();
@@ -208,35 +220,23 @@ public abstract class BaseLazyFragment extends Fragment {
     protected abstract View getLoadingTargetView();
 
     /**
-     * init all views and add events
-     */
-    protected abstract void initViewsAndEvents();
-
-    /**
-     * bind layout resource file
+     * when event coming
      *
-     * @return id of layout resource
-     */
-    protected abstract int getContentViewLayoutID();
-
-    /**
-     * when event comming
-     *
-     * @param eventCenter
+     * @param eventCenter EventCenter
      */
     protected abstract void onEventComing(EventCenter eventCenter);
 
     /**
      * is bind eventBus
      *
-     * @return
+     * @return boolean
      */
     protected abstract boolean isBindEventBus();
 
     /**
      * get the support fragment manager
      *
-     * @return
+     * @return FragmentManager
      */
     protected FragmentManager getSupportFragmentManager() {
         return getActivity().getSupportFragmentManager();
@@ -245,7 +245,7 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * startActivity
      *
-     * @param clazz
+     * @param clazz Class
      */
     protected void readyGo(Class<?> clazz) {
         Intent intent = new Intent(getActivity(), clazz);
@@ -255,8 +255,8 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * startActivity with bundle
      *
-     * @param clazz
-     * @param bundle
+     * @param clazz  Class
+     * @param bundle Bundle
      */
     protected void readyGo(Class<?> clazz, Bundle bundle) {
         Intent intent = new Intent(getActivity(), clazz);
@@ -269,8 +269,8 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * startActivityForResult
      *
-     * @param clazz
-     * @param requestCode
+     * @param clazz       Class
+     * @param requestCode requestCode
      */
     protected void readyGoForResult(Class<?> clazz, int requestCode) {
         Intent intent = new Intent(getActivity(), clazz);
@@ -280,9 +280,9 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * startActivityForResult with bundle
      *
-     * @param clazz
-     * @param requestCode
-     * @param bundle
+     * @param clazz       Class
+     * @param requestCode requestCode
+     * @param bundle      Bundle
      */
     protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(getActivity(), clazz);
@@ -295,7 +295,7 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * show toast
      *
-     * @param msg
+     * @param msg String
      */
     protected void showToast(String msg) {
         if (null != msg && !AbCommonUtils.isEmpty(msg)) {
@@ -306,7 +306,7 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * toggle show loading
      *
-     * @param toggle
+     * @param toggle boolean
      */
     protected void toggleShowLoading(boolean toggle, String msg) {
         if (null == mEmptyViewHelperController) {
@@ -323,7 +323,7 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * toggle show empty
      *
-     * @param toggle
+     * @param toggle boolean
      */
     protected void toggleShowEmpty(boolean toggle, String msg, View.OnClickListener onClickListener) {
         if (null == mEmptyViewHelperController) {
@@ -340,7 +340,7 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * toggle show error
      *
-     * @param toggle
+     * @param toggle boolean
      */
     protected void toggleShowError(boolean toggle, String msg, View.OnClickListener onClickListener) {
         if (null == mEmptyViewHelperController) {
@@ -357,7 +357,7 @@ public abstract class BaseLazyFragment extends Fragment {
     /**
      * toggle show network error
      *
-     * @param toggle
+     * @param toggle boolean
      */
     protected void toggleNetworkError(boolean toggle, View.OnClickListener onClickListener) {
         if (null == mEmptyViewHelperController) {
