@@ -2,15 +2,15 @@ package com.dream.data;
 
 import android.test.ApplicationTestCase;
 
-import com.dream.library.base.BaseApplication;
+import com.dream.library.base.BaseLibApplication;
 import com.dream.library.logger.AbLog;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
-public class ApplicationTest extends ApplicationTestCase<BaseApplication> {
+public class ApplicationTest extends ApplicationTestCase<BaseLibApplication> {
     public ApplicationTest() {
-        super(BaseApplication.class);
+        super(BaseLibApplication.class);
     }
 
     @Override

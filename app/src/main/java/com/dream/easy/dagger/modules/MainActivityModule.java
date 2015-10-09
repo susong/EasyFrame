@@ -1,8 +1,9 @@
 package com.dream.easy.dagger.modules;
 
 import android.app.Activity;
+import android.content.Context;
 
-import com.dream.library.dagger.ForActivity;
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -23,8 +24,14 @@ public class MainActivityModule {
     }
 
     @Provides
-    @ForActivity
+    @Named("MainActivity")
     Activity provideActivity() {
+        return mActivity;
+    }
+
+    @Provides
+    @Named("MainActivity")
+    Context provideContext() {
         return mActivity;
     }
 }

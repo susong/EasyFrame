@@ -10,16 +10,16 @@ import com.dream.library.volley.VolleyHelper;
  * Date:        15/9/28 下午3:55
  * Description: EasyFrame
  */
-public abstract class BaseApplication extends Application {
+public abstract class BaseLibApplication extends Application {
 
-    private static BaseApplication instance;
+    private static BaseLibApplication instance;
 
     /**
      * 获得当前app运行的AppContext
      *
-     * @return BaseApplication
+     * @return BaseLibApplication
      */
-    public static BaseApplication getInstance() {
+    public static BaseLibApplication getInstance() {
         return instance;
     }
 

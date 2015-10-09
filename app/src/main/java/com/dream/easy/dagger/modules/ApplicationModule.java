@@ -2,7 +2,7 @@ package com.dream.easy.dagger.modules;
 
 import android.app.Application;
 
-import com.dream.easy.base.AbDaggerApplication;
+import com.dream.easy.base.BaseApplication;
 import com.dream.library.dagger.ForApplication;
 
 import dagger.Module;
@@ -17,9 +17,9 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
-    private final AbDaggerApplication application;
+    private final BaseApplication application;
 
-    public ApplicationModule(AbDaggerApplication application) {
+    public ApplicationModule(BaseApplication application) {
         this.application = application;
     }
 

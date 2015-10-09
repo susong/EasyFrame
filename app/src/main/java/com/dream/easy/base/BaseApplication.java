@@ -3,7 +3,7 @@ package com.dream.easy.base;
 import com.dream.easy.dagger.components.ApplicationComponent;
 import com.dream.easy.dagger.components.DaggerApplicationComponent;
 import com.dream.easy.dagger.modules.ApplicationModule;
-import com.dream.library.base.BaseApplication;
+import com.dream.library.base.BaseLibApplication;
 
 /**
  * Author:      SuSong
@@ -11,7 +11,7 @@ import com.dream.library.base.BaseApplication;
  * Date:        15/9/30 上午10:51
  * Description: EasyFrame
  */
-public abstract class AbDaggerApplication extends BaseApplication {
+public abstract class BaseApplication extends BaseLibApplication {
 
     private ApplicationComponent mApplicationComponent;
 

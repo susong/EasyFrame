@@ -1,7 +1,7 @@
 package com.dream.easy.base;
 
 import com.dream.easy.view.base.IBaseView;
-import com.dream.library.base.BaseLazyFragment;
+import com.dream.library.base.BaseLibFragment;
 
 /**
  * Author:      SuSong
@@ -9,7 +9,7 @@ import com.dream.library.base.BaseLazyFragment;
  * Date:        15/10/6 下午9:56
  * Description: EasyFrame
  */
-public abstract class BaseFragment extends BaseLazyFragment implements IBaseView {
+public abstract class BaseFragment extends BaseLibFragment implements IBaseView {
 
     @Override
     public void showError(String msg) {

@@ -1,6 +1,6 @@
 package com.dream.easy;
 
-import com.dream.easy.base.AbDaggerApplication;
+import com.dream.easy.base.BaseApplication;
 import com.dream.library.logger.AbLog;
 import com.dream.library.logger.LogLevel;
 
@@ -11,7 +11,7 @@ import com.dream.library.logger.LogLevel;
  * Date:        15/9/28 下午3:25
  * Description: EasyFrame
  */
-public class App extends AbDaggerApplication {
+public class App extends BaseApplication {
 
     public static final String APP_NAME = "EasyFrame";
 

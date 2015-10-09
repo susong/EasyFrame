@@ -20,6 +20,7 @@ import com.dream.easy.base.BaseActivity;
 import com.dream.easy.bean.NavigationEntity;
 import com.dream.easy.dagger.components.DaggerMainActivityComponent;
 import com.dream.easy.dagger.components.MainActivityComponent;
+import com.dream.easy.dagger.modules.ImageContainerFragmentModule;
 import com.dream.easy.dagger.modules.MainActivityModule;
 import com.dream.easy.ui.fragment.ImagesContainerFragment;
 import com.dream.easy.ui.fragment.MusicFragment;
@@ -27,7 +28,7 @@ import com.dream.easy.ui.fragment.VideosContainerFragment;
 import com.dream.easy.view.IMainView;
 import com.dream.library.adapter.CommonAdapter;
 import com.dream.library.adapter.ViewHolder;
-import com.dream.library.base.BaseLazyFragment;
+import com.dream.library.base.BaseLibFragment;
 import com.dream.library.eventbus.EventCenter;
 import com.dream.library.netstatus.NetUtils;
 import com.dream.library.utils.DoubleClickExitHelper;
@@ -59,6 +60,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     private int mCurrentMenuCheckedPos = 0;
     private CommonAdapter<NavigationEntity> mCommonAdapter;
     private DoubleClickExitHelper mDoubleClickExitHelper;
+    private MainActivityComponent mMainActivityComponent;
 
     @Override
     protected void getBundleExtras(Bundle extras) {
@@ -82,12 +84,17 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     protected void initViewsAndEvents() {
-        MainActivityComponent mainActivityComponent = DaggerMainActivityComponent.builder()
+        mMainActivityComponent = DaggerMainActivityComponent.builder()
             .applicationComponent(getApplicationComponent())
             .mainActivityModule(new MainActivityModule(this))
+            .imageContainerFragmentModule(new ImageContainerFragmentModule())
             .build();
-        mainActivityComponent.inject(this);
+        mMainActivityComponent.inject(this);
         init();
+    }
+
+    public MainActivityComponent getComponent() {
+        return mMainActivityComponent;
     }
 
     private void init() {
@@ -110,7 +117,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         mMainDrawer.setDrawerListener(mActionBarDrawerToggle);
         mActionBarDrawerToggle.syncState();
 
-        List<BaseLazyFragment> pagerFragments = getPagerFragments();
+        List<BaseLibFragment> pagerFragments = getPagerFragments();
         mMainContainer.setLocked(true);
         mMainContainer.setOffscreenPageLimit(pagerFragments.size());
         mMainContainer.setAdapter(new MainContainerPagerAdapter(getSupportFragmentManager(), pagerFragments));
@@ -145,8 +152,8 @@ public class MainActivity extends BaseActivity implements IMainView {
         mDoubleClickExitHelper = new DoubleClickExitHelper(this);
     }
 
-    private List<BaseLazyFragment> getPagerFragments() {
-        List<BaseLazyFragment> fragments = new ArrayList<>();
+    private List<BaseLibFragment> getPagerFragments() {
+        List<BaseLibFragment> fragments = new ArrayList<>();
         fragments.add(new ImagesContainerFragment());
         fragments.add(new VideosContainerFragment());
         fragments.add(new MusicFragment());
@@ -241,9 +248,9 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     private class MainContainerPagerAdapter extends FragmentPagerAdapter {
 
-        List<BaseLazyFragment> mFragmentList;
+        List<BaseLibFragment> mFragmentList;
 
-        public MainContainerPagerAdapter(FragmentManager fm, List<BaseLazyFragment> fragmentList) {
+        public MainContainerPagerAdapter(FragmentManager fm, List<BaseLibFragment> fragmentList) {
             super(fm);
             this.mFragmentList = fragmentList;
         }

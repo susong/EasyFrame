@@ -42,7 +42,7 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IBas
     }
 
     protected ApplicationComponent getApplicationComponent() {
-        return ((AbDaggerApplication) getApplication()).getApplicationComponent();
+        return ((BaseApplication) getApplication()).getApplicationComponent();
     }
 
     protected App getApp() {

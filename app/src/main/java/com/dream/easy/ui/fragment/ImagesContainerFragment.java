@@ -9,10 +9,17 @@ import android.view.View;
 import com.dream.easy.R;
 import com.dream.easy.base.BaseFragment;
 import com.dream.easy.bean.BaseEntity;
+import com.dream.easy.presenter.IPresenter;
+import com.dream.easy.presenter.impl.ImagesContainerPresenterImpl;
+import com.dream.easy.ui.MainActivity;
+import com.dream.easy.view.ICommonContainerView;
 import com.dream.library.eventbus.EventCenter;
 import com.dream.library.widgets.XViewPager;
 
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.Bind;
 
@@ -22,10 +29,13 @@ import butterknife.Bind;
  * Date:        15/10/6 下午9:55
  * Description: EasyFrame
  */
-public class ImagesContainerFragment extends BaseFragment {
+public class ImagesContainerFragment extends BaseFragment implements ICommonContainerView {
 
     @Bind(R.id.tabLayout) TabLayout mTabLayout;
     @Bind(R.id.viewPager) XViewPager mViewPager;
+
+    @Inject @Named("ImagesContainer") IPresenter mPresenter;
+//    IPresenter mPresenter;
 
     @Override
     protected int getContentViewLayoutId() {
@@ -34,7 +44,9 @@ public class ImagesContainerFragment extends BaseFragment {
 
     @Override
     protected void initViewsAndEvents() {
-//        mTabLayout.setupWithViewPager(mViewPager);
+        ((MainActivity) getActivity()).getComponent().inject(this);
+        ((ImagesContainerPresenterImpl) mPresenter).setCommonContainerView(this);
+        mPresenter.init();
     }
 
     @Override
@@ -67,11 +79,26 @@ public class ImagesContainerFragment extends BaseFragment {
         return false;
     }
 
-    private class ImagesContainerPagerAdaper extends FragmentPagerAdapter {
+    @Override
+    public void init(List<BaseEntity> entityList) {
+        if (entityList != null && !entityList.isEmpty()) {
+            mViewPager.setOffscreenPageLimit(entityList.size());
+            mViewPager.setAdapter(new ImagesContainerPagerAdapter(getSupportFragmentManager(), entityList));
+            mTabLayout.setupWithViewPager(mViewPager);
+            mTabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    super.onTabSelected(tab);
+                }
+            });
+        }
+    }
+
+    private class ImagesContainerPagerAdapter extends FragmentPagerAdapter {
 
         private List<BaseEntity> mEntityList;
 
-        public ImagesContainerPagerAdaper(FragmentManager fm, List<BaseEntity> entityList) {
+        public ImagesContainerPagerAdapter(FragmentManager fm, List<BaseEntity> entityList) {
             super(fm);
             this.mEntityList = entityList;
         }

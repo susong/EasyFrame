@@ -29,7 +29,7 @@ import de.greenrobot.event.EventBus;
  * Description: EasyFrame
  */
 @SuppressWarnings("unused")
-public abstract class BaseLazyFragment extends Fragment {
+public abstract class BaseLibFragment extends Fragment {
 
     /**
      * Log tag
