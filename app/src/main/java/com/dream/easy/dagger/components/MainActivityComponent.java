@@ -3,11 +3,9 @@ package com.dream.easy.dagger.components;
 import com.dream.easy.dagger.modules.ImageContainerFragmentModule;
 import com.dream.easy.dagger.modules.MainActivityModule;
 import com.dream.easy.ui.MainActivity;
-import com.dream.easy.ui.fragment.ImagesContainerFragment;
+import com.dream.library.dagger.ActivityScope;
 
-import javax.inject.Singleton;
-
-import dagger.Component;
+import dagger.Subcomponent;
 
 /**
  * Author:      SuSong
@@ -15,10 +13,12 @@ import dagger.Component;
  * Date:        15/9/30 下午3:28
  * Description: EasyFrame
  */
-@Singleton
-@Component(dependencies = ApplicationComponent.class, modules = {MainActivityModule.class, ImageContainerFragmentModule.class})
+@ActivityScope
+@Subcomponent(
+    modules = MainActivityModule.class
+)
 public interface MainActivityComponent {
-    void inject(MainActivity mainActivity);
+    MainActivity inject(MainActivity mainActivity);
 
-    void inject(ImagesContainerFragment imagesContainerFragment);
+    ImageContainerFragmentComponent plus(ImageContainerFragmentModule imageContainerFragmentModule);
 }

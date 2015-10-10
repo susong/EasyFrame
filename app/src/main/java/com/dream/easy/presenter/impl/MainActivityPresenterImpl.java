@@ -2,7 +2,7 @@ package com.dream.easy.presenter.impl;
 
 import android.content.Context;
 
-import com.dream.easy.presenter.IPresenter;
+import com.dream.easy.presenter.IMainActivityPresenter;
 import com.dream.easy.view.IMainView;
 
 /**
@@ -11,12 +11,12 @@ import com.dream.easy.view.IMainView;
  * Date:        15/10/6 下午9:43
  * Description: EasyFrame
  */
-public class MainPresenterImpl implements IPresenter {
+public class MainActivityPresenterImpl implements IMainActivityPresenter {
 
     private Context mContext;
     private IMainView mMainView;
 
-    public MainPresenterImpl(Context context, IMainView mainView) {
+    public MainActivityPresenterImpl(Context context, IMainView mainView) {
         if (mainView == null) {
             throw new IllegalArgumentException("Constructor's parameters must not be Null");
         }

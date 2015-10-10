@@ -8,10 +8,11 @@ import javax.inject.Scope;
 /**
  * Author:      SuSong
  * Email:       751971697@qq.com | susong0618@163.com
- * Date:        15/9/30 上午10:47
+ * GitHub:      https://github.com/susong0618
+ * Date:        15/10/10 下午4:30
  * Description: EasyFrame
  */
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PerActivity {
+public @interface FragmentScope {
 }

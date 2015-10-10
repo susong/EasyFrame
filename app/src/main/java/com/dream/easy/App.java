@@ -1,6 +1,9 @@
 package com.dream.easy;
 
 import com.dream.easy.base.BaseApplication;
+import com.dream.easy.dagger.components.AppComponent;
+import com.dream.easy.dagger.components.DaggerAppComponent;
+import com.dream.easy.dagger.modules.AppModule;
 import com.dream.library.logger.AbLog;
 import com.dream.library.logger.LogLevel;
 
@@ -14,11 +17,31 @@ import com.dream.library.logger.LogLevel;
 public class App extends BaseApplication {
 
     public static final String APP_NAME = "EasyFrame";
+    private static App mInstance;
+
+    private AppComponent mAppComponent;
+
+
+    public static App getInstance() {
+        return mInstance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance = this;
+        initDagger();
         init();
+    }
+
+    private void initDagger() {
+        mAppComponent = DaggerAppComponent.builder()
+            .appModule(new AppModule(this))
+            .build();
+    }
+
+    public AppComponent getAppComponent() {
+        return mAppComponent;
     }
 
     /**

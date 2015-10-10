@@ -14,7 +14,7 @@ import java.util.List;
  * Date:        15/10/8 下午10:19
  * Description: EasyFrame
  */
-public interface IHomeModel {
+public interface IMainActivityModel {
     List<BaseLibFragment> getPagerFragments();
 
     List<NavigationEntity> getNavigationListData(Context context);

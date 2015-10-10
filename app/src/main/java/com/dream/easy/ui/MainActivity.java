@@ -15,12 +15,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.dream.easy.App;
 import com.dream.easy.R;
 import com.dream.easy.base.BaseActivity;
 import com.dream.easy.bean.NavigationEntity;
-import com.dream.easy.dagger.components.DaggerMainActivityComponent;
 import com.dream.easy.dagger.components.MainActivityComponent;
-import com.dream.easy.dagger.modules.ImageContainerFragmentModule;
 import com.dream.easy.dagger.modules.MainActivityModule;
 import com.dream.easy.ui.fragment.ImagesContainerFragment;
 import com.dream.easy.ui.fragment.MusicFragment;
@@ -84,16 +83,18 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     protected void initViewsAndEvents() {
-        mMainActivityComponent = DaggerMainActivityComponent.builder()
-            .applicationComponent(getApplicationComponent())
-            .mainActivityModule(new MainActivityModule(this))
-            .imageContainerFragmentModule(new ImageContainerFragmentModule())
-            .build();
-        mMainActivityComponent.inject(this);
+        initDagger();
         init();
     }
 
-    public MainActivityComponent getComponent() {
+    private void initDagger() {
+        mMainActivityComponent = App.getInstance()
+            .getAppComponent()
+            .plus(new MainActivityModule(this));
+        mMainActivityComponent.inject(this);
+    }
+
+    public MainActivityComponent getMainActivityComponent() {
         return mMainActivityComponent;
     }
 

@@ -2,8 +2,9 @@ package com.dream.easy.dagger.modules;
 
 import android.app.Application;
 
-import com.dream.easy.base.BaseApplication;
-import com.dream.library.dagger.ForApplication;
+import com.dream.easy.App;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,17 +16,17 @@ import dagger.Provides;
  * Description: EasyFrame
  */
 @Module
-public class ApplicationModule {
+public class AppModule {
 
-    private final BaseApplication application;
+    private final App mApp;
 
-    public ApplicationModule(BaseApplication application) {
-        this.application = application;
+    public AppModule(App app) {
+        this.mApp = app;
     }
 
     @Provides
-    @ForApplication
+    @Singleton
     Application provideApplication() {
-        return application;
+        return mApp;
     }
 }

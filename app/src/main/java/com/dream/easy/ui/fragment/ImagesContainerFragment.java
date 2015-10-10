@@ -9,8 +9,8 @@ import android.view.View;
 import com.dream.easy.R;
 import com.dream.easy.base.BaseFragment;
 import com.dream.easy.bean.BaseEntity;
-import com.dream.easy.presenter.IPresenter;
-import com.dream.easy.presenter.impl.ImagesContainerPresenterImpl;
+import com.dream.easy.dagger.modules.ImageContainerFragmentModule;
+import com.dream.easy.presenter.IImagesContainerPresenter;
 import com.dream.easy.ui.MainActivity;
 import com.dream.easy.view.ICommonContainerView;
 import com.dream.library.eventbus.EventCenter;
@@ -19,7 +19,6 @@ import com.dream.library.widgets.XViewPager;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.Bind;
 
@@ -34,8 +33,7 @@ public class ImagesContainerFragment extends BaseFragment implements ICommonCont
     @Bind(R.id.tabLayout) TabLayout mTabLayout;
     @Bind(R.id.viewPager) XViewPager mViewPager;
 
-    @Inject @Named("ImagesContainer") IPresenter mPresenter;
-//    IPresenter mPresenter;
+    @Inject IImagesContainerPresenter mPresenter;
 
     @Override
     protected int getContentViewLayoutId() {
@@ -44,8 +42,9 @@ public class ImagesContainerFragment extends BaseFragment implements ICommonCont
 
     @Override
     protected void initViewsAndEvents() {
-        ((MainActivity) getActivity()).getComponent().inject(this);
-        ((ImagesContainerPresenterImpl) mPresenter).setCommonContainerView(this);
+        ((MainActivity) mContext).getMainActivityComponent()
+            .plus(new ImageContainerFragmentModule(this))
+            .inject(this);
         mPresenter.init();
     }
 

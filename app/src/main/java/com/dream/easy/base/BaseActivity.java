@@ -5,7 +5,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.dream.easy.App;
 import com.dream.easy.R;
-import com.dream.easy.dagger.components.ApplicationComponent;
 import com.dream.easy.view.base.IBaseView;
 import com.dream.library.base.BaseAppCompatActivity;
 
@@ -39,10 +38,6 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IBas
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-    }
-
-    protected ApplicationComponent getApplicationComponent() {
-        return ((BaseApplication) getApplication()).getApplicationComponent();
     }
 
     protected App getApp() {

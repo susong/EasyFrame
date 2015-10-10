@@ -1,8 +1,5 @@
 package com.dream.easy.base;
 
-import com.dream.easy.dagger.components.ApplicationComponent;
-import com.dream.easy.dagger.components.DaggerApplicationComponent;
-import com.dream.easy.dagger.modules.ApplicationModule;
 import com.dream.library.base.BaseLibApplication;
 
 /**
@@ -13,21 +10,11 @@ import com.dream.library.base.BaseLibApplication;
  */
 public abstract class BaseApplication extends BaseLibApplication {
 
-    private ApplicationComponent mApplicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        initDagger();
     }
 
-    private void initDagger() {
-        mApplicationComponent = DaggerApplicationComponent.builder()
-            .applicationModule(new ApplicationModule(this))
-            .build();
-    }
 
-    public ApplicationComponent getApplicationComponent() {
-        return mApplicationComponent;
-    }
 }

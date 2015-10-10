@@ -9,9 +9,6 @@ import com.dream.easy.model.ICommonContainerModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 /**
  * Author:      SuSong
  * Email:       751971697@qq.com | susong0618@163.com
@@ -19,12 +16,7 @@ import javax.inject.Singleton;
  * Date:        15/10/8 下午11:02
  * Description: EasyFrame
  */
-@Singleton
 public class ImagesContainerModelImpl implements ICommonContainerModel {
-
-    @Inject
-    public ImagesContainerModelImpl() {
-    }
 
     @Override
     public List<BaseEntity> getCommonCategoryList(Context context) {

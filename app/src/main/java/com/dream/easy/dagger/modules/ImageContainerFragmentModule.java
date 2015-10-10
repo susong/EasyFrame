@@ -2,11 +2,11 @@ package com.dream.easy.dagger.modules;
 
 import com.dream.easy.model.ICommonContainerModel;
 import com.dream.easy.model.impl.ImagesContainerModelImpl;
-import com.dream.easy.presenter.IPresenter;
+import com.dream.easy.presenter.IImagesContainerPresenter;
 import com.dream.easy.presenter.impl.ImagesContainerPresenterImpl;
-
-import javax.inject.Named;
-import javax.inject.Singleton;
+import com.dream.easy.ui.fragment.ImagesContainerFragment;
+import com.dream.easy.view.ICommonContainerView;
+import com.dream.library.dagger.FragmentScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,16 +20,40 @@ import dagger.Provides;
  */
 @Module
 public class ImageContainerFragmentModule {
-    @Provides
-    @Singleton
-    ICommonContainerModel provideImagesContainerModel(ImagesContainerModelImpl imagesContainerModel) {
-        return imagesContainerModel;
+
+    private ImagesContainerFragment mImagesContainerFragment;
+
+    public ImageContainerFragmentModule(ImagesContainerFragment imagesContainerFragment) {
+        mImagesContainerFragment = imagesContainerFragment;
     }
 
     @Provides
-    @Singleton
-    @Named("ImagesContainer")
-    IPresenter provideImagesContainerPresenter(ImagesContainerPresenterImpl imagesContainerPresenter) {
-        return imagesContainerPresenter;
+    @FragmentScope
+    ImagesContainerFragment provideImagesContainerFragment() {
+        return mImagesContainerFragment;
+    }
+
+    @Provides
+    @FragmentScope
+    ICommonContainerView provideICommonContainerView(ImagesContainerFragment imagesContainerFragment) {
+        return imagesContainerFragment;
+    }
+
+    @Provides
+    @FragmentScope
+    ICommonContainerModel provideImagesContainerModel() {
+        return new ImagesContainerModelImpl();
+    }
+
+    @Provides
+    @FragmentScope
+    IImagesContainerPresenter provideImagesContainerPresenter(
+        ImagesContainerFragment imagesContainerFragment,
+        ICommonContainerView commonContainerView,
+        ICommonContainerModel commonContainerModel) {
+        return new ImagesContainerPresenterImpl(
+            imagesContainerFragment,
+            commonContainerView,
+            commonContainerModel);
     }
 }

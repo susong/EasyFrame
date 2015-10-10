@@ -1,9 +1,7 @@
 package com.dream.easy.dagger.modules;
 
-import android.app.Activity;
-import android.content.Context;
-
-import javax.inject.Named;
+import com.dream.easy.ui.MainActivity;
+import com.dream.library.dagger.ActivityScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -17,21 +15,17 @@ import dagger.Provides;
 @Module
 public class MainActivityModule {
 
-    private Activity mActivity;
+    private MainActivity mActivity;
 
-    public MainActivityModule(Activity activity) {
+    public MainActivityModule(MainActivity activity) {
         mActivity = activity;
     }
 
     @Provides
-    @Named("MainActivity")
-    Activity provideActivity() {
+    @ActivityScope
+    MainActivity provideActivity() {
         return mActivity;
     }
 
-    @Provides
-    @Named("MainActivity")
-    Context provideContext() {
-        return mActivity;
-    }
+
 }

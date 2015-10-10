@@ -1,14 +1,9 @@
 package com.dream.easy.presenter.impl;
 
-import android.content.Context;
-
 import com.dream.easy.model.ICommonContainerModel;
-import com.dream.easy.presenter.IPresenter;
+import com.dream.easy.presenter.IImagesContainerPresenter;
+import com.dream.easy.ui.fragment.ImagesContainerFragment;
 import com.dream.easy.view.ICommonContainerView;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 /**
  * Author:      SuSong
@@ -17,25 +12,20 @@ import javax.inject.Singleton;
  * Date:        15/10/8 下午10:13
  * Description: EasyFrame
  */
-@Singleton
-public class ImagesContainerPresenterImpl implements IPresenter {
+public class ImagesContainerPresenterImpl implements IImagesContainerPresenter {
 
-    private Context mContext;
+    private ImagesContainerFragment mImagesContainerFragment;
     private ICommonContainerView mCommonContainerView;
     private ICommonContainerModel mCommonContainerModel;
 
-    public void setCommonContainerView(ICommonContainerView commonContainerView) {
-        mCommonContainerView = commonContainerView;
-    }
-
-    @Inject
-    public ImagesContainerPresenterImpl(@Named("MainActivity") Context context, ICommonContainerModel commonContainerModel) {
-        this.mContext = context;
+    public ImagesContainerPresenterImpl(ImagesContainerFragment imagesContainerFragment, ICommonContainerView commonContainerView, ICommonContainerModel commonContainerModel) {
+        this.mImagesContainerFragment = imagesContainerFragment;
+        this.mCommonContainerView = commonContainerView;
         this.mCommonContainerModel = commonContainerModel;
     }
 
     @Override
     public void init() {
-        mCommonContainerView.init(mCommonContainerModel.getCommonCategoryList(mContext));
+        mCommonContainerView.init(mCommonContainerModel.getCommonCategoryList(mImagesContainerFragment.getContext()));
     }
 }

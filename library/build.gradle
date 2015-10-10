@@ -66,6 +66,8 @@ dependencies {
     compile 'io.reactivex:rxjava:1.0.14'
     // https://github.com/ReactiveX/RxAndroid
     compile 'io.reactivex:rxandroid:1.0.1'
+    // https://github.com/google/guava
+    compile 'com.google.guava:guava:18.0'
     // https://github.com/JakeWharton/NineOldAndroids
     compile 'com.nineoldandroids:library:2.4.0'
     // http://facebook.github.io/stetho/
