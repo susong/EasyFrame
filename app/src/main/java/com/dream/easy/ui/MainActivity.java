@@ -1,6 +1,5 @@
 package com.dream.easy.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,10 +20,8 @@ import com.dream.easy.base.BaseActivity;
 import com.dream.easy.bean.NavigationEntity;
 import com.dream.easy.dagger.components.MainActivityComponent;
 import com.dream.easy.dagger.modules.MainActivityModule;
-import com.dream.easy.ui.fragment.ImagesContainerFragment;
-import com.dream.easy.ui.fragment.MusicFragment;
-import com.dream.easy.ui.fragment.VideosContainerFragment;
-import com.dream.easy.view.IMainView;
+import com.dream.easy.presenter.IMainActivityPresenter;
+import com.dream.easy.view.IMainActivityView;
 import com.dream.library.adapter.CommonAdapter;
 import com.dream.library.adapter.ViewHolder;
 import com.dream.library.base.BaseLibFragment;
@@ -33,8 +30,9 @@ import com.dream.library.netstatus.NetUtils;
 import com.dream.library.utils.DoubleClickExitHelper;
 import com.dream.library.widgets.XViewPager;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
@@ -44,11 +42,13 @@ import butterknife.Bind;
  * Date:        15/9/28 下午3:25
  * Description: EasyFrame
  */
-public class MainActivity extends BaseActivity implements IMainView {
+public class MainActivity extends BaseActivity implements IMainActivityView {
 
     @Bind(R.id.main_container) XViewPager mMainContainer;
     @Bind(R.id.main_navigation_list) ListView mMainNavigationList;
     @Bind(R.id.main_drawer) DrawerLayout mMainDrawer;
+
+    @Inject IMainActivityPresenter mMainActivityPresenter;
 
     private int mCheckedListItemColorResIds[] = {
         R.color.navigation_checked_picture_text_color,
@@ -118,13 +118,28 @@ public class MainActivity extends BaseActivity implements IMainView {
         mMainDrawer.setDrawerListener(mActionBarDrawerToggle);
         mActionBarDrawerToggle.syncState();
 
-        List<BaseLibFragment> pagerFragments = getPagerFragments();
-        mMainContainer.setLocked(true);
-        mMainContainer.setOffscreenPageLimit(pagerFragments.size());
-        mMainContainer.setAdapter(new MainContainerPagerAdapter(getSupportFragmentManager(), pagerFragments));
 
-        List<NavigationEntity> navigationListData = getNavigationListData(this);
-        mCommonAdapter = new CommonAdapter<NavigationEntity>(this, navigationListData, R.layout.list_item_navigation) {
+        mMainNavigationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mCurrentMenuCheckedPos = position;
+                mCommonAdapter.notifyDataSetChanged();
+                mMainDrawer.closeDrawer(GravityCompat.START);
+                mMainContainer.setCurrentItem(mCurrentMenuCheckedPos, false);
+            }
+        });
+        mDoubleClickExitHelper = new DoubleClickExitHelper(this);
+        mMainActivityPresenter.init();
+    }
+
+
+    @Override
+    public void init(List<BaseLibFragment> fragments, List<NavigationEntity> navigationList) {
+        mMainContainer.setLocked(true);
+        mMainContainer.setOffscreenPageLimit(fragments.size());
+        mMainContainer.setAdapter(new MainContainerPagerAdapter(getSupportFragmentManager(), fragments));
+
+        mCommonAdapter = new CommonAdapter<NavigationEntity>(this, navigationList, R.layout.list_item_navigation) {
             @Override
             public void convert(ViewHolder holder, NavigationEntity navigationEntity) {
                 holder.setImageResource(R.id.list_item_navigation_icon, navigationEntity.getIconResId())
@@ -139,35 +154,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         };
         mMainNavigationList.setAdapter(mCommonAdapter);
 
-        setTitle(navigationListData.get(mCurrentMenuCheckedPos).getName());
-
-        mMainNavigationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mCurrentMenuCheckedPos = position;
-                mCommonAdapter.notifyDataSetChanged();
-                mMainDrawer.closeDrawer(GravityCompat.START);
-                mMainContainer.setCurrentItem(mCurrentMenuCheckedPos, false);
-            }
-        });
-        mDoubleClickExitHelper = new DoubleClickExitHelper(this);
-    }
-
-    private List<BaseLibFragment> getPagerFragments() {
-        List<BaseLibFragment> fragments = new ArrayList<>();
-        fragments.add(new ImagesContainerFragment());
-        fragments.add(new VideosContainerFragment());
-        fragments.add(new MusicFragment());
-        return fragments;
-    }
-
-    private List<NavigationEntity> getNavigationListData(Context context) {
-        List<NavigationEntity> navigationEntities = new ArrayList<>();
-        String[] navigationArrays = context.getResources().getStringArray(R.array.navigation_list);
-        navigationEntities.add(new NavigationEntity("", navigationArrays[0], R.drawable.ic_picture));
-        navigationEntities.add(new NavigationEntity("", navigationArrays[1], R.drawable.ic_video));
-        navigationEntities.add(new NavigationEntity("", navigationArrays[2], R.drawable.ic_music));
-        return navigationEntities;
+        setTitle(navigationList.get(mCurrentMenuCheckedPos).getName());
     }
 
     @Override
@@ -246,6 +233,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         }
         return super.onKeyDown(keyCode, event);
     }
+
 
     private class MainContainerPagerAdapter extends FragmentPagerAdapter {
 

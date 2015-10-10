@@ -1,9 +1,9 @@
 package com.dream.easy.presenter.impl;
 
-import android.content.Context;
-
+import com.dream.easy.model.IMainActivityModel;
 import com.dream.easy.presenter.IMainActivityPresenter;
-import com.dream.easy.view.IMainView;
+import com.dream.easy.ui.MainActivity;
+import com.dream.easy.view.IMainActivityView;
 
 /**
  * Author:      SuSong
@@ -13,18 +13,20 @@ import com.dream.easy.view.IMainView;
  */
 public class MainActivityPresenterImpl implements IMainActivityPresenter {
 
-    private Context mContext;
-    private IMainView mMainView;
+    private MainActivity mMainActivity;
+    private IMainActivityView mMainActivityView;
+    private IMainActivityModel mMainActivityModel;
 
-    public MainActivityPresenterImpl(Context context, IMainView mainView) {
-        if (mainView == null) {
-            throw new IllegalArgumentException("Constructor's parameters must not be Null");
-        }
-        mContext = context;
-        mMainView = mainView;
+    public MainActivityPresenterImpl(MainActivity mainActivity,
+                                     IMainActivityView mainActivityView,
+                                     IMainActivityModel mainActivityModel) {
+        mMainActivity = mainActivity;
+        mMainActivityView = mainActivityView;
+        mMainActivityModel = mainActivityModel;
     }
 
     @Override
     public void init() {
+        mMainActivityView.init(mMainActivityModel.getPagerFragments(), mMainActivityModel.getNavigationListData(mMainActivity));
     }
 }

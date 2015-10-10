@@ -12,7 +12,7 @@ import com.dream.easy.bean.BaseEntity;
 import com.dream.easy.dagger.modules.ImageContainerFragmentModule;
 import com.dream.easy.presenter.IImagesContainerPresenter;
 import com.dream.easy.ui.MainActivity;
-import com.dream.easy.view.ICommonContainerView;
+import com.dream.easy.view.IImagesContainerFragmentView;
 import com.dream.library.eventbus.EventCenter;
 import com.dream.library.widgets.XViewPager;
 
@@ -28,7 +28,7 @@ import butterknife.Bind;
  * Date:        15/10/6 下午9:55
  * Description: EasyFrame
  */
-public class ImagesContainerFragment extends BaseFragment implements ICommonContainerView {
+public class ImagesContainerFragment extends BaseFragment implements IImagesContainerFragmentView {
 
     @Bind(R.id.tabLayout) TabLayout mTabLayout;
     @Bind(R.id.viewPager) XViewPager mViewPager;

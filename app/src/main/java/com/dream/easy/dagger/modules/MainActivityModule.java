@@ -1,6 +1,11 @@
 package com.dream.easy.dagger.modules;
 
+import com.dream.easy.model.IMainActivityModel;
+import com.dream.easy.model.impl.MainActivityModelImpl;
+import com.dream.easy.presenter.IMainActivityPresenter;
+import com.dream.easy.presenter.impl.MainActivityPresenterImpl;
 import com.dream.easy.ui.MainActivity;
+import com.dream.easy.view.IMainActivityView;
 import com.dream.library.dagger.ActivityScope;
 
 import dagger.Module;
@@ -27,5 +32,24 @@ public class MainActivityModule {
         return mActivity;
     }
 
+    @Provides
+    @ActivityScope
+    IMainActivityView provideIMainActivityView() {
+        return mActivity;
+    }
 
+    @Provides
+    @ActivityScope
+    IMainActivityModel provideIMainActivityModel() {
+        return new MainActivityModelImpl();
+    }
+
+    @Provides
+    @ActivityScope
+    IMainActivityPresenter provideIMainActivityPresenter(
+        MainActivity mainActivity,
+        IMainActivityView mainActivityView,
+        IMainActivityModel mainActivityModel) {
+        return new MainActivityPresenterImpl(mainActivity, mainActivityView, mainActivityModel);
+    }
 }

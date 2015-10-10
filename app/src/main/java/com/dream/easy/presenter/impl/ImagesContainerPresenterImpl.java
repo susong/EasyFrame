@@ -1,9 +1,9 @@
 package com.dream.easy.presenter.impl;
 
-import com.dream.easy.model.ICommonContainerModel;
+import com.dream.easy.model.IImagesContainerModel;
 import com.dream.easy.presenter.IImagesContainerPresenter;
 import com.dream.easy.ui.fragment.ImagesContainerFragment;
-import com.dream.easy.view.ICommonContainerView;
+import com.dream.easy.view.IImagesContainerFragmentView;
 
 /**
  * Author:      SuSong
@@ -15,10 +15,10 @@ import com.dream.easy.view.ICommonContainerView;
 public class ImagesContainerPresenterImpl implements IImagesContainerPresenter {
 
     private ImagesContainerFragment mImagesContainerFragment;
-    private ICommonContainerView mCommonContainerView;
-    private ICommonContainerModel mCommonContainerModel;
+    private IImagesContainerFragmentView mCommonContainerView;
+    private IImagesContainerModel mCommonContainerModel;
 
-    public ImagesContainerPresenterImpl(ImagesContainerFragment imagesContainerFragment, ICommonContainerView commonContainerView, ICommonContainerModel commonContainerModel) {
+    public ImagesContainerPresenterImpl(ImagesContainerFragment imagesContainerFragment, IImagesContainerFragmentView commonContainerView, IImagesContainerModel commonContainerModel) {
         this.mImagesContainerFragment = imagesContainerFragment;
         this.mCommonContainerView = commonContainerView;
         this.mCommonContainerModel = commonContainerModel;

@@ -1,11 +1,11 @@
 package com.dream.easy.dagger.modules;
 
-import com.dream.easy.model.ICommonContainerModel;
+import com.dream.easy.model.IImagesContainerModel;
 import com.dream.easy.model.impl.ImagesContainerModelImpl;
 import com.dream.easy.presenter.IImagesContainerPresenter;
 import com.dream.easy.presenter.impl.ImagesContainerPresenterImpl;
 import com.dream.easy.ui.fragment.ImagesContainerFragment;
-import com.dream.easy.view.ICommonContainerView;
+import com.dream.easy.view.IImagesContainerFragmentView;
 import com.dream.library.dagger.FragmentScope;
 
 import dagger.Module;
@@ -35,13 +35,13 @@ public class ImageContainerFragmentModule {
 
     @Provides
     @FragmentScope
-    ICommonContainerView provideICommonContainerView(ImagesContainerFragment imagesContainerFragment) {
+    IImagesContainerFragmentView provideICommonContainerView(ImagesContainerFragment imagesContainerFragment) {
         return imagesContainerFragment;
     }
 
     @Provides
     @FragmentScope
-    ICommonContainerModel provideImagesContainerModel() {
+    IImagesContainerModel provideImagesContainerModel() {
         return new ImagesContainerModelImpl();
     }
 
@@ -49,8 +49,8 @@ public class ImageContainerFragmentModule {
     @FragmentScope
     IImagesContainerPresenter provideImagesContainerPresenter(
         ImagesContainerFragment imagesContainerFragment,
-        ICommonContainerView commonContainerView,
-        ICommonContainerModel commonContainerModel) {
+        IImagesContainerFragmentView commonContainerView,
+        IImagesContainerModel commonContainerModel) {
         return new ImagesContainerPresenterImpl(
             imagesContainerFragment,
             commonContainerView,
