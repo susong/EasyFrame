@@ -2,6 +2,7 @@ package com.dream.easy.ui.fragment;
 
 import android.view.View;
 
+import com.dream.easy.R;
 import com.dream.easy.base.BaseFragment;
 import com.dream.library.eventbus.EventCenter;
 
@@ -16,7 +17,7 @@ public class ImagesListFragment extends BaseFragment {
 
     @Override
     protected int getContentViewLayoutId() {
-        return 0;
+        return R.layout.fragment_images_list;
     }
 
     @Override
