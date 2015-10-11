@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.dream.easy.R;
 import com.dream.easy.bean.BaseEntity;
-import com.dream.easy.model.IImagesContainerModel;
+import com.dream.easy.model.IImageContainerModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * Date:        15/10/8 下午11:02
  * Description: EasyFrame
  */
-public class ImagesContainerModelImpl implements IImagesContainerModel {
+public class ImageContainerModelImpl implements IImageContainerModel {
 
     @Override
     public List<BaseEntity> getCommonCategoryList(Context context) {

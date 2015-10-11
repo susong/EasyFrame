@@ -1,12 +1,12 @@
 package com.dream.easy.dagger.modules;
 
-import com.dream.easy.model.IImagesContainerModel;
-import com.dream.easy.model.impl.ImagesContainerModelImpl;
-import com.dream.easy.presenter.IImagesContainerPresenter;
-import com.dream.easy.presenter.impl.ImagesContainerPresenterImpl;
-import com.dream.easy.ui.fragment.ImagesContainerFragment;
+import com.dream.easy.dagger.scope.ImageContainerFragmentScope;
+import com.dream.easy.model.IImageContainerModel;
+import com.dream.easy.model.impl.ImageContainerModelImpl;
+import com.dream.easy.presenter.IImageContainerFragmentPresenter;
+import com.dream.easy.presenter.impl.ImageContainerFragmentPresenterImpl;
+import com.dream.easy.ui.fragment.ImageContainerFragment;
 import com.dream.easy.view.IImagesContainerFragmentView;
-import com.dream.library.dagger.FragmentScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -21,38 +21,38 @@ import dagger.Provides;
 @Module
 public class ImageContainerFragmentModule {
 
-    private ImagesContainerFragment mImagesContainerFragment;
+    private ImageContainerFragment mImageContainerFragment;
 
-    public ImageContainerFragmentModule(ImagesContainerFragment imagesContainerFragment) {
-        mImagesContainerFragment = imagesContainerFragment;
+    public ImageContainerFragmentModule(ImageContainerFragment imageContainerFragment) {
+        mImageContainerFragment = imageContainerFragment;
     }
 
     @Provides
-    @FragmentScope
-    ImagesContainerFragment provideImagesContainerFragment() {
-        return mImagesContainerFragment;
+    @ImageContainerFragmentScope
+    ImageContainerFragment provideImagesContainerFragment() {
+        return mImageContainerFragment;
     }
 
     @Provides
-    @FragmentScope
-    IImagesContainerFragmentView provideICommonContainerView(ImagesContainerFragment imagesContainerFragment) {
-        return imagesContainerFragment;
+    @ImageContainerFragmentScope
+    IImagesContainerFragmentView provideICommonContainerView(ImageContainerFragment imageContainerFragment) {
+        return imageContainerFragment;
     }
 
     @Provides
-    @FragmentScope
-    IImagesContainerModel provideImagesContainerModel() {
-        return new ImagesContainerModelImpl();
+    @ImageContainerFragmentScope
+    IImageContainerModel provideImagesContainerModel() {
+        return new ImageContainerModelImpl();
     }
 
     @Provides
-    @FragmentScope
-    IImagesContainerPresenter provideImagesContainerPresenter(
-        ImagesContainerFragment imagesContainerFragment,
+    @ImageContainerFragmentScope
+    IImageContainerFragmentPresenter provideImagesContainerPresenter(
+        ImageContainerFragment imageContainerFragment,
         IImagesContainerFragmentView commonContainerView,
-        IImagesContainerModel commonContainerModel) {
-        return new ImagesContainerPresenterImpl(
-            imagesContainerFragment,
+        IImageContainerModel commonContainerModel) {
+        return new ImageContainerFragmentPresenterImpl(
+            imageContainerFragment,
             commonContainerView,
             commonContainerModel);
     }

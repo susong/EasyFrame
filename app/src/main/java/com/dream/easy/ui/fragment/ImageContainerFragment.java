@@ -9,13 +9,15 @@ import android.view.View;
 import com.dream.easy.R;
 import com.dream.easy.base.BaseFragment;
 import com.dream.easy.bean.BaseEntity;
+import com.dream.easy.dagger.components.ImageContainerFragmentComponent;
 import com.dream.easy.dagger.modules.ImageContainerFragmentModule;
-import com.dream.easy.presenter.IImagesContainerPresenter;
+import com.dream.easy.presenter.IImageContainerFragmentPresenter;
 import com.dream.easy.ui.MainActivity;
 import com.dream.easy.view.IImagesContainerFragmentView;
 import com.dream.library.eventbus.EventCenter;
 import com.dream.library.widgets.XViewPager;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,12 +30,13 @@ import butterknife.Bind;
  * Date:        15/10/6 下午9:55
  * Description: EasyFrame
  */
-public class ImagesContainerFragment extends BaseFragment implements IImagesContainerFragmentView {
+public class ImageContainerFragment extends BaseFragment implements Serializable, IImagesContainerFragmentView {
 
     @Bind(R.id.tabLayout) TabLayout mTabLayout;
     @Bind(R.id.viewPager) XViewPager mViewPager;
 
-    @Inject IImagesContainerPresenter mPresenter;
+    @Inject IImageContainerFragmentPresenter mPresenter;
+    private ImageContainerFragmentComponent mImageContainerFragmentComponent;
 
     @Override
     protected int getContentViewLayoutId() {
@@ -42,10 +45,22 @@ public class ImagesContainerFragment extends BaseFragment implements IImagesCont
 
     @Override
     protected void initViewsAndEvents() {
-        ((MainActivity) mContext).getMainActivityComponent()
-            .plus(new ImageContainerFragmentModule(this))
-            .inject(this);
+        initDagger();
+        init();
+    }
+
+    private void initDagger() {
+        mImageContainerFragmentComponent = ((MainActivity) mContext).getMainActivityComponent()
+            .plus(new ImageContainerFragmentModule(this));
+        mImageContainerFragmentComponent.inject(this);
+    }
+
+    private void init() {
         mPresenter.init();
+    }
+
+    public ImageContainerFragmentComponent getImageContainerFragmentComponent() {
+        return mImageContainerFragmentComponent;
     }
 
     @Override
@@ -84,12 +99,6 @@ public class ImagesContainerFragment extends BaseFragment implements IImagesCont
             mViewPager.setOffscreenPageLimit(entityList.size());
             mViewPager.setAdapter(new ImagesContainerPagerAdapter(getSupportFragmentManager(), entityList));
             mTabLayout.setupWithViewPager(mViewPager);
-            mTabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
-                    super.onTabSelected(tab);
-                }
-            });
         }
     }
 
@@ -104,7 +113,7 @@ public class ImagesContainerFragment extends BaseFragment implements IImagesCont
 
         @Override
         public Fragment getItem(int position) {
-            return new ImagesListFragment();
+            return ImageListFragment.getInstance(ImageContainerFragment.this, mEntityList.get(position));
         }
 
         @Override

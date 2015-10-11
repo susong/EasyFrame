@@ -5,7 +5,7 @@ import android.content.Context;
 import com.dream.easy.R;
 import com.dream.easy.bean.NavigationEntity;
 import com.dream.easy.model.IMainActivityModel;
-import com.dream.easy.ui.fragment.ImagesContainerFragment;
+import com.dream.easy.ui.fragment.ImageContainerFragment;
 import com.dream.easy.ui.fragment.MusicFragment;
 import com.dream.easy.ui.fragment.VideosContainerFragment;
 import com.dream.library.base.BaseLibFragment;
@@ -24,7 +24,7 @@ public class MainActivityModelImpl implements IMainActivityModel {
     @Override
     public List<BaseLibFragment> getPagerFragments() {
         List<BaseLibFragment> fragments = new ArrayList<>();
-        fragments.add(new ImagesContainerFragment());
+        fragments.add(new ImageContainerFragment());
         fragments.add(new VideosContainerFragment());
         fragments.add(new MusicFragment());
         return fragments;

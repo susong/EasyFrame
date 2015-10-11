@@ -1,8 +1,9 @@
 package com.dream.easy.dagger.components;
 
 import com.dream.easy.dagger.modules.ImageContainerFragmentModule;
-import com.dream.easy.ui.fragment.ImagesContainerFragment;
-import com.dream.library.dagger.FragmentScope;
+import com.dream.easy.dagger.modules.ImageListFragmentModule;
+import com.dream.easy.dagger.scope.ImageContainerFragmentScope;
+import com.dream.easy.ui.fragment.ImageContainerFragment;
 
 import dagger.Subcomponent;
 
@@ -13,10 +14,12 @@ import dagger.Subcomponent;
  * Date:        15/10/10 下午4:27
  * Description: EasyFrame
  */
-@FragmentScope
+@ImageContainerFragmentScope
 @Subcomponent(
     modules = ImageContainerFragmentModule.class
 )
 public interface ImageContainerFragmentComponent {
-    ImagesContainerFragment inject(ImagesContainerFragment imagesContainerFragment);
+    ImageContainerFragment inject(ImageContainerFragment imageContainerFragment);
+
+    ImageListFragmentComponent plus(ImageListFragmentModule imageListFragmentModule);
 }

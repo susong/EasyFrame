@@ -13,6 +13,6 @@ import java.util.List;
  * Date:        15/10/8 下午10:20
  * Description: EasyFrame
  */
-public interface IImagesContainerModel {
+public interface IImageContainerModel {
     List<BaseEntity> getCommonCategoryList(Context context);
 }
