@@ -2,6 +2,8 @@ package com.dream.easy.dagger.modules;
 
 import android.app.Application;
 
+import com.dream.data.api.Api;
+import com.dream.data.api.UriHelper;
 import com.dream.easy.App;
 
 import javax.inject.Singleton;
@@ -28,5 +30,17 @@ public class AppModule {
     @Singleton
     Application provideApplication() {
         return mApp;
+    }
+
+    @Provides
+    @Singleton
+    UriHelper provideUriHelper() {
+        return new UriHelper();
+    }
+
+    @Provides
+    @Singleton
+    Api provideApi(UriHelper uriHelper) {
+        return new Api(uriHelper);
     }
 }

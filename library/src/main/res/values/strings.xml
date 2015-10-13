@@ -25,6 +25,7 @@
     <string name="cube_views_load_more_loaded_no_more">All the data has been loaded</string>
     <string name="cube_views_load_more_loaded_empty">It is empty. :(</string>
     <string name="cube_views_load_more_error">Load error, click to retry</string>
+    <string name="common_load_more_end">No more content</string>
 
     <string name="tip_double_click_exit">再次点击退出</string>
 </resources>

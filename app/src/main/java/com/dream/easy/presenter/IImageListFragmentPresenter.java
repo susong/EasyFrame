@@ -8,4 +8,7 @@ package com.dream.easy.presenter;
  * Description: EasyFrame
  */
 public interface IImageListFragmentPresenter {
+
+    void loadImageList(String requestTag, int event_tag, String keywords, int page, boolean isSwipeRefresh);
+
 }

@@ -2,7 +2,7 @@ package com.dream.easy.presenter.impl;
 
 import com.dream.easy.model.IMainActivityModel;
 import com.dream.easy.presenter.IMainActivityPresenter;
-import com.dream.easy.ui.MainActivity;
+import com.dream.easy.ui.activity.MainActivity;
 import com.dream.easy.view.IMainActivityView;
 
 /**

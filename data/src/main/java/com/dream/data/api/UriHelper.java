@@ -11,28 +11,10 @@ import java.net.URLEncoder;
  */
 public class UriHelper {
 
-    private static volatile UriHelper instance = null;
-
     /**
      * 20 datas per page
      */
     public static final int PAGE_LIMIT = 20;
-
-    public static final String URL_MUSICS_LIST_CHANNEL_ID = "0";
-
-    private UriHelper() {
-    }
-
-    public static UriHelper getInstance() {
-        if (null == instance) {
-            synchronized (UriHelper.class) {
-                if (null == instance) {
-                    instance = new UriHelper();
-                }
-            }
-        }
-        return instance;
-    }
 
     public String getImagesListUrl(String category, int pageNum) {
         StringBuilder sb = new StringBuilder();

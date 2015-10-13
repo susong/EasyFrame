@@ -82,5 +82,7 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:1.2.2'
     // https://github.com/square/picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
+    // https://github.com/nostra13/Android-Universal-Image-Loader
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     testCompile 'junit:junit:4.12'
 }

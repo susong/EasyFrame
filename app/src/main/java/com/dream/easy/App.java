@@ -1,11 +1,14 @@
 package com.dream.easy;
 
+import com.dream.data.api.ApiConstants;
 import com.dream.easy.base.BaseApplication;
 import com.dream.easy.dagger.components.AppComponent;
 import com.dream.easy.dagger.components.DaggerAppComponent;
 import com.dream.easy.dagger.modules.AppModule;
 import com.dream.library.logger.AbLog;
 import com.dream.library.logger.LogLevel;
+import com.dream.library.utils.ImageLoaderHelper;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 
 /**
@@ -49,6 +52,9 @@ public class App extends BaseApplication {
      */
     private void init() {
         initLogger();
+        ImageLoader.getInstance().init(
+            ImageLoaderHelper.getInstance(this)
+                .getImageLoaderConfiguration(ApiConstants.Paths.IMAGE_LOADER_CACHE_PATH));
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.dream.easy.ui;
+package com.dream.easy.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
         mMainContainer.setOffscreenPageLimit(fragments.size());
         mMainContainer.setAdapter(new MainContainerPagerAdapter(getSupportFragmentManager(), fragments));
 
-        mCommonAdapter = new CommonAdapter<NavigationEntity>(this, navigationList, R.layout.list_item_navigation) {
+        mCommonAdapter = new CommonAdapter<NavigationEntity>(this, navigationList, R.layout.item_lv_navigation) {
             @Override
             public void convert(ViewHolder holder, NavigationEntity navigationEntity) {
                 holder.setImageResource(R.id.list_item_navigation_icon, navigationEntity.getIconResId())

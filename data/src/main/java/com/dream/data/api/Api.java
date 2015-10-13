@@ -1,16 +1,11 @@
 package com.dream.data.api;
 
 import com.android.volley.Response;
-import com.dream.data.entity.ImageEntity;
+import com.android.volley.VolleyError;
 import com.dream.data.entity.ResponseImageListEntity;
-import com.dream.library.logger.AbLog;
+import com.dream.data.listeners.BaseMultiLoadedListener;
 import com.dream.library.volley.CustomRequest;
 import com.dream.library.volley.VolleyHelper;
-
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * Author:      SuSong
@@ -18,26 +13,36 @@ import javax.inject.Singleton;
  * Date:        15/9/29 下午3:44
  * Description: EasyFrame
  */
-@Singleton
 public class Api {
 
-    @Inject
-    public Api() {
+    private UriHelper mUriHelper;
+
+    public Api(UriHelper uriHelper) {
+        mUriHelper = uriHelper;
     }
 
-    public void getImagesList(String category, int pageNum) {
-        VolleyHelper.getInstance().addRequest(new CustomRequest.RequestBuilder()
-            .url(UriHelper.getInstance().getImagesListUrl(category, pageNum))
+    public void getImagesList(String requestTag, final int eventTag, String category, int pageNum,
+                              BaseMultiLoadedListener<ResponseImageListEntity> listener) {
+        CustomRequest customRequest = new CustomRequest.RequestBuilder()
+            .url(mUriHelper.getImagesListUrl(category, pageNum))
             .clazz(ResponseImageListEntity.class)
             .successListener(new Response.Listener<ResponseImageListEntity>() {
                 @Override
                 public void onResponse(ResponseImageListEntity response) {
-                    List<ImageEntity> imgs = response.getImgs();
-                    for (ImageEntity entity : imgs) {
-                        AbLog.i(entity.getImageUrl());
-                    }
+                    listener.onSuccess(eventTag, response);
                 }
             })
-            .build());
+            .errorListener(new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    listener.onError(error.getMessage());
+                }
+            })
+            .build();
+
+        customRequest.setShouldCache(true);
+        customRequest.setTag(requestTag);
+
+        VolleyHelper.getInstance().addRequest(customRequest);
     }
 }

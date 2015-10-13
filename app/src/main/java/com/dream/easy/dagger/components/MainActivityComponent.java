@@ -2,7 +2,7 @@ package com.dream.easy.dagger.components;
 
 import com.dream.easy.dagger.modules.ImageContainerFragmentModule;
 import com.dream.easy.dagger.modules.MainActivityModule;
-import com.dream.easy.ui.MainActivity;
+import com.dream.easy.ui.activity.MainActivity;
 import com.dream.library.dagger.ActivityScope;
 
 import dagger.Subcomponent;

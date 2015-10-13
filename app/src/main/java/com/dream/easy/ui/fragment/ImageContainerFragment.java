@@ -12,7 +12,7 @@ import com.dream.easy.bean.BaseEntity;
 import com.dream.easy.dagger.components.ImageContainerFragmentComponent;
 import com.dream.easy.dagger.modules.ImageContainerFragmentModule;
 import com.dream.easy.presenter.IImageContainerFragmentPresenter;
-import com.dream.easy.ui.MainActivity;
+import com.dream.easy.ui.activity.MainActivity;
 import com.dream.easy.view.IImagesContainerFragmentView;
 import com.dream.library.eventbus.EventCenter;
 import com.dream.library.widgets.XViewPager;

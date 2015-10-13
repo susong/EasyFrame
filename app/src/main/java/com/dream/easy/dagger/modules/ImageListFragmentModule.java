@@ -1,5 +1,6 @@
 package com.dream.easy.dagger.modules;
 
+import com.dream.data.api.Api;
 import com.dream.easy.dagger.scope.ImageListFragmentScope;
 import com.dream.easy.model.IImageListFragmentModel;
 import com.dream.easy.model.impl.ImageListFragmentModelImpl;
@@ -41,8 +42,8 @@ public class ImageListFragmentModule {
 
     @Provides
     @ImageListFragmentScope
-    IImageListFragmentModel provideIImageListFragmentModel() {
-        return new ImageListFragmentModelImpl();
+    IImageListFragmentModel provideIImageListFragmentModel(Api api) {
+        return new ImageListFragmentModelImpl(api);
     }
 
     @Provides
