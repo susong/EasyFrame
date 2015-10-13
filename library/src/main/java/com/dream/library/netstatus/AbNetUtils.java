@@ -12,7 +12,7 @@ import java.util.Locale;
  * Date:        15/10/2 下午9:57
  * Description: EasyFrame
  */
-public class NetUtils {
+public class AbNetUtils {
 
     public enum NetType {
         WIFI, CMNET, CMWAP, NONE

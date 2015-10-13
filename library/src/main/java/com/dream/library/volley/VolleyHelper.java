@@ -21,6 +21,7 @@ import java.util.Map;
  * Date:        15/9/29 上午8:51
  * Description: EasyFrame
  */
+@SuppressWarnings("unused")
 public class VolleyHelper {
     private static VolleyHelper mInstance;
     private RequestQueue mRequestQueue;

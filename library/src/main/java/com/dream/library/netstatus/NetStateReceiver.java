@@ -23,7 +23,7 @@ public class NetStateReceiver extends BroadcastReceiver {
     private final static String TAG = NetStateReceiver.class.getSimpleName();
 
     private static boolean isNetAvailable = false;
-    private static NetUtils.NetType mNetType;
+    private static AbNetUtils.NetType mNetType;
     private static ArrayList<NetChangeObserver> mNetChangeObservers = new ArrayList<>();
     private static BroadcastReceiver mBroadcastReceiver;
 
@@ -42,13 +42,13 @@ public class NetStateReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         mBroadcastReceiver = NetStateReceiver.this;
         if (intent.getAction().equalsIgnoreCase(ANDROID_NET_CHANGE_ACTION) || intent.getAction().equalsIgnoreCase(CUSTOM_ANDROID_NET_CHANGE_ACTION)) {
-            if (!NetUtils.isNetworkAvailable(context)) {
+            if (!AbNetUtils.isNetworkAvailable(context)) {
                 AbSimpleLog.i(TAG, "<--- network disconnected --->");
                 isNetAvailable = false;
             } else {
                 AbSimpleLog.i(TAG, "<--- network connected --->");
                 isNetAvailable = true;
-                mNetType = NetUtils.getAPNType(context);
+                mNetType = AbNetUtils.getAPNType(context);
             }
             notifyObserver();
         }
@@ -81,7 +81,7 @@ public class NetStateReceiver extends BroadcastReceiver {
         return isNetAvailable;
     }
 
-    public static NetUtils.NetType getAPNType() {
+    public static AbNetUtils.NetType getAPNType() {
         return mNetType;
     }
 

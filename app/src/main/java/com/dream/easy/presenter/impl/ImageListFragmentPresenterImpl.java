@@ -30,9 +30,9 @@ public class ImageListFragmentPresenterImpl implements IImageListFragmentPresent
     }
 
     @Override
-    public void loadImageList(String requestTag, int event_tag, String keywords, int page, boolean isSwipeRefresh) {
+    public void loadImageList(String requestTag, int event_tag, String keywords, int page, boolean isShowRefresh) {
         mImageListFragmentView.hideLoading();
-        if (!isSwipeRefresh) {
+        if (isShowRefresh) {
             mImageListFragmentView.showLoading("Loading...");
         }
         mImageListFragmentModel.loadImageList(requestTag, event_tag, keywords, page, this);

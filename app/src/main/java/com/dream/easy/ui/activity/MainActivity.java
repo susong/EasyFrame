@@ -23,10 +23,10 @@ import com.dream.easy.dagger.modules.MainActivityModule;
 import com.dream.easy.presenter.IMainActivityPresenter;
 import com.dream.easy.view.IMainActivityView;
 import com.dream.library.adapter.CommonAdapter;
-import com.dream.library.adapter.ViewHolder;
+import com.dream.library.adapter.CommonAdapterHelper;
 import com.dream.library.base.BaseLibFragment;
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.netstatus.NetUtils;
+import com.dream.library.netstatus.AbNetUtils;
 import com.dream.library.utils.DoubleClickExitHelper;
 import com.dream.library.widgets.XViewPager;
 
@@ -141,14 +141,14 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
 
         mCommonAdapter = new CommonAdapter<NavigationEntity>(this, navigationList, R.layout.item_lv_navigation) {
             @Override
-            public void convert(ViewHolder holder, NavigationEntity navigationEntity) {
-                holder.setImageResource(R.id.list_item_navigation_icon, navigationEntity.getIconResId())
+            public void convert(CommonAdapterHelper helper, NavigationEntity navigationEntity) {
+                helper.setImageResource(R.id.list_item_navigation_icon, navigationEntity.getIconResId())
                     .setText(R.id.list_item_navigation_name, navigationEntity.getName());
-                int position = holder.getPosition();
+                int position = helper.getPosition();
                 if (position == mCurrentMenuCheckedPos) {
-                    holder.setTextColor(R.id.list_item_navigation_name, mCheckedListItemColorResIds[position]);
+                    helper.setTextColor(R.id.list_item_navigation_name, mCheckedListItemColorResIds[position]);
                 } else {
-                    holder.setTextColor(R.id.list_item_navigation_name, R.color.black);
+                    helper.setTextColor(R.id.list_item_navigation_name, R.color.black);
                 }
             }
         };
@@ -158,7 +158,7 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
     }
 
     @Override
-    protected void onNetworkConnected(NetUtils.NetType type) {
+    protected void onNetworkConnected(AbNetUtils.NetType type) {
 
     }
 

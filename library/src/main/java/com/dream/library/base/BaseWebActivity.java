@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.dream.library.R;
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.netstatus.NetUtils;
+import com.dream.library.netstatus.AbNetUtils;
 import com.dream.library.utils.AbCommonUtils;
 import com.dream.library.widgets.BrowserLayout;
 
@@ -87,7 +87,7 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
     }
 
     @Override
-    protected void onNetworkConnected(NetUtils.NetType type) {
+    protected void onNetworkConnected(AbNetUtils.NetType type) {
 
     }
 

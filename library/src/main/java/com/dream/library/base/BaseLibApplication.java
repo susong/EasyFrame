@@ -2,7 +2,9 @@ package com.dream.library.base;
 
 import android.app.Application;
 
+import com.dream.library.utils.ImageLoaderHelper;
 import com.dream.library.volley.VolleyHelper;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * Author:      SuSong
@@ -31,7 +33,24 @@ public abstract class BaseLibApplication extends Application {
     }
 
     private void init() {
+        initVolley(true);
+        initImageLoader(true);
+    }
+
+    protected void initVolley(boolean isNeed) {
+        if (!isNeed) {
+            return;
+        }
         // 初始化Volley
         VolleyHelper.getInstance().init(this);
+    }
+
+    protected void initImageLoader(boolean isNeed) {
+        if (!isNeed) {
+            return;
+        }
+        // 初始化ImageLoader
+        ImageLoader.getInstance().init(
+            ImageLoaderHelper.getInstance(this).getImageLoaderConfiguration());
     }
 }

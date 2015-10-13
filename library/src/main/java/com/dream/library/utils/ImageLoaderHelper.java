@@ -32,11 +32,15 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import java.io.File;
 
-
+@SuppressWarnings("unused")
 public class ImageLoaderHelper {
 
     private Context mContext = null;
     private static volatile ImageLoaderHelper instance = null;
+
+    private ImageLoaderHelper() {
+
+    }
 
     private ImageLoaderHelper(Context context) {
         mContext = context;
@@ -53,7 +57,7 @@ public class ImageLoaderHelper {
         return instance;
     }
 
-    public DisplayImageOptions getDisplayOptionsDefault() {
+    public DisplayImageOptions getDisplayOptionsPic() {
         return new DisplayImageOptions.Builder()
             .showImageForEmptyUri(R.drawable.ic_picture_loading)
             .showImageOnLoading(R.drawable.ic_picture_loading)
@@ -130,17 +134,24 @@ public class ImageLoaderHelper {
             .build();
     }
 
-    public ImageLoaderConfiguration getImageLoaderConfigurationDefault() {
-        return getImageLoaderConfiguration(null);
+    public ImageLoaderConfiguration getImageLoaderConfiguration() {
+        return getImageLoaderConfiguration(null, null);
     }
 
     public ImageLoaderConfiguration getImageLoaderConfiguration(String filePath) {
+        return getImageLoaderConfiguration(filePath, null);
+    }
+
+    public ImageLoaderConfiguration getImageLoaderConfiguration(DisplayImageOptions displayImageOptions) {
+        return getImageLoaderConfiguration(null, displayImageOptions);
+    }
+
+    public ImageLoaderConfiguration getImageLoaderConfiguration(String filePath, DisplayImageOptions displayImageOptions) {
 
         ImageLoaderConfiguration.Builder builder = new ImageLoaderConfiguration.Builder(mContext);
-        builder.denyCacheImageMultipleSizesInMemory();
 
         // Disk
-        File cacheDir = null;
+        File cacheDir;
         if (!AbCommonUtils.isEmpty(filePath)) {
             cacheDir = StorageUtils.getOwnCacheDirectory(mContext, filePath);
         } else {
@@ -152,6 +163,7 @@ public class ImageLoaderHelper {
         builder.diskCacheFileNameGenerator(new Md5FileNameGenerator());
 
         // Memory
+        builder.denyCacheImageMultipleSizesInMemory();
         builder.memoryCacheSizePercentage(14);
         builder.memoryCacheSize(2 * 1024 * 1024);
         builder.memoryCacheExtraOptions(720, 1280);
@@ -161,7 +173,12 @@ public class ImageLoaderHelper {
         builder.threadPoolSize(3);
         builder.threadPriority(Thread.NORM_PRIORITY - 2);
 
-        builder.defaultDisplayImageOptions(getDisplayOptionsDefault());
+        // DisplayImageOptions
+        if (displayImageOptions == null) {
+            builder.defaultDisplayImageOptions(getDisplayOptions());
+        } else {
+            builder.defaultDisplayImageOptions(displayImageOptions);
+        }
 
         return builder.build();
     }

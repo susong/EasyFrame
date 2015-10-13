@@ -52,9 +52,8 @@ public class App extends BaseApplication {
      */
     private void init() {
         initLogger();
-        ImageLoader.getInstance().init(
-            ImageLoaderHelper.getInstance(this)
-                .getImageLoaderConfiguration(ApiConstants.Paths.IMAGE_LOADER_CACHE_PATH));
+
+//        Fresco.initialize(this);
     }
 
     /**
@@ -67,5 +66,15 @@ public class App extends BaseApplication {
 //            .hideThreadInfo()           // default shown
 //            .setMethodOffset(2)         // default 0
             .setLogLevel(LogLevel.FULL);  // default LogLevel.FULL
+    }
+
+    @Override
+    protected void initImageLoader(boolean isNeed) {
+        if (!isNeed) {
+            return;
+        }
+        // 初始化ImageLoader
+        ImageLoader.getInstance().init(
+            ImageLoaderHelper.getInstance(this).getImageLoaderConfiguration(ApiConstants.Paths.IMAGE_LOADER_CACHE_PATH));
     }
 }

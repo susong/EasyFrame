@@ -18,7 +18,7 @@ import com.dream.library.empty.EmptyViewHelperController;
 import com.dream.library.eventbus.EventCenter;
 import com.dream.library.netstatus.NetChangeObserver;
 import com.dream.library.netstatus.NetStateReceiver;
-import com.dream.library.netstatus.NetUtils;
+import com.dream.library.netstatus.AbNetUtils;
 import com.dream.library.utils.AbAppManager;
 import com.dream.library.utils.AbCommonUtils;
 import com.dream.library.utils.AbSmartBarUtils;
@@ -126,7 +126,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
         mNetChangeObserver = new NetChangeObserver() {
             @Override
-            public void onNetConnected(NetUtils.NetType type) {
+            public void onNetConnected(AbNetUtils.NetType type) {
                 super.onNetConnected(type);
                 onNetworkConnected(type);
             }
@@ -235,7 +235,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     /**
      * network connected
      */
-    protected abstract void onNetworkConnected(NetUtils.NetType type);
+    protected abstract void onNetworkConnected(AbNetUtils.NetType type);
 
     /**
      * network disconnected

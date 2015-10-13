@@ -92,23 +92,16 @@ public class PLA_LoadMoreListView extends PLA_MultiColumnListView implements PLA
     @Override
     public void onScroll(PLA_AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         if (mOnScrollListener != null) {
-            mOnScrollListener.onScroll(view, firstVisibleItem,
-                    visibleItemCount, totalItemCount);
+            mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
         }
-
         if (mOnLoadMoreListener != null) {
-
             if (visibleItemCount == totalItemCount) {
                 mProgressBarLoadMore.setVisibility(View.GONE);
                 mLabLoadMore.setVisibility(View.GONE);
                 return;
             }
-
-
             boolean loadMore = firstVisibleItem + visibleItemCount >= totalItemCount;
-
-            if (!mIsLoadingMore && loadMore
-                    && mCurrentScrollState != SCROLL_STATE_IDLE) {
+            if (!mIsLoadingMore && loadMore && mCurrentScrollState != SCROLL_STATE_IDLE) {
                 if (!mCanLoadMore) {
                     mLabLoadMore.setVisibility(View.VISIBLE);
                     return;
@@ -116,10 +109,10 @@ public class PLA_LoadMoreListView extends PLA_MultiColumnListView implements PLA
                 mProgressBarLoadMore.setVisibility(View.VISIBLE);
                 mLabLoadMore.setVisibility(View.GONE);
                 mIsLoadingMore = true;
-                onLoadMore();
+                if (mOnLoadMoreListener != null) {
+                    mOnLoadMoreListener.onLoadMore();
+                }
             }
-
-
         }
     }
 
@@ -140,6 +133,7 @@ public class PLA_LoadMoreListView extends PLA_MultiColumnListView implements PLA
      *
      * @param onLoadMoreListener The callback to run.
      */
+    @Override
     public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
         mOnLoadMoreListener = onLoadMoreListener;
     }
@@ -149,29 +143,24 @@ public class PLA_LoadMoreListView extends PLA_MultiColumnListView implements PLA
         mLabLoadMore.setVisibility(View.GONE);
     }
 
-    public void onLoadMore() {
-        if (mOnLoadMoreListener != null) {
-            mOnLoadMoreListener.onLoadMore();
-        }
-    }
-
     /**
      * Notify the loading more operation has finished
      */
+    @Override
     public void onLoadMoreComplete() {
         mIsLoadingMore = false;
         mProgressBarLoadMore.setVisibility(View.GONE);
     }
 
-    /**
-     * Interface definition for a callback to be invoked when list reaches the
-     * last item (the user load more items in the list)
-     */
-    public interface OnLoadMoreListener {
-        /**
-         * Called when the list reaches the last item (the last item is visible
-         * to the user)
-         */
-        public void onLoadMore();
-    }
+//    /**
+//     * Interface definition for a callback to be invoked when list reaches the
+//     * last item (the user load more items in the list)
+//     */
+//    public interface OnLoadMoreListener {
+//        /**
+//         * Called when the list reaches the last item (the last item is visible
+//         * to the user)
+//         */
+//        public void onLoadMore();
+//    }
 }

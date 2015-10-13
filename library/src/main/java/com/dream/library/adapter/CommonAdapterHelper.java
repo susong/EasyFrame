@@ -22,14 +22,14 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 @SuppressWarnings("unused")
-public class ViewHolder {
+public class CommonAdapterHelper {
     private SparseArray<View> mViews;
     private int mPosition;
     private View mConvertView;
     private Context mContext;
     private int mLayoutId;
 
-    public ViewHolder(Context context, ViewGroup parent, int layoutId, int position) {
+    public CommonAdapterHelper(Context context, ViewGroup parent, int layoutId, int position) {
         this.mContext = context;
         this.mLayoutId = layoutId;
         this.mPosition = position;
@@ -38,11 +38,11 @@ public class ViewHolder {
         this.mConvertView.setTag(this);
     }
 
-    public static ViewHolder get(Context context, View convertView, ViewGroup parent, int layoutId, int position) {
+    public static CommonAdapterHelper get(Context context, View convertView, ViewGroup parent, int layoutId, int position) {
         if (convertView == null) {
-            return new ViewHolder(context, parent, layoutId, position);
+            return new CommonAdapterHelper(context, parent, layoutId, position);
         } else {
-            ViewHolder holder = (ViewHolder) convertView.getTag();
+            CommonAdapterHelper holder = (CommonAdapterHelper) convertView.getTag();
             holder.mPosition = position;
             return holder;
         }
@@ -76,55 +76,55 @@ public class ViewHolder {
     /**
      * 设置TextView的值
      */
-    public ViewHolder setText(int viewId, String text) {
+    public CommonAdapterHelper setText(int viewId, String text) {
         TextView tv = getView(viewId);
         tv.setText(text);
         return this;
     }
 
-    public ViewHolder setImageResource(int viewId, int resId) {
+    public CommonAdapterHelper setImageResource(int viewId, int resId) {
         ImageView view = getView(viewId);
         view.setImageResource(resId);
         return this;
     }
 
-    public ViewHolder setImageBitmap(int viewId, Bitmap bitmap) {
+    public CommonAdapterHelper setImageBitmap(int viewId, Bitmap bitmap) {
         ImageView view = getView(viewId);
         view.setImageBitmap(bitmap);
         return this;
     }
 
-    public ViewHolder setImageDrawable(int viewId, Drawable drawable) {
+    public CommonAdapterHelper setImageDrawable(int viewId, Drawable drawable) {
         ImageView view = getView(viewId);
         view.setImageDrawable(drawable);
         return this;
     }
 
-    public ViewHolder setImageUrl(int viewId, String imageUrl) {
+    public CommonAdapterHelper setImageUrl(int viewId, String imageUrl) {
         ImageView view = getView(viewId);
         Picasso.with(mContext).load(imageUrl).into(view);
         return this;
     }
 
-    public ViewHolder setBackgroundColor(int viewId, int color) {
+    public CommonAdapterHelper setBackgroundColor(int viewId, int color) {
         View view = getView(viewId);
         view.setBackgroundColor(color);
         return this;
     }
 
-    public ViewHolder setBackgroundRes(int viewId, int backgroundRes) {
+    public CommonAdapterHelper setBackgroundRes(int viewId, int backgroundRes) {
         View view = getView(viewId);
         view.setBackgroundResource(backgroundRes);
         return this;
     }
 
-    public ViewHolder setTextColor(int viewId, int textColor) {
+    public CommonAdapterHelper setTextColor(int viewId, int textColor) {
         TextView view = getView(viewId);
         view.setTextColor(textColor);
         return this;
     }
 
-    public ViewHolder setTextColorRes(int viewId, int textColorRes) {
+    public CommonAdapterHelper setTextColorRes(int viewId, int textColorRes) {
         TextView view = getView(viewId);
         //noinspection deprecation
         view.setTextColor(mContext.getResources().getColor(textColorRes));
@@ -132,7 +132,7 @@ public class ViewHolder {
     }
 
     @SuppressLint("NewApi")
-    public ViewHolder setAlpha(int viewId, float value) {
+    public CommonAdapterHelper setAlpha(int viewId, float value) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             getView(viewId).setAlpha(value);
         } else {
@@ -145,26 +145,26 @@ public class ViewHolder {
         return this;
     }
 
-    public ViewHolder setVisible(int viewId, boolean visible) {
+    public CommonAdapterHelper setVisible(int viewId, boolean visible) {
         View view = getView(viewId);
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
         return this;
     }
 
-    public ViewHolder linkify(int viewId) {
+    public CommonAdapterHelper linkify(int viewId) {
         TextView view = getView(viewId);
         Linkify.addLinks(view, Linkify.ALL);
         return this;
     }
 
-    public ViewHolder setTypeface(int viewId, Typeface typeface) {
+    public CommonAdapterHelper setTypeface(int viewId, Typeface typeface) {
         TextView view = getView(viewId);
         view.setTypeface(typeface);
         view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
         return this;
     }
 
-    public ViewHolder setTypeface(Typeface typeface, int... viewIds) {
+    public CommonAdapterHelper setTypeface(Typeface typeface, int... viewIds) {
         for (int viewId : viewIds) {
             TextView view = getView(viewId);
             view.setTypeface(typeface);
@@ -173,51 +173,51 @@ public class ViewHolder {
         return this;
     }
 
-    public ViewHolder setProgress(int viewId, int progress) {
+    public CommonAdapterHelper setProgress(int viewId, int progress) {
         ProgressBar view = getView(viewId);
         view.setProgress(progress);
         return this;
     }
 
-    public ViewHolder setProgress(int viewId, int progress, int max) {
+    public CommonAdapterHelper setProgress(int viewId, int progress, int max) {
         ProgressBar view = getView(viewId);
         view.setMax(max);
         view.setProgress(progress);
         return this;
     }
 
-    public ViewHolder setMax(int viewId, int max) {
+    public CommonAdapterHelper setMax(int viewId, int max) {
         ProgressBar view = getView(viewId);
         view.setMax(max);
         return this;
     }
 
-    public ViewHolder setRating(int viewId, float rating) {
+    public CommonAdapterHelper setRating(int viewId, float rating) {
         RatingBar view = getView(viewId);
         view.setRating(rating);
         return this;
     }
 
-    public ViewHolder setRating(int viewId, float rating, int max) {
+    public CommonAdapterHelper setRating(int viewId, float rating, int max) {
         RatingBar view = getView(viewId);
         view.setMax(max);
         view.setRating(rating);
         return this;
     }
 
-    public ViewHolder setTag(int viewId, Object tag) {
+    public CommonAdapterHelper setTag(int viewId, Object tag) {
         View view = getView(viewId);
         view.setTag(tag);
         return this;
     }
 
-    public ViewHolder setTag(int viewId, int key, Object tag) {
+    public CommonAdapterHelper setTag(int viewId, int key, Object tag) {
         View view = getView(viewId);
         view.setTag(key, tag);
         return this;
     }
 
-    public ViewHolder setChecked(int viewId, boolean checked) {
+    public CommonAdapterHelper setChecked(int viewId, boolean checked) {
         Checkable view = getView(viewId);
         view.setChecked(checked);
         return this;
@@ -226,21 +226,21 @@ public class ViewHolder {
     /**
      * 关于事件的
      */
-    public ViewHolder setOnClickListener(int viewId,
+    public CommonAdapterHelper setOnClickListener(int viewId,
                                          View.OnClickListener listener) {
         View view = getView(viewId);
         view.setOnClickListener(listener);
         return this;
     }
 
-    public ViewHolder setOnTouchListener(int viewId,
+    public CommonAdapterHelper setOnTouchListener(int viewId,
                                          View.OnTouchListener listener) {
         View view = getView(viewId);
         view.setOnTouchListener(listener);
         return this;
     }
 
-    public ViewHolder setOnLongClickListener(int viewId,
+    public CommonAdapterHelper setOnLongClickListener(int viewId,
                                              View.OnLongClickListener listener) {
         View view = getView(viewId);
         view.setOnLongClickListener(listener);

@@ -9,6 +9,6 @@ package com.dream.easy.presenter;
  */
 public interface IImageListFragmentPresenter {
 
-    void loadImageList(String requestTag, int event_tag, String keywords, int page, boolean isSwipeRefresh);
+    void loadImageList(String requestTag, int event_tag, String keywords, int page, boolean isShowRefresh);
 
 }

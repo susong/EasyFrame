@@ -11,7 +11,7 @@ public class NetChangeObserver {
 	/**
 	 * when network connected callback
 	 */
-	public void onNetConnected(NetUtils.NetType type) {
+	public void onNetConnected(AbNetUtils.NetType type) {
 
 	}
 
