@@ -72,4 +72,8 @@
     <dimen name="circular_progress_border">4dp</dimen>
     <dimen name="md_default_dialog_width">0dp</dimen>
 
+    <dimen name="md_simpleitem_height">62dp</dimen>
+    <dimen name="md_simplelist_icon">40dp</dimen>
+    <dimen name="md_simplelist_icon_margin">16dp</dimen>
+    <dimen name="md_simplelist_textsize">18sp</dimen>
 </resources>
