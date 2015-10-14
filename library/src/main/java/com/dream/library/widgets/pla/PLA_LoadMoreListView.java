@@ -24,7 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dream.library.R;
-import com.dream.library.progress.CircularProgressBar;
+import com.dream.library.widgets.progress.CircularProgressBar;
 
 /**
  * Author:  Tau.Chen

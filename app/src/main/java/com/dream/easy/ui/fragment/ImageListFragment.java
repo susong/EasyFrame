@@ -19,7 +19,7 @@ import com.dream.easy.view.IImageListFragmentView;
 import com.dream.library.adapter.CommonAdapter;
 import com.dream.library.adapter.CommonAdapterHelper;
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.netstatus.AbNetUtils;
+import com.dream.library.utils.netstatus.AbNetUtils;
 import com.dream.library.widgets.XSwipeRefreshLayout;
 import com.dream.library.widgets.pla.PLA_AdapterView;
 import com.dream.library.widgets.pla.PLA_LoadMoreListView;

@@ -21,7 +21,7 @@
     android:paddingBottom="@dimen/common_load_more_padding"
     android:paddingTop="@dimen/common_load_more_padding">
 
-    <com.dream.library.progress.CircularProgressBar
+    <com.dream.library.widgets.progress.CircularProgressBar
         android:id="@+id/common_load_more_footer_progress"
         android:layout_width="@dimen/common_load_more_progress_size"
         android:layout_height="@dimen/common_load_more_progress_size"

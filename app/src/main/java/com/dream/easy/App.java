@@ -5,8 +5,8 @@ import com.dream.easy.base.BaseApplication;
 import com.dream.easy.dagger.components.AppComponent;
 import com.dream.easy.dagger.components.DaggerAppComponent;
 import com.dream.easy.dagger.modules.AppModule;
-import com.dream.library.logger.AbLog;
-import com.dream.library.logger.LogLevel;
+import com.dream.library.utils.logger.AbLog;
+import com.dream.library.utils.logger.LogLevel;
 import com.dream.library.utils.ImageLoaderHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

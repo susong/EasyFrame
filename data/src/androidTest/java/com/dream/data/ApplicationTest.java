@@ -3,7 +3,7 @@ package com.dream.data;
 import android.test.ApplicationTestCase;
 
 import com.dream.library.base.BaseLibApplication;
-import com.dream.library.logger.AbLog;
+import com.dream.library.utils.logger.AbLog;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>

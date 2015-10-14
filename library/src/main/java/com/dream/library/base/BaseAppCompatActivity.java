@@ -14,11 +14,11 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.dream.library.R;
-import com.dream.library.empty.EmptyViewHelperController;
+import com.dream.library.widgets.empty.EmptyViewHelperController;
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.netstatus.NetChangeObserver;
-import com.dream.library.netstatus.NetStateReceiver;
-import com.dream.library.netstatus.AbNetUtils;
+import com.dream.library.utils.netstatus.NetChangeObserver;
+import com.dream.library.utils.netstatus.NetStateReceiver;
+import com.dream.library.utils.netstatus.AbNetUtils;
 import com.dream.library.utils.AbAppManager;
 import com.dream.library.utils.AbCommonUtils;
 import com.dream.library.utils.AbSmartBarUtils;

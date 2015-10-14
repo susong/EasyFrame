@@ -3,10 +3,10 @@ package com.dream.library.base;
 import android.os.Bundle;
 import android.view.View;
 
-import com.dream.library.swipeback.SwipeBackActivityBase;
-import com.dream.library.swipeback.SwipeBackActivityHelper;
-import com.dream.library.swipeback.SwipeBackLayout;
-import com.dream.library.swipeback.Utils;
+import com.dream.library.widgets.swipeback.SwipeBackActivityBase;
+import com.dream.library.widgets.swipeback.SwipeBackActivityHelper;
+import com.dream.library.widgets.swipeback.SwipeBackLayout;
+import com.dream.library.widgets.swipeback.Utils;
 
 
 /**

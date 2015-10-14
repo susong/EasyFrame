@@ -26,7 +26,7 @@ import com.dream.library.adapter.CommonAdapter;
 import com.dream.library.adapter.CommonAdapterHelper;
 import com.dream.library.base.BaseLibFragment;
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.netstatus.AbNetUtils;
+import com.dream.library.utils.netstatus.AbNetUtils;
 import com.dream.library.utils.DoubleClickExitHelper;
 import com.dream.library.widgets.XViewPager;
 

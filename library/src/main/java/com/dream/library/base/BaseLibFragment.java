@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.empty.EmptyViewHelperController;
+import com.dream.library.widgets.empty.EmptyViewHelperController;
 import com.dream.library.utils.AbCommonUtils;
 
 import java.lang.reflect.Field;
