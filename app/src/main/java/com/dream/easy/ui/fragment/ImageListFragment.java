@@ -123,12 +123,11 @@ public class ImageListFragment extends BaseFragment implements IImageListFragmen
 
     @Override
     protected void onFirstUserVisible() {
-
     }
 
     @Override
     protected void onUserVisible() {
-        
+
     }
 
     @Override
