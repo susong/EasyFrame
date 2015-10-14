@@ -109,7 +109,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
         mContext = this;
         TAG_LOG = this.getClass().getSimpleName();
-        AbAppManager.getInstance().addActivity(this);
+        AbAppManager.getAbAppManager().addActivity(this);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -120,9 +120,10 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
         if (getContentViewLayoutId() != 0) {
             setContentView(getContentViewLayoutId());
-        } else {
-            throw new IllegalArgumentException("You must return a right contentView layout resource Id");
         }
+//        else {
+//            throw new IllegalArgumentException("You must return a right contentView layout resource Id");
+//        }
 
         mNetChangeObserver = new NetChangeObserver() {
             @Override
@@ -165,7 +166,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        AbAppManager.getInstance().finishActivity(this);
+        AbAppManager.getAbAppManager().finishActivity(this);
         if (toggleOverridePendingTransition()) {
             switch (getOverridePendingTransitionMode()) {
                 case LEFT:

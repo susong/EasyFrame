@@ -15,7 +15,7 @@ public class AbAppManager {
 
     private static final String TAG = AbAppManager.class.getSimpleName();
 
-    private static AbAppManager mInstance = null;
+    private static AbAppManager mAbAppManager = null;
     private static Stack<Activity> mActivityStack = new Stack<>();
 
     private AbAppManager() {
@@ -25,15 +25,15 @@ public class AbAppManager {
     /**
      * 单一实例
      */
-    public static AbAppManager getInstance() {
-        if (null == mInstance) {
+    public static AbAppManager getAbAppManager() {
+        if (mAbAppManager == null) {
             synchronized (AbAppManager.class) {
-                if (null == mInstance) {
-                    mInstance = new AbAppManager();
+                if (mAbAppManager == null) {
+                    mAbAppManager = new AbAppManager();
                 }
             }
         }
-        return mInstance;
+        return mAbAppManager;
     }
 
     public int size() {

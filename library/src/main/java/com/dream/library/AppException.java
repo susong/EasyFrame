@@ -147,7 +147,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         if (!handleException(ex)) {
-            AbAppManager.getInstance().AppExit();
+            AbAppManager.getAbAppManager().AppExit();
             System.exit(0);
         }
     }
@@ -169,8 +169,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
             e.printStackTrace();
         } finally {
             if (success) {
-                final Context context = AbAppManager.getInstance()
-                    .currentActivity();
+                final Context context = AbAppManager.getAbAppManager().currentActivity();
                 // 显示异常信息&发送报告
                 new Thread() {
                     @Override
@@ -197,20 +196,8 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    AbAppManager.getInstance().AppExit();
+                    AbAppManager.getAbAppManager().AppExit();
                     System.exit(-1);
-                }
-            })
-            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            })
-            .setNeutralButton("报告", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
                 }
             });
         builder.setCancelable(false);

@@ -109,7 +109,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
         mContext = this;
         TAG_LOG = this.getClass().getSimpleName();
-        AbAppManager.getInstance().addActivity(this);
+        AbAppManager.getAbAppManager().addActivity(this);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -165,7 +165,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     @Override
     public void finish() {
         super.finish();
-        AbAppManager.getInstance().finishActivity(this);
+        AbAppManager.getAbAppManager().finishActivity(this);
         if (toggleOverridePendingTransition()) {
             switch (getOverridePendingTransitionMode()) {
                 case LEFT:

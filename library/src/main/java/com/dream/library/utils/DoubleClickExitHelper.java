@@ -51,7 +51,7 @@ public class DoubleClickExitHelper {
                 mToast.cancel();
             }
             // 退出
-            AbAppManager.getInstance().AppExit();
+            AbAppManager.getAbAppManager().AppExit();
             return true;
         } else {
             mIsOneKeyBack = true;
