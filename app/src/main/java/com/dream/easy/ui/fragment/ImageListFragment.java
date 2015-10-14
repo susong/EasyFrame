@@ -128,7 +128,7 @@ public class ImageListFragment extends BaseFragment implements IImageListFragmen
 
     @Override
     protected void onUserVisible() {
-
+        throw new RuntimeException("测试异常类");
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.dream.library.base;
 
 import android.app.Application;
 
+import com.dream.library.AppException;
 import com.dream.library.utils.ImageLoaderHelper;
 import com.dream.library.volley.VolleyHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -33,6 +34,9 @@ public abstract class BaseLibApplication extends Application {
     }
 
     private void init() {
+        // 错误信息捕获
+        Thread.setDefaultUncaughtExceptionHandler(AppException
+            .getAppExceptionHandler(this));
         initVolley(true);
         initImageLoader(true);
     }
