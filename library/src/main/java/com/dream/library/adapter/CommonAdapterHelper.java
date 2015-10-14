@@ -19,7 +19,8 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 
 @SuppressWarnings("unused")
 public class CommonAdapterHelper {
@@ -102,7 +103,7 @@ public class CommonAdapterHelper {
 
     public CommonAdapterHelper setImageUrl(int viewId, String imageUrl) {
         ImageView view = getView(viewId);
-        Picasso.with(mContext).load(imageUrl).into(view);
+        ImageLoader.getInstance().displayImage(imageUrl, view);
         return this;
     }
 
@@ -227,21 +228,21 @@ public class CommonAdapterHelper {
      * 关于事件的
      */
     public CommonAdapterHelper setOnClickListener(int viewId,
-                                         View.OnClickListener listener) {
+                                                  View.OnClickListener listener) {
         View view = getView(viewId);
         view.setOnClickListener(listener);
         return this;
     }
 
     public CommonAdapterHelper setOnTouchListener(int viewId,
-                                         View.OnTouchListener listener) {
+                                                  View.OnTouchListener listener) {
         View view = getView(viewId);
         view.setOnTouchListener(listener);
         return this;
     }
 
     public CommonAdapterHelper setOnLongClickListener(int viewId,
-                                             View.OnLongClickListener listener) {
+                                                      View.OnLongClickListener listener) {
         View view = getView(viewId);
         view.setOnLongClickListener(listener);
         return this;
