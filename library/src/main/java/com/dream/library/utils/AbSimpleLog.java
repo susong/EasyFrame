@@ -123,16 +123,23 @@ public class AbSimpleLog {
      */
     private static String rebuildMsg(StackTraceElement stackTraceElement, String msg) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Thread:");
-        sb.append(Thread.currentThread().getName());
-        sb.append(" ");
-        sb.append(stackTraceElement.getFileName());
-        sb.append(" (");
-        sb.append(stackTraceElement.getLineNumber());
-        sb.append(") ");
-        sb.append(stackTraceElement.getMethodName());
-        sb.append(": ");
-        sb.append(msg);
+        sb.append("Thread:")
+            .append(Thread.currentThread().getName())
+            .append(" ")
+            .append(getSimpleClassName(stackTraceElement.getClassName()))
+            .append(".")
+            .append(stackTraceElement.getMethodName())
+            .append(" (")
+            .append(stackTraceElement.getFileName())
+            .append(":")
+            .append(stackTraceElement.getLineNumber())
+            .append(") ")
+            .append(msg);
         return sb.toString();
+    }
+
+    private static String getSimpleClassName(String name) {
+        int lastIndex = name.lastIndexOf(".");
+        return name.substring(lastIndex + 1);
     }
 }

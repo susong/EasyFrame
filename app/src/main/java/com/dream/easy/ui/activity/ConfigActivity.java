@@ -6,7 +6,11 @@ import android.view.View;
 import com.dream.easy.base.BaseActivity;
 import com.dream.library.eventbus.EventCenter;
 import com.dream.library.utils.AbPropertiesUtils;
+import com.dream.library.utils.logger.AbLog;
 import com.dream.library.utils.netstatus.AbNetUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Author:      SuSong
@@ -48,8 +52,15 @@ public class ConfigActivity extends BaseActivity {
 //        ps.setProperty("name","jack");
 //        ps.setProperty("age","1");
 //        abPropertiesUtils.set(ps);
-        abPropertiesUtils.set("like","apple");
-        abPropertiesUtils.set("工作","IT工程师");
+//        abPropertiesUtils.set("like","apple");
+//        abPropertiesUtils.set("工作","IT工程师");
+        abPropertiesUtils.remove("工作", "like", "aaa");
+        abPropertiesUtils.get("name");
+
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "jack");
+        map.put("age", "1");
+        AbLog.i(map.toString());
     }
 
     @Override

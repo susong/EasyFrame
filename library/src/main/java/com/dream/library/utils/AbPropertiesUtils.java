@@ -7,6 +7,7 @@ import com.dream.library.AppConfig;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Arrays;
 import java.util.Properties;
 
 /**
@@ -76,12 +77,15 @@ public class AbPropertiesUtils {
                 AbSimpleLog.e(TAG, e);
             }
         }
+        AbSimpleLog.i(TAG, "properties get");
         return props;
     }
 
     public String get(String key) {
         Properties props = getProps();
-        return (props != null) ? props.getProperty(key) : null;
+        String value = (props != null) ? props.getProperty(key) : null;
+        AbSimpleLog.i(TAG, "properties get : {" + key + " = " + value + "}");
+        return value;
     }
 
     private void setProps(Properties p) {
@@ -116,13 +120,14 @@ public class AbPropertiesUtils {
         Properties props = getProps();
         props.putAll(ps);
         setProps(props);
+        AbSimpleLog.i(TAG, "properties set");
     }
 
     public void set(String key, String value) {
         Properties props = getProps();
         props.setProperty(key, value);
         setProps(props);
-        AbSimpleLog.i(TAG, "properties set key : " + key + " value : " + value);
+        AbSimpleLog.i(TAG, "properties set : {" + key + " = " + value + "}");
     }
 
     public void remove(String... key) {
@@ -131,6 +136,6 @@ public class AbPropertiesUtils {
             props.remove(k);
         }
         setProps(props);
-        AbSimpleLog.i(TAG, "properties remove key : " + key.toString());
+        AbSimpleLog.i(TAG, "properties remove key : " + Arrays.asList(key).toString());
     }
 }
