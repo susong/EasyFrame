@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.dream.easy.base.BaseActivity;
 import com.dream.library.eventbus.EventCenter;
+import com.dream.library.utils.AbPropertiesUtils;
 import com.dream.library.utils.netstatus.AbNetUtils;
 
 /**
@@ -42,7 +43,13 @@ public class ConfigActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-
+        AbPropertiesUtils abPropertiesUtils = AbPropertiesUtils.init(this);
+//        Properties ps = new Properties();
+//        ps.setProperty("name","jack");
+//        ps.setProperty("age","1");
+//        abPropertiesUtils.set(ps);
+        abPropertiesUtils.set("like","apple");
+        abPropertiesUtils.set("工作","IT工程师");
     }
 
     @Override

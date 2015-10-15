@@ -131,6 +131,6 @@ public class AbPropertiesUtils {
             props.remove(k);
         }
         setProps(props);
-        AbSimpleLog.i(TAG, "properties set key : " + key.toString());
+        AbSimpleLog.i(TAG, "properties remove key : " + key.toString());
     }
 }
