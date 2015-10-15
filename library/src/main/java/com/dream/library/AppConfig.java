@@ -4,21 +4,19 @@ import android.content.Context;
 
 /**
  * 应用程序配置类：用于保存用户相关信息及设置
- *
- * @author FireAnt（http://my.oschina.net/LittleDY）
- * @created 2014年9月25日 下午5:29:00
+ * <p>
+ * author FireAnt（http://my.oschina.net/LittleDY）
+ * created 2014年9月25日 下午5:29:00
  */
 public class AppConfig {
 
     public static String APP_NAME = "EasyFrame";
 
-    public static boolean IS_DEGUB = true;
+    public static boolean IS_DEBUG = true;
 
     public final static String APP_CONFIG = "config";
 
     public final static String CONF_COOKIE = "cookie";
-
-    public final static String CONF_APP_UNIQUEID = "APP_UNIQUEID";
 
     /**
      * 默认 SharePreferences文件名.
@@ -26,24 +24,14 @@ public class AppConfig {
     public static final String SHARED_PATH = "app_share";
 
     /**
-     * 默认图片下载地址.
-     */
-    public static final String IMAGE_DOWNLOAD_DIR = "images_download";
-
-    /**
      * 默认文件下载地址.
      */
-    public static final String FILE_DOWNLOAD_DIR = "download";
+    public static final String DOWNLOAD_DIR = "download";
 
     /**
      * APP文件缓存目录.
      */
-    public static final String FILE_CACHE_DIR = "cache";
-
-    /**
-     * APP图片缓存目录.
-     */
-    public static final String IMAGES_CACHE_DIR = "images_cache";
+    public static final String CACHE_DIR = "cache";
 
     /**
      * DB目录.

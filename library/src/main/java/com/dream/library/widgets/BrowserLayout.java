@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.dream.library.R;
-import com.dream.library.utils.AbCommonUtils;
+import com.dream.library.utils.AbStringUtils;
 
 
 /**
@@ -136,7 +136,7 @@ public class BrowserLayout extends LinearLayout {
 
             @Override
             public void onClick(View v) {
-                if (!AbCommonUtils.isEmpty(mLoadUrl)) {
+                if (!AbStringUtils.isEmpty(mLoadUrl)) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(mLoadUrl));
                     mContext.startActivity(intent);

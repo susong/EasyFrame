@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dream.library.R;
-import com.dream.library.utils.AbCommonUtils;
+import com.dream.library.utils.AbStringUtils;
 
 /**
  * Author:      SuSong
@@ -45,7 +45,7 @@ public class EmptyViewHelperController {
   public void showError(String errorMsg, View.OnClickListener onClickListener) {
     View layout = helper.inflate(R.layout.il_empty);
     TextView textView = (TextView) layout.findViewById(R.id.message_info);
-    if (!AbCommonUtils.isEmpty(errorMsg)) {
+    if (!AbStringUtils.isEmpty(errorMsg)) {
       textView.setText(errorMsg);
     } else {
       textView.setText(helper.getContext().getResources().getString(R.string.common_error_msg));
@@ -64,7 +64,7 @@ public class EmptyViewHelperController {
   public void showEmpty(String emptyMsg, View.OnClickListener onClickListener) {
     View layout = helper.inflate(R.layout.il_empty);
     TextView textView = (TextView) layout.findViewById(R.id.message_info);
-    if (!AbCommonUtils.isEmpty(emptyMsg)) {
+    if (!AbStringUtils.isEmpty(emptyMsg)) {
       textView.setText(emptyMsg);
     } else {
       textView.setText(helper.getContext().getResources().getString(R.string.common_empty_msg));
@@ -82,7 +82,7 @@ public class EmptyViewHelperController {
 
   public void showLoading(String msg) {
     View layout = helper.inflate(R.layout.il_empty_loading);
-    if (!AbCommonUtils.isEmpty(msg)) {
+    if (!AbStringUtils.isEmpty(msg)) {
       TextView textView = (TextView) layout.findViewById(R.id.loading_msg);
       textView.setText(msg);
     }

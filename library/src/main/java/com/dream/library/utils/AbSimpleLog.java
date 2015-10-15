@@ -18,7 +18,7 @@ public class AbSimpleLog {
     /**
      * This flag to indicate the log is enabled or disabled.
      */
-    private static boolean isLogEnable = AppConfig.IS_DEGUB;
+    private static boolean isLogEnable = AppConfig.IS_DEBUG;
 
     /**
      * Disable the log output.

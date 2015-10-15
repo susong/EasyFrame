@@ -14,15 +14,15 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.dream.library.R;
-import com.dream.library.widgets.empty.EmptyViewHelperController;
 import com.dream.library.eventbus.EventCenter;
+import com.dream.library.utils.AbAppManager;
+import com.dream.library.utils.AbSmartBarUtils;
+import com.dream.library.utils.AbStringUtils;
+import com.dream.library.utils.AbSystemBarTintManager;
+import com.dream.library.utils.netstatus.AbNetUtils;
 import com.dream.library.utils.netstatus.NetChangeObserver;
 import com.dream.library.utils.netstatus.NetStateReceiver;
-import com.dream.library.utils.netstatus.AbNetUtils;
-import com.dream.library.utils.AbAppManager;
-import com.dream.library.utils.AbCommonUtils;
-import com.dream.library.utils.AbSmartBarUtils;
-import com.dream.library.utils.AbSystemBarTintManager;
+import com.dream.library.widgets.empty.EmptyViewHelperController;
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
@@ -350,7 +350,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
      * @param msg String
      */
     protected void showToast(String msg) {
-        if (null != msg && !AbCommonUtils.isEmpty(msg)) {
+        if (null != msg && !AbStringUtils.isEmpty(msg)) {
             Snackbar.make(getWindow().getDecorView(), msg, Snackbar.LENGTH_SHORT).show();
         }
     }

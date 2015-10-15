@@ -6,8 +6,8 @@ import android.view.View;
 
 import com.dream.library.R;
 import com.dream.library.eventbus.EventCenter;
+import com.dream.library.utils.AbStringUtils;
 import com.dream.library.utils.netstatus.AbNetUtils;
-import com.dream.library.utils.AbCommonUtils;
 import com.dream.library.widgets.BrowserLayout;
 
 import butterknife.ButterKnife;
@@ -67,13 +67,13 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        if (!AbCommonUtils.isEmpty(mWebTitle)) {
+        if (!AbStringUtils.isEmpty(mWebTitle)) {
             setTitle(mWebTitle);
         } else {
             setTitle("网页");
         }
 
-        if (!AbCommonUtils.isEmpty(mWebUrl)) {
+        if (!AbStringUtils.isEmpty(mWebUrl)) {
             mBrowserLayout.loadUrl(mWebUrl);
         } else {
             showToast("获取URL地址失败");

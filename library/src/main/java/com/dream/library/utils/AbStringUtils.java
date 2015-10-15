@@ -1,7 +1,5 @@
 package com.dream.library.utils;
 
-import android.text.TextUtils;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,67 +8,169 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 /**
  * 字符串操作工具包
- *
- * @author liux (http://my.oschina.net/liux)
- * @version 1.0
- * @created 2012-3-21
+ * <p>
+ * author liux (http://my.oschina.net/liux)
+ * version 1.0
+ * created 2012-3-21
  */
+@SuppressWarnings("unused")
 public class AbStringUtils {
-    private final static Pattern emailer = Pattern
-            .compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
+
+    private final static Pattern EMAIL = Pattern
+        .compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
 
     private final static Pattern PHONE = Pattern
-            .compile("^1\\d{10}$");
+        .compile("^1\\d{10}$");
 
     private final static Pattern IMG_URL = Pattern
-            .compile(".*?(gif|jpeg|png|jpg|bmp)");
+        .compile(".*?(gif|jpeg|png|jpg|bmp)");
 
     private final static Pattern URL = Pattern
-            .compile("^(https|http)://.*?$(net|com|.com.cn|org|me|)");
+        .compile("^([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~/])+$");
 
-    private final static Pattern USER_NAME = Pattern.compile("^[A-Za-z0-9\\u4e00-\\u9fa5_@]+$");
+    private final static Pattern USER_NAME = Pattern
+        .compile("^[A-Za-z0-9\\u4e00-\\u9fa5_@]+$");
 
-    private final static Pattern PASSWORD = Pattern.compile("^[A-Za-z0-9!@#]+$");
+    private final static Pattern PASSWORD = Pattern
+        .compile("^[A-Za-z0-9!@#]+$");
 
-    private final static ThreadLocal<SimpleDateFormat> dateFormater = new ThreadLocal<SimpleDateFormat>() {
+    private final static ThreadLocal<SimpleDateFormat> dateFormatterLong = new ThreadLocal<SimpleDateFormat>() {
         @Override
         protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         }
     };
 
-    private final static ThreadLocal<SimpleDateFormat> dateFormater2 = new ThreadLocal<SimpleDateFormat>() {
+    private final static ThreadLocal<SimpleDateFormat> dateFormatterShort = new ThreadLocal<SimpleDateFormat>() {
         @Override
         protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd");
+            return new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         }
     };
 
     /**
-     * 将字符串转位日期类型
+     * 判断给定字符串是否空白串。若输入字符串为null或空字符串，返回true
      *
-     * @param sdate
-     * @return
+     * @param str String
+     * @return boolean
      */
-    public static Date toDate(String sdate) {
-        return toDate(sdate, dateFormater.get());
+    public static boolean isEmpty(String str) {
+        return str == null || str.trim().length() == 0 || str.trim().equalsIgnoreCase("null");
     }
 
-    public static Date toDate(String sdate, SimpleDateFormat dateFormater) {
+    /**
+     * 判断给定字符串是否空白串。 空白串是指由空格、制表符、回车符、换行符组成的字符串 若输入字符串为null或空字符串，返回true
+     *
+     * @param str String
+     * @return boolean
+     */
+    public static boolean isEmptyStrict(String str) {
+        if (isEmpty(str)) {
+            return true;
+        }
+
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c != ' ' && c != '\t' && c != '\r' && c != '\n') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 判断是不是一个合法的电子邮件地址
+     *
+     * @param email email
+     * @return boolean
+     */
+    public static boolean isEmail(String email) {
+        return !isEmpty(email) && EMAIL.matcher(email).matches();
+    }
+
+    /**
+     * 简单判断是不是一个合法的手机号码
+     *
+     * @param phone phone
+     * @return boolean
+     */
+    public static boolean isPhone(String phone) {
+        return !isEmpty(phone) && PHONE.matcher(phone).matches();
+    }
+
+    /**
+     * 用户名（可自定义）
+     *
+     * @param name 用户名
+     * @return boolean
+     */
+    public static boolean isLegalName(String name) {
+        return !isEmpty(name) && USER_NAME.matcher(name).matches();
+    }
+
+    /**
+     * 密码（可自定义）
+     *
+     * @param password 密码
+     * @return boolean
+     */
+    public static boolean isLegalPassword(String password) {
+        return !isEmpty(password) && PASSWORD.matcher(password).matches();
+    }
+
+    /**
+     * 判断一个url是否为图片url
+     *
+     * @param url url
+     * @return boolean
+     */
+    public static boolean isImgUrl(String url) {
+        return !isEmpty(url) && IMG_URL.matcher(url).matches();
+    }
+
+    /**
+     * 判断是否为一个合法的url地址
+     *
+     * @param url url
+     * @return boolean
+     */
+    public static boolean isUrl(String url) {
+        return !isEmpty(url) && URL.matcher(url).matches();
+    }
+
+    /**
+     * 将字符串转为日期类型
+     *
+     * @param dateStr 日期字符串
+     * @return 日期
+     */
+    public static Date toDate(String dateStr) {
+        return toDate(dateStr, dateFormatterLong.get());
+    }
+
+    /**
+     * 将字符串转为日期类型
+     *
+     * @param dateStr       日期字符串
+     * @param dateFormatter 格式
+     * @return 日期
+     */
+    public static Date toDate(String dateStr, SimpleDateFormat dateFormatter) {
         try {
-            return dateFormater.parse(sdate);
+            return dateFormatter.parse(dateStr);
         } catch (ParseException e) {
             return null;
         }
     }
 
     public static String getDateString(Date date) {
-        return dateFormater.get().format(date);
+        return dateFormatterLong.get().format(date);
     }
 
     /**
@@ -86,7 +186,7 @@ public class AbStringUtils {
             time = toDate(sdate);
         else
             time = AbTimeZoneUtil.transformTime(toDate(sdate),
-                    TimeZone.getTimeZone("GMT+08"), TimeZone.getDefault());
+                TimeZone.getTimeZone("GMT+08"), TimeZone.getDefault());
 
         if (time == null) {
             return "Unknown";
@@ -95,14 +195,14 @@ public class AbStringUtils {
         Calendar cal = Calendar.getInstance();
 
         // 判断是否是同一天
-        String curDate = dateFormater2.get().format(cal.getTime());
-        String paramDate = dateFormater2.get().format(time);
+        String curDate = dateFormatterShort.get().format(cal.getTime());
+        String paramDate = dateFormatterShort.get().format(time);
         if (curDate.equals(paramDate)) {
             int hour = (int) ((cal.getTimeInMillis() - time.getTime()) / 3600000);
             if (hour == 0)
                 ftime = Math.max(
                     (cal.getTimeInMillis() - time.getTime()) / 60000, 1)
-                        + "分钟前";
+                    + "分钟前";
             else
                 ftime = hour + "小时前";
             return ftime;
@@ -116,7 +216,7 @@ public class AbStringUtils {
             if (hour == 0)
                 ftime = Math.max(
                     (cal.getTimeInMillis() - time.getTime()) / 60000, 1)
-                        + "分钟前";
+                    + "分钟前";
             else
                 ftime = hour + "小时前";
         } else if (days == 1) {
@@ -132,7 +232,7 @@ public class AbStringUtils {
         } else if (days > 3 * 31 && days <= 4 * 31) {
             ftime = "3个月前";
         } else {
-            ftime = dateFormater2.get().format(time);
+            ftime = dateFormatterShort.get().format(time);
         }
         return ftime;
     }
@@ -196,8 +296,8 @@ public class AbStringUtils {
         Date time = toDate(sdate);
         Date today = new Date();
         if (time != null) {
-            String nowDate = dateFormater2.get().format(today);
-            String timeDate = dateFormater2.get().format(time);
+            String nowDate = dateFormatterShort.get().format(today);
+            String timeDate = dateFormatterShort.get().format(time);
             if (nowDate.equals(timeDate)) {
                 b = true;
             }
@@ -212,14 +312,14 @@ public class AbStringUtils {
      */
     public static long getToday() {
         Calendar cal = Calendar.getInstance();
-        String curDate = dateFormater2.get().format(cal.getTime());
+        String curDate = dateFormatterShort.get().format(cal.getTime());
         curDate = curDate.replace("-", "");
         return Long.parseLong(curDate);
     }
 
     public static String getCurTimeStr() {
         Calendar cal = Calendar.getInstance();
-        String curDate = dateFormater.get().format(cal.getTime());
+        String curDate = dateFormatterLong.get().format(cal.getTime());
         return curDate;
     }
 
@@ -239,8 +339,8 @@ public class AbStringUtils {
         Date d2 = null;
 
         try {
-            d1 = dateFormater.get().parse(dete1);
-            d2 = dateFormater.get().parse(date2);
+            d1 = dateFormatterLong.get().parse(dete1);
+            d2 = dateFormatterLong.get().parse(date2);
 
             // 毫秒ms
             diff = d2.getTime() - d1.getTime();
@@ -252,86 +352,6 @@ public class AbStringUtils {
         return diff / 1000;
     }
 
-    /**
-     * 判断给定字符串是否空白串。 空白串是指由空格、制表符、回车符、换行符组成的字符串 若输入字符串为null或空字符串，返回true
-     *
-     * @param input
-     * @return boolean
-     */
-    public static boolean isEmpty(String input) {
-        if (input == null || "".equals(input) || "null".equals(input))
-            return true;
-
-        for (int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
-            if (c != ' ' && c != '\t' && c != '\r' && c != '\n') {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * 判断是不是一个合法的电子邮件地址
-     *
-     * @param email
-     * @return
-     */
-    public static boolean isEmail(String email) {
-        if (email == null || email.trim().length() == 0)
-            return false;
-        return emailer.matcher(email).matches();
-    }
-
-    /**
-     * 简单判断是不是一个合法的手机号码
-     *
-     * @param phone
-     * @return
-     */
-    public static boolean isPhone(String phone) {
-        if (phone == null || phone.trim().length() == 0)
-            return false;
-        return PHONE.matcher(phone).matches();
-    }
-
-    public static boolean isLegalName(String name) {
-        if (TextUtils.isEmpty(name)) {
-            return false;
-        }
-        return USER_NAME.matcher(name).matches();
-    }
-
-    public static boolean isLegalPassword(String password) {
-        if (TextUtils.isEmpty(password)) {
-            return false;
-        }
-        return PASSWORD.matcher(password).matches();
-    }
-
-    /**
-     * 判断一个url是否为图片url
-     *
-     * @param url
-     * @return
-     */
-    public static boolean isImgUrl(String url) {
-        if (url == null || url.trim().length() == 0)
-            return false;
-        return IMG_URL.matcher(url).matches();
-    }
-
-    /**
-     * 判断是否为一个合法的url地址
-     *
-     * @param str
-     * @return
-     */
-    public static boolean isUrl(String str) {
-        if (str == null || str.trim().length() == 0)
-            return false;
-        return URL.matcher(str).matches();
-    }
 
     /**
      * 字符串转整数

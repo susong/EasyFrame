@@ -23,6 +23,7 @@ import android.graphics.drawable.Drawable;
 import com.dream.library.R;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
@@ -74,6 +75,10 @@ public class ImageLoaderHelper {
 
     private ImageLoaderHelper(Context context) {
         mContext = context;
+    }
+
+    public static void init(Context context) {
+        ImageLoader.getInstance().init(getInstance(context).getImageLoaderConfiguration());
     }
 
     public static ImageLoaderHelper getInstance(Context context) {
@@ -219,10 +224,11 @@ public class ImageLoaderHelper {
 
         // Disk
         File cacheDir;
-        if (!AbCommonUtils.isEmpty(filePath)) {
-            cacheDir = StorageUtils.getOwnCacheDirectory(mContext, filePath);//自定义缓存目录
+        if (AbStringUtils.isEmpty(filePath)) {
+            cacheDir = StorageUtils.getOwnCacheDirectory(mContext, AbDirUtils.getCacheDir());//自定义默认缓存目录
         } else {
-            cacheDir = StorageUtils.getCacheDirectory(mContext);//默认缓存目录，查看源码了解储存在哪
+            cacheDir = StorageUtils.getOwnCacheDirectory(mContext, filePath);//自定义缓存目录
+//            cacheDir = StorageUtils.getCacheDirectory(mContext);//默认缓存目录，查看源码了解储存在哪
         }
         builder.diskCache(new UnlimitedDiskCache(cacheDir));//自定义缓存路径
 //        builder.diskCacheSize(512 * 1024 * 1024);//缓存的文件大小

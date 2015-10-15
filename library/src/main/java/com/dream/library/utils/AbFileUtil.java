@@ -23,7 +23,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.os.StatFs;
 
-import com.dream.library.AppConfig;
 import com.dream.library.utils.logger.AbLog;
 
 import org.apache.http.Header;
@@ -57,133 +56,9 @@ import java.util.regex.Pattern;
 public class AbFileUtil {
 
     /**
-     * 默认APP根目录.
-     */
-    private static String appRootDir = null;
-
-    /**
-     * 默认下载图片文件目录.
-     */
-    private static String imageDownloadDir = null;
-
-    /**
-     * 默认下载文件目录.
-     */
-    private static String fileDownloadDir = null;
-
-    /**
-     * 文件默认缓存目录.
-     */
-    private static String fileCacheDir = null;
-    /**
-     * 图片默认缓存目录.
-     */
-    private static String imageCacheDir = null;
-
-    /**
-     * 默认下载数据库文件的目录.
-     */
-    private static String dbDir = null;
-
-    /**
-     * 默认日志文件的目录.
-     */
-    private static String logDir = null;
-
-
-    /**
      * 剩余空间大于200M才使用SD缓存.
      */
     private static int freeSdSpaceNeededToCache = 200 * 1024 * 1024;
-
-
-    /**
-     * Gets the download root dir.
-     *
-     * @return the download root dir
-     */
-    public static String getRootDir() {
-        if (appRootDir == null) {
-            initFileDir();
-        }
-        return appRootDir;
-    }
-
-
-    /**
-     * Gets the image download dir.
-     *
-     * @return the image download dir
-     */
-    public static String getImageDownloadDir() {
-        if (appRootDir == null) {
-            initFileDir();
-        }
-        return imageDownloadDir;
-    }
-
-
-    /**
-     * Gets the file download dir.
-     *
-     * @return the file download dir
-     */
-    public static String getFileDownloadDir() {
-        if (appRootDir == null) {
-            initFileDir();
-        }
-        return fileDownloadDir;
-    }
-
-    /**
-     * Gets the cache download dir.
-     *
-     * @return the cache download dir
-     */
-    public static String getImageCacheDir() {
-        if (appRootDir == null) {
-            initFileDir();
-        }
-        return imageCacheDir;
-    }
-
-
-    /**
-     * Gets the cache download dir.
-     *
-     * @return the cache download dir
-     */
-    public static String getFileCacheDir() {
-        if (appRootDir == null) {
-            initFileDir();
-        }
-        return fileCacheDir;
-    }
-
-
-    /**
-     * Gets the db download dir.
-     *
-     * @return the db download dir
-     */
-    public static String getDbDir() {
-        if (appRootDir == null) {
-            initFileDir();
-        }
-        return dbDir;
-    }
-
-    /**
-     * Gets the log download dir.
-     *
-     * @return the log download dir
-     */
-    public static String getLogDir() {
-        if (appRootDir == null) {
-            initFileDir();
-        }
-        return logDir;
-    }
 
     /**
      * Gets the free sd space needed to cache.
@@ -193,84 +68,6 @@ public class AbFileUtil {
     public static int getFreeSdSpaceNeededToCache() {
         return freeSdSpaceNeededToCache;
     }
-
-    /**
-     * 描述：初始化存储目录.
-     */
-    public static void initFileDir() {
-        // 应用专用目录
-        String rootPath = File.separator + AppConfig.APP_NAME + File.separator;
-
-        //默认下载图片目录.
-        String imageDownloadPath = rootPath + AppConfig.IMAGE_DOWNLOAD_DIR + File.separator;
-
-        //默认下载文件目录.
-        String fileDownloadPath = rootPath + AppConfig.FILE_DOWNLOAD_DIR + File.separator;
-
-        //默认文件缓存目录.
-        String fileCachePath = rootPath + AppConfig.FILE_CACHE_DIR + File.separator;
-
-        //默认图片缓存目录.
-        String imageCachePath = rootPath + AppConfig.IMAGES_CACHE_DIR + File.separator;
-
-        //默认DB目录.
-        String dbPath = rootPath + AppConfig.DB_DIR + File.separator;
-
-        //默认Log目录
-        String logPath = rootPath + AppConfig.LOG_DIR + File.separator;
-        try {
-            if (!isCanUseSD()) {
-                return;
-            } else {
-
-                File root = Environment.getExternalStorageDirectory();
-                File downloadDir = new File(root.getAbsolutePath() + rootPath);
-                if (!downloadDir.exists()) {
-                    downloadDir.mkdirs();
-                }
-                appRootDir = downloadDir.getPath();
-
-                File imageDownloadDirFile = new File(root.getAbsolutePath() + imageDownloadPath);
-                if (!imageDownloadDirFile.exists()) {
-                    imageDownloadDirFile.mkdirs();
-                }
-                imageDownloadDir = imageDownloadDirFile.getPath();
-
-                File fileDownloadDirFile = new File(root.getAbsolutePath() + fileDownloadPath);
-                if (!fileDownloadDirFile.exists()) {
-                    fileDownloadDirFile.mkdirs();
-                }
-                fileDownloadDir = fileDownloadDirFile.getPath();
-
-                File fileCacheDirFile = new File(root.getAbsolutePath() + fileCachePath);
-                if (!fileCacheDirFile.exists()) {
-                    fileCacheDirFile.mkdirs();
-                }
-                fileCacheDir = fileCacheDirFile.getPath();
-
-                File imageCacheDirFile = new File(root.getAbsolutePath() + imageCachePath);
-                if (!imageCacheDirFile.exists()) {
-                    imageCacheDirFile.mkdirs();
-                }
-                imageCacheDir = imageCacheDirFile.getPath();
-
-                File dbDirFile = new File(root.getAbsolutePath() + dbPath);
-                if (!dbDirFile.exists()) {
-                    dbDirFile.mkdirs();
-                }
-                dbDir = dbDirFile.getPath();
-
-                File logDirFile = new File(root.getAbsolutePath() + logPath);
-                if (!logDirFile.exists()) {
-                    logDirFile.mkdirs();
-                }
-                logDir = logDirFile.getPath();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 
     /**
      * 描述：通过文件的网络地址从SD卡中读取图片，如果SD中没有则自动下载并保存.
@@ -295,7 +92,7 @@ public class AbFileUtil {
                 return bitmap;
             }
             //下载文件，如果不存在就下载，存在直接返回地址
-            String downFilePath = downloadFile(url, imageDownloadDir);
+            String downFilePath = downloadFile(url, AbDirUtils.getDownloadDir());
             if (downFilePath != null) {
                 //获取图片
                 return getBitmapFromSD(new File(downFilePath), type, desiredWidth, desiredHeight);
@@ -393,7 +190,7 @@ public class AbFileUtil {
         try {
             if (imgByte != null) {
 
-                file = new File(imageDownloadDir + fileName);
+                file = new File(AbDirUtils.getDownloadDir(), fileName);
                 if (!file.exists()) {
                     file.createNewFile();
                 }
@@ -532,7 +329,7 @@ public class AbFileUtil {
             }
             //先判断SD卡中有没有这个文件，不比较后缀部分比较
             String fileNameNoMIME = getCacheFileNameFromUrl(url);
-            File parentFile = new File(imageDownloadDir);
+            File parentFile = new File(AbDirUtils.getDownloadDir());
             File[] files = parentFile.listFiles();
             for (int i = 0; i < files.length; ++i) {
                 String fileName = files[i].getName();
@@ -549,7 +346,7 @@ public class AbFileUtil {
             //获取文件名，下载文件
             String fileName = getCacheFileNameFromUrl(url, connection);
 
-            file = new File(imageDownloadDir, fileName);
+            file = new File(AbDirUtils.getDownloadDir(), fileName);
             downFilePath = file.getPath();
             if (!file.exists()) {
                 file.createNewFile();
@@ -1027,7 +824,7 @@ public class AbFileUtil {
             }
 
             File path = Environment.getExternalStorageDirectory();
-            File fileDirectory = new File(path.getAbsolutePath() + appRootDir);
+            File fileDirectory = new File(path.getAbsolutePath() + AbDirUtils.getAppDir());
             File[] files = fileDirectory.listFiles();
             if (files == null) {
                 return true;

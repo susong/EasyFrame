@@ -11,7 +11,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.dream.library.base.BaseLibApplication;
 import com.dream.library.utils.AbAppManager;
-import com.dream.library.utils.AbFileUtil;
+import com.dream.library.utils.AbDirUtils;
 
 import org.apache.http.HttpException;
 
@@ -31,12 +31,12 @@ import java.util.Locale;
 
 /**
  * 应用程序异常：用于捕获异常和提示错误信息
- *
- * @author FireAnt（http://my.oschina.net/LittleDY）
- * @author kymjs (kymjs123@gmali.com)
- * @created 2014年9月25日 下午5:34:05
+ * <p>
+ * address FireAnt（http://my.oschina.net/LittleDY）
+ * author kymjs (kymjs123@gmali.com)
+ * created 2014年9月25日 下午5:34:05
  */
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "unused"})
 public class AppException extends Exception implements UncaughtExceptionHandler {
 
     /**
@@ -53,8 +53,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
     public final static byte TYPE_FILE_NOT_FOUND = 0x09;
 
     private byte type;// 异常的类型
-    // 异常的状态码，这里一般是网络请求的状态码
-    private int code;
+    private int code;// 异常的状态码，这里一般是网络请求的状态码
 
     /**
      * 系统默认的UncaughtException处理类
@@ -185,21 +184,23 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
     }
 
     private void showDialog(Context context, Throwable ex) {
-        StringWriter writer = new StringWriter();
-        ex.printStackTrace(new PrintWriter(writer));
-        String errorMsg = writer.toString();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("应用程序错误")
-//            .setMessage("很抱歉，应用崩溃了")
-            .setMessage(errorMsg)
-            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    AbAppManager.getAbAppManager().AppExit();
-                    System.exit(-1);
-                }
-            });
+        builder.setTitle("应用程序错误");
+        if (AppConfig.IS_DEBUG) {
+            StringWriter writer = new StringWriter();
+            ex.printStackTrace(new PrintWriter(writer));
+            String errorMsg = writer.toString();
+            builder.setMessage(errorMsg);
+        } else {
+            builder.setMessage("很抱歉，应用崩溃了");
+        }
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                AbAppManager.getAbAppManager().AppExit();
+                System.exit(-1);
+            }
+        });
         builder.setCancelable(false);
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -207,7 +208,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
 
     private boolean saveToSDCard(Throwable ex) throws Exception {
         boolean append = false;
-        File file = new File(AbFileUtil.getLogDir() + File.separator + "ErrorLog.log");
+        File file = new File(AbDirUtils.getLogDir(), "ErrorLog.log");
         if (System.currentTimeMillis() - file.lastModified() > 5000) {
             append = true;
         }

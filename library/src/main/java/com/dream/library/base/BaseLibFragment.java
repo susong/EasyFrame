@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dream.library.eventbus.EventCenter;
+import com.dream.library.utils.AbStringUtils;
 import com.dream.library.widgets.empty.EmptyViewHelperController;
-import com.dream.library.utils.AbCommonUtils;
 
 import java.lang.reflect.Field;
 
@@ -298,7 +298,7 @@ public abstract class BaseLibFragment extends Fragment {
      * @param msg String
      */
     protected void showToast(String msg) {
-        if (null != msg && !AbCommonUtils.isEmpty(msg)) {
+        if (null != msg && !AbStringUtils.isEmpty(msg)) {
             Snackbar.make(((Activity) mContext).getWindow().getDecorView(), msg, Snackbar.LENGTH_SHORT).show();
         }
     }

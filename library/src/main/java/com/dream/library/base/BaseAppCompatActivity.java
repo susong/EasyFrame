@@ -14,15 +14,15 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.dream.library.R;
-import com.dream.library.widgets.empty.EmptyViewHelperController;
 import com.dream.library.eventbus.EventCenter;
+import com.dream.library.utils.AbAppManager;
+import com.dream.library.utils.AbSmartBarUtils;
+import com.dream.library.utils.AbStringUtils;
+import com.dream.library.utils.AbSystemBarTintManager;
+import com.dream.library.utils.netstatus.AbNetUtils;
 import com.dream.library.utils.netstatus.NetChangeObserver;
 import com.dream.library.utils.netstatus.NetStateReceiver;
-import com.dream.library.utils.netstatus.AbNetUtils;
-import com.dream.library.utils.AbAppManager;
-import com.dream.library.utils.AbCommonUtils;
-import com.dream.library.utils.AbSmartBarUtils;
-import com.dream.library.utils.AbSystemBarTintManager;
+import com.dream.library.widgets.empty.EmptyViewHelperController;
 
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
@@ -352,7 +352,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      */
     protected void showToast(String msg) {
         //防止遮盖虚拟按键
-        if (null != msg && !AbCommonUtils.isEmpty(msg)) {
+        if (null != msg && !AbStringUtils.isEmpty(msg)) {
             Snackbar.make(getLoadingTargetView(), msg, Snackbar.LENGTH_SHORT).show();
         }
     }
