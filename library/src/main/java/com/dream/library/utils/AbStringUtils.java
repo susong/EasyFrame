@@ -34,10 +34,10 @@ public class AbStringUtils {
     private final static Pattern URL = Pattern
         .compile("^([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~/])+$");
 
-    private final static Pattern USER_NAME = Pattern
+    private final static Pattern LEGAL_NAME = Pattern
         .compile("^[A-Za-z0-9\\u4e00-\\u9fa5_@]+$");
 
-    private final static Pattern PASSWORD = Pattern
+    private final static Pattern LEGAL_PASSWORD = Pattern
         .compile("^[A-Za-z0-9!@#]+$");
 
     private final static ThreadLocal<SimpleDateFormat> dateFormatterLong = new ThreadLocal<SimpleDateFormat>() {
@@ -85,6 +85,26 @@ public class AbStringUtils {
     }
 
     /**
+     * 用户名（可自定义）
+     *
+     * @param name 用户名
+     * @return boolean
+     */
+    public static boolean isLegalName(String name) {
+        return !isEmpty(name) && LEGAL_NAME.matcher(name).matches();
+    }
+
+    /**
+     * 密码（可自定义）
+     *
+     * @param password 密码
+     * @return boolean
+     */
+    public static boolean isLegalPassword(String password) {
+        return !isEmpty(password) && LEGAL_PASSWORD.matcher(password).matches();
+    }
+
+    /**
      * 判断是不是一个合法的电子邮件地址
      *
      * @param email email
@@ -102,26 +122,6 @@ public class AbStringUtils {
      */
     public static boolean isPhone(String phone) {
         return !isEmpty(phone) && PHONE.matcher(phone).matches();
-    }
-
-    /**
-     * 用户名（可自定义）
-     *
-     * @param name 用户名
-     * @return boolean
-     */
-    public static boolean isLegalName(String name) {
-        return !isEmpty(name) && USER_NAME.matcher(name).matches();
-    }
-
-    /**
-     * 密码（可自定义）
-     *
-     * @param password 密码
-     * @return boolean
-     */
-    public static boolean isLegalPassword(String password) {
-        return !isEmpty(password) && PASSWORD.matcher(password).matches();
     }
 
     /**
