@@ -100,6 +100,7 @@ public class AbMd5 {
         System.out.println(AbMd5.MD5("MD5加密"));
         System.out.println(AbMd5.getMD5("MD5加密"));
         System.out.println(AbMd5.MD516("MD5加密"));
+        System.out.println(org.apache.commons.codec.digest.DigestUtils.md5Hex("MD5加密"));
     }
 
 }
