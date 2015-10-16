@@ -1,6 +1,7 @@
 package com.dream.easy.ui.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.dream.easy.base.BaseActivity;
@@ -52,7 +53,6 @@ public class ConfigActivity extends BaseActivity {
 
     @Override
     protected void onNetworkDisConnected() {
-
     }
 
     @Override

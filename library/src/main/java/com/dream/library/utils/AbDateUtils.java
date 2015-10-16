@@ -13,7 +13,7 @@ import java.util.TimeZone;
 
 /**
  * © 2012 amsoft.cn
- * 名称：AbDateUtil.java
+ * 名称：AbDateUtils.java
  * 描述：日期处理类.
  * <p>
  * author 还如一梦中
@@ -21,7 +21,7 @@ import java.util.TimeZone;
  * date：2013-01-18 下午11:52:13
  */
 @SuppressWarnings("unused")
-public class AbDateUtil {
+public class AbDateUtils {
 
     /**
      * 时间日期格式化到年月日时分秒.
@@ -57,6 +57,16 @@ public class AbDateUtil {
      * 时分.
      */
     public static final String dateFormatHM = "HH:mm";
+
+    /**
+     * long类型的年月日时分秒
+     */
+    public static final String dateFormatYMDHMSlong = "yyyyMMddHHmmss";
+
+    /**
+     * long类型的年月日
+     */
+    public static final String dateFormatYMDlong = "yyyyMMdd";
 
     /**
      * 上午.
@@ -156,8 +166,7 @@ public class AbDateUtil {
      * @return 字符串时间
      */
     public static String convertMillis2DateStr(long millis, String format) {
-        SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat(format, Locale.CHINA);
-        return mSimpleDateFormat.format(new Date(millis));
+        return new SimpleDateFormat(format, Locale.CHINA).format(new Date(millis));
     }
 
     /**
@@ -167,8 +176,7 @@ public class AbDateUtil {
      * @return 字符串时间
      */
     public static String convertMillis2DateStr(long millis) {
-        SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat(dateFormatYMDHMS, Locale.CHINA);
-        return mSimpleDateFormat.format(new Date(millis));
+        return new SimpleDateFormat(dateFormatYMDHMS, Locale.CHINA).format(new Date(millis));
     }
 
     /**
@@ -182,14 +190,34 @@ public class AbDateUtil {
     }
 
     /**
+     * 时间转字符串时间
+     *
+     * @param date 时间
+     * @return 字符串时间
+     */
+    public static String convertDate2Str(Date date) {
+        return new SimpleDateFormat(dateFormatYMDHMS, Locale.CHINA).format(date);
+    }
+
+    /**
+     * 时间转字符串时间
+     *
+     * @param date   时间
+     * @param format 格式
+     * @return 字符串时间
+     */
+    public static String convertDate2Str(Date date, String format) {
+        return new SimpleDateFormat(format, Locale.CHINA).format(date);
+    }
+
+    /**
      * 描述：获取表示当前日期时间的字符串.
      *
      * @param format 格式化字符串，如："yyyy-MM-dd HH:mm:ss"
      * @return String String类型的当前日期时间
      */
     public static String getCurrentDate(String format) {
-        SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat(format, Locale.CHINA);
-        return mSimpleDateFormat.format(new Date());
+        return new SimpleDateFormat(format, Locale.CHINA).format(new Date());
     }
 
     /**
@@ -256,6 +284,24 @@ public class AbDateUtil {
     }
 
     /**
+     * 获取表示当前日期时间的字符串,格式：yyyyMMddHHmmss
+     *
+     * @return String类型的当前日期时间
+     */
+    public static String getCurrentDataYMDHMSlong() {
+        return getCurrentDate(dateFormatYMDHMSlong);
+    }
+
+    /**
+     * 获取表示当前日期时间的字符串,格式：yyyyMMdd
+     *
+     * @return String类型的当前日期时间
+     */
+    public static String getCurrentDataYMDlong() {
+        return getCurrentDate(dateFormatYMDlong);
+    }
+
+    /**
      * 描述：获取表示当前日期时间的字符串(可偏移).
      *
      * @param format        格式化字符串，如："yyyy-MM-dd HH:mm:ss"
@@ -267,7 +313,7 @@ public class AbDateUtil {
         String mDateTime = null;
         try {
             SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat(format, Locale.CHINA);
-            Calendar c = new GregorianCalendar();
+            Calendar c = Calendar.getInstance();
             c.add(calendarField, offset);
             mDateTime = mSimpleDateFormat.format(c.getTime());
         } catch (Exception e) {
@@ -560,6 +606,46 @@ public class AbDateUtil {
         return m;
     }
 
+    /***
+     * 计算两个时间差，返回的是的秒s
+     *
+     * @param date1 str
+     * @param date2 str
+     * @return long
+     */
+    public static long calDateDifferent(String date1, String date2) {
+
+        long diff = 0;
+
+        Date d1;
+        Date d2;
+
+        try {
+            d1 = getDateYMDHMS(date1);
+            d2 = getDateYMDHMS(date2);
+
+            // 毫秒ms
+            diff = d2.getTime() - d1.getTime();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return diff / 1000;
+    }
+
+    /**
+     * 返回long类型的今天的日期
+     *
+     * @return long
+     */
+    public static long getToday() {
+        Calendar cal = Calendar.getInstance();
+        String curDate = convertDate2Str(cal.getTime(), dateFormatYMD);
+        curDate = curDate.replace("-", "");
+        return Long.parseLong(curDate);
+    }
+
     /**
      * 描述：获取本周一.
      *
@@ -698,75 +784,141 @@ public class AbDateUtil {
     }
 
     /**
-     * 描述：根据时间返回格式化后的时间的描述.
-     * 小于1小时显示多少分钟前  大于1小时显示今天＋实际日期，大于今天全部显示实际时间
+     * 判断给定字符串时间是否为今日
+     *
+     * @param dateStr str
+     * @return boolean
+     */
+    public static boolean isToday(String dateStr) {
+        boolean b = false;
+        Date time = getDateYMDHMS(dateStr);
+        Date today = new Date();
+        if (time != null) {
+            String nowDate = convertDate2Str(today);
+            String timeDate = convertDate2Str(time);
+            if (nowDate.equals(timeDate)) {
+                b = true;
+            }
+        }
+        return b;
+    }
+
+    /**
+     * 以友好的方式显示时间
      *
      * @param millis 毫秒
      * @return the string
      */
-    public static String formatMillis2Desc(long millis) {
-        return formatDateStr2Desc(convertMillis2DateStr(millis));
+    public static String friendlyTime(long millis) {
+        return friendlyTime(convertMillis2DateStr(millis));
     }
 
     /**
-     * 描述：根据时间返回格式化后的时间的描述.
-     * 小于1小时显示多少分钟前  大于1小时显示今天＋实际日期，大于今天全部显示实际时间
+     * 以友好的方式显示时间
      *
-     * @param strDate 字符串时间
-     * @return the string
+     * @param dateStr 时间
+     * @return string
      */
-    public static String formatDateStr2Desc(String strDate) {
-        DateFormat df = new SimpleDateFormat(dateFormatYMDHMS, Locale.CHINA);
-        Calendar cNow = Calendar.getInstance();
-        Calendar cPast = Calendar.getInstance();
-        try {
-            cNow.setTime(new Date());
-            cPast.setTime(df.parse(strDate));
-            int day = getDiscrepancyDay(cNow.getTimeInMillis(), cPast.getTimeInMillis());
-            if (day == 0) {
-                int hour = getDiscrepancyHour(cNow.getTimeInMillis(), cPast.getTimeInMillis());
-                if (hour > 0) {
-                    return "今天" + getStringByFormat(strDate, dateFormatHMS);
-                    //return h + "小时前";
-                } else if (hour < 0) {
-                    return Math.abs(hour) + "小时后";
-                } else if (hour == 0) {
-                    int minutes = getDiscrepancyMinutes(cNow.getTimeInMillis(), cPast.getTimeInMillis());
-                    if (minutes > 0) {
-                        return minutes + "分钟前";
-                    } else if (minutes < 0) {
-                        return Math.abs(minutes) + "分钟后";
-                    } else {
-                        return "刚刚";
-                    }
-                }
-            } else if (day > 0) {
-                if (day == 1) {
-                    return "昨天" + getStringByFormat(strDate, dateFormatHMS);
-                } else if (day == 2) {
-                    return "前天" + getStringByFormat(strDate, dateFormatHMS);
-                } else {
-                    return Math.abs(day) + "天前" + getStringByFormat(strDate, dateFormatHMS);
-                }
-            } else if (day < 0) {
-                if (day == -1) {
-                    return "明天" + getStringByFormat(strDate, dateFormatHMS);
-                } else if (day == -2) {
-                    return "后天" + getStringByFormat(strDate, dateFormatHMS);
-                } else {
-                    return Math.abs(day) + "天后" + getStringByFormat(strDate, dateFormatHMS);
-                }
-            }
-            String out = getStringByFormat(strDate, dateFormatYMDHMS);
-            if (!TextUtils.isEmpty(out)) {
-                return out;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static String friendlyTime(String dateStr) {
+        Date time;
+        if (AbTimeZoneUtil.isInEasternEightZones()) {
+            time = getDateYMDHMS(dateStr);
+        } else {
+            time = AbTimeZoneUtil.transformTime(getDateYMDHMS(dateStr), TimeZone.getTimeZone("GMT+08"), TimeZone.getDefault());
         }
-        return strDate;
+        if (time == null) {
+            return "Unknown";
+        }
+        String fTime;
+        Calendar cal = Calendar.getInstance();
+        // 判断是否是同一天
+        String curDate = convertDate2Str(cal.getTime(), dateFormatYMD);
+        String paramDate = convertDate2Str(time, dateFormatYMD);
+        if (curDate.equals(paramDate)) {
+            int hour = (int) ((cal.getTimeInMillis() - time.getTime()) / 3600000);
+            if (hour == 0) {
+                fTime = Math.max((cal.getTimeInMillis() - time.getTime()) / 60000, 1) + "分钟前";
+            } else {
+                fTime = hour + "小时前";
+            }
+            return fTime;
+        }
+
+        long lt = time.getTime() / 86400000;
+        long ct = cal.getTimeInMillis() / 86400000;
+        int days = (int) (ct - lt);
+        if (days == 0) {
+            int hour = (int) ((cal.getTimeInMillis() - time.getTime()) / 3600000);
+            if (hour == 0) {
+                fTime = Math.max((cal.getTimeInMillis() - time.getTime()) / 60000, 1) + "分钟前";
+            } else {
+                fTime = hour + "小时前";
+            }
+        } else if (days == 1) {
+            fTime = "昨天";
+        } else if (days == 2) {
+            fTime = "前天 ";
+        } else if (days > 2 && days < 31) {
+            fTime = days + "天前";
+        } else if (days >= 31 && days <= 2 * 31) {
+            fTime = "一个月前";
+        } else if (days > 2 * 31 && days <= 3 * 31) {
+            fTime = "2个月前";
+        } else if (days > 3 * 31 && days <= 4 * 31) {
+            fTime = "3个月前";
+        } else {
+            fTime = convertDate2Str(time);
+        }
+        return fTime;
     }
 
+    public static String friendlyTime2(String dateStr) {
+        String res = "";
+        if (AbStringUtils.isEmpty(dateStr)) {
+            return "";
+        }
+
+        String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+        String currentData = getCurrentDate("MM-dd");
+        int currentDay = AbStringUtils.toInt(currentData.substring(3));
+        int currentMoth = AbStringUtils.toInt(currentData.substring(0, 2));
+
+        int sMoth = AbStringUtils.toInt(dateStr.substring(5, 7));
+        int sDay = AbStringUtils.toInt(dateStr.substring(8, 10));
+        int sYear = AbStringUtils.toInt(dateStr.substring(0, 4));
+        Date dt = new Date(sYear, sMoth - 1, sDay - 1);
+
+        if (sDay == currentDay && sMoth == currentMoth) {
+            res = "今天 / " + weekDays[getWeekOfDate(new Date())];
+        } else if (sDay == currentDay + 1 && sMoth == currentMoth) {
+            res = "昨天 / " + weekDays[(getWeekOfDate(new Date()) + 6) % 7];
+        } else {
+            if (sMoth < 10) {
+                res = "0";
+            }
+            res += sMoth + "/";
+            if (sDay < 10) {
+                res += "0";
+            }
+            res += sDay + " / " + weekDays[getWeekOfDate(dt)];
+        }
+        return res;
+    }
+
+    /**
+     * 获取当前日期是星期几
+     *
+     * @param dt 日期
+     * @return 当前日期是星期几
+     */
+    public static int getWeekOfDate(Date dt) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return w;
+    }
 
     /**
      * 取指定日期为星期几.
@@ -775,7 +927,7 @@ public class AbDateUtil {
      * @param inFormat 指定日期格式
      * @return String   星期几
      */
-    public static String getWeekNumber(String strDate, String inFormat) {
+    public static String getWeekOfDateStr(String strDate, String inFormat) {
         String week = "星期日";
         Calendar calendar = new GregorianCalendar();
         DateFormat df = new SimpleDateFormat(inFormat, Locale.CHINA);
@@ -809,6 +961,30 @@ public class AbDateUtil {
                 break;
         }
         return week;
+    }
+
+    /**
+     * 获取当前时间为每年第几周
+     *
+     * @return int
+     */
+    public static int getWeekOfYear() {
+        return getWeekOfYear(new Date());
+    }
+
+    /**
+     * 获取当前时间为每年第几周
+     *
+     * @param date date
+     * @return int
+     */
+    public static int getWeekOfYear(Date date) {
+        Calendar c = Calendar.getInstance();
+        c.setFirstDayOfWeek(Calendar.MONDAY);
+        c.setTime(date);
+        int week = c.get(Calendar.WEEK_OF_YEAR) - 1;
+        week = week == 0 ? 52 : week;
+        return week > 0 ? week : 1;
     }
 
     /**
@@ -850,5 +1026,14 @@ public class AbDateUtil {
         } else {
             return milliseconds + "毫秒";
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getCurrentDataYMDHMS());
+        System.out.println(convertDate2Str(getDateYMDHMS(getCurrentDataYMDHMS())));
+        System.out.println(friendlyTime("2015-10-16 11:43:12"));
+        System.out.println(friendlyTime2("2015-10-13 11:43:12"));
+        System.out.println(getToday());
+        System.out.println(getCurrentDataYMDHMSlong());
     }
 }
