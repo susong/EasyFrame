@@ -1,7 +1,12 @@
 package com.dream.library.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -16,6 +21,18 @@ import java.util.Locale;
  * Description: EasyFrame
  */
 public class AbCommonUtils {
+
+    private static long lastClickTime;
+
+    public synchronized static boolean isFastClick() {
+        long time = System.currentTimeMillis();
+        if (time - lastClickTime < 300) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
+    }
+
 
     /**
      * get format date
@@ -141,5 +158,36 @@ public class AbCommonUtils {
         styledAttributes.recycle();
 
         return toolbarHeight;
+    }
+
+    /**
+     * 启用外部浏览器
+     */
+    public static void openBrowser(Context context, String url) {
+        try {
+            // 启用外部浏览器
+            Uri uri = Uri.parse(url);
+            Intent it = new Intent(Intent.ACTION_VIEW, uri);
+            context.startActivity(it);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void takePic(Context context) {
+        Intent intent;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            intent = new Intent();
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            ((Activity) context).startActivityForResult(Intent.createChooser(intent, "选择图片"),
+                ImageUtils.REQUEST_CODE_GETIMAGE_BYSDCARD);
+        } else {
+            intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.setType("image/*");
+            ((Activity) context).startActivityForResult(Intent.createChooser(intent, "选择图片"),
+                ImageUtils.REQUEST_CODE_GETIMAGE_BYSDCARD);
+        }
     }
 }

@@ -14,6 +14,16 @@ public class AppConfig {
 
     public static boolean IS_DEBUG = true;
 
+    /**
+     * UI设计的基准宽度.
+     */
+    public static final int UI_WIDTH = 720;
+
+    /**
+     * UI设计的基准高度.
+     */
+    public static final int UI_HEIGHT = 1080;
+
     public final static String APP_CONFIG = "config";
 
     public final static String CONF_COOKIE = "cookie";
