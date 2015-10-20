@@ -107,7 +107,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         AbSmartBarUtils.hide(getWindow().getDecorView());
 
         setTranslucentStatus(isApplyStatusBarTranslucency());
-        if (isApplyStatusBarTranslucency()) {
+        if (isApplyKitKatTranslucency()) {
             setSystemBarTintDrawable(getResources().getDrawable(R.drawable.sr_primary));
         }
 
@@ -253,6 +253,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
      */
     protected abstract boolean isApplyStatusBarTranslucency();
 
+    protected abstract boolean isApplyKitKatTranslucency();
+
     /**
      * is bind eventBus
      *
@@ -285,7 +287,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     /**
      * startActivity with bundle
      *
-     * @param clazz Class
+     * @param clazz  Class
      * @param bundle Bundle
      */
     protected void readyGo(Class<?> clazz, Bundle bundle) {
@@ -310,7 +312,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     /**
      * startActivity with bundle then finish
      *
-     * @param clazz Class
+     * @param clazz  Class
      * @param bundle Bundle
      */
     protected void readyGoThenKill(Class<?> clazz, Bundle bundle) {
@@ -325,7 +327,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     /**
      * startActivityForResult
      *
-     * @param clazz Class
+     * @param clazz       Class
      * @param requestCode requestCode
      */
     protected void readyGoForResult(Class<?> clazz, int requestCode) {
@@ -336,9 +338,9 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     /**
      * startActivityForResult with bundle
      *
-     * @param clazz Class
+     * @param clazz       Class
      * @param requestCode requestCode
-     * @param bundle Bundle
+     * @param bundle      Bundle
      */
     protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
@@ -449,7 +451,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
                 mTintManager.setTintDrawable(null);
             }
         }
-
     }
 
     /**

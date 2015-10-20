@@ -107,7 +107,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         AbSmartBarUtils.hide(getWindow().getDecorView());
 
         setTranslucentStatus(isApplyStatusBarTranslucency());
-        if (isApplyStatusBarTranslucency()) {
+        if (isApplyKitKatTranslucency()) {
             setSystemBarTintDrawable(getResources().getDrawable(R.drawable.sr_primary));
         }
 
@@ -253,6 +253,8 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
      * @return is applyStatusBarTranslucency
      */
     protected abstract boolean isApplyStatusBarTranslucency();
+
+    protected abstract boolean isApplyKitKatTranslucency();
 
     /**
      * is bind eventBus

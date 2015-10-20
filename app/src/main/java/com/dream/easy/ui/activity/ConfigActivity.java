@@ -55,6 +55,11 @@ public class ConfigActivity extends BaseActivity {
     }
 
     @Override
+    protected boolean isApplyKitKatTranslucency() {
+        return false;
+    }
+
+    @Override
     protected boolean isBindEventBus() {
         return false;
     }

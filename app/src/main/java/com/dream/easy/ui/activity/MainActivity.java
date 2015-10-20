@@ -173,6 +173,11 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
     }
 
     @Override
+    protected boolean isApplyKitKatTranslucency() {
+        return true;
+    }
+
+    @Override
     protected boolean isBindEventBus() {
         return false;
     }

@@ -102,6 +102,11 @@ public class BaseWebActivity extends BaseSwipeBackCompatActivity {
     }
 
     @Override
+    protected boolean isApplyKitKatTranslucency() {
+        return false;
+    }
+
+    @Override
     protected boolean isBindEventBus() {
         return false;
     }
