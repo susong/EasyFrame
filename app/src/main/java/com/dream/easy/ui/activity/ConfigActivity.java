@@ -43,7 +43,6 @@ public class ConfigActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        throw new RuntimeException("测试");
     }
 
     @Override

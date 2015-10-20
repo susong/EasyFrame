@@ -2,8 +2,11 @@ package com.dream.library.base;
 
 import android.app.Application;
 
+import com.dream.library.AppConfig;
 import com.dream.library.AppException;
 import com.dream.library.utils.ImageLoaderHelper;
+import com.dream.library.utils.logger.AbLog;
+import com.dream.library.utils.logger.LogLevel;
 import com.dream.library.volley.VolleyHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -37,8 +40,28 @@ public abstract class BaseLibApplication extends Application {
         // 错误信息捕获
         Thread.setDefaultUncaughtExceptionHandler(AppException
             .getAppExceptionHandler(this));
+        initLogger(true);
         initVolley(true);
         initImageLoader(true);
+    }
+
+    /**
+     * 初始化日志打印工具类
+     */
+    private void initLogger(boolean isNeed) {
+        if (isNeed && AppConfig.IS_DEBUG) {
+            AbLog
+                .init(AppConfig.APP_NAME)     // default PRETTYLOGGER or use just init()
+//            .setMethodCount(2)          // default 2
+//            .hideThreadInfo()           // default shown
+//            .setMethodOffset(2)         // default 0
+                .setLogLevel(LogLevel.FULL);  // default LogLevel.FULL
+        } else {
+            AbLog
+                .init(AppConfig.APP_NAME)     // default PRETTYLOGGER or use just init()
+                .setLogLevel(LogLevel.NONE);  // default LogLevel.FULL
+        }
+
     }
 
     protected void initVolley(boolean isNeed) {

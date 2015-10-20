@@ -8,7 +8,9 @@ buildscript {
     }
 
     dependencies {
+        // Retrolambda: Use Lambdas on Java 7
         classpath 'me.tatarka:gradle-retrolambda:3.2.2'
+        // https://bitbucket.org/hvisser/android-apt
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
     }
 }

@@ -123,11 +123,11 @@ public class AbDirUtils {
         if (!file.exists()) {
             boolean isSuccess = file.mkdirs();
             if (isSuccess) {
-                return file.getPath();
+                return file.getPath() + File.separator;
             } else {
                 return null;
             }
         }
-        return file.getPath();
+        return file.getPath() + File.separator;
     }
 }
