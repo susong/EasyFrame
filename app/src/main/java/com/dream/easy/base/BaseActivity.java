@@ -24,9 +24,6 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IBas
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (isApplyKitKatTranslucency()) {
-            setSystemBarTintDrawable(getResources().getDrawable(R.drawable.sr_primary));
-        }
     }
 
     @Override
@@ -68,6 +65,4 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IBas
     public void hideLoading() {
         toggleShowLoading(false, null);
     }
-
-    protected abstract boolean isApplyKitKatTranslucency();
 }

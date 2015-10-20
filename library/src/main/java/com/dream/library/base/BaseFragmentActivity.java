@@ -105,7 +105,11 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
             EventBus.getDefault().register(this);
         }
         AbSmartBarUtils.hide(getWindow().getDecorView());
+
         setTranslucentStatus(isApplyStatusBarTranslucency());
+        if (isApplyStatusBarTranslucency()) {
+            setSystemBarTintDrawable(getResources().getDrawable(R.drawable.sr_primary));
+        }
 
         mContext = this;
         TAG_LOG = this.getClass().getSimpleName();

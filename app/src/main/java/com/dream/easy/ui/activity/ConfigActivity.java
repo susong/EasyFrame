@@ -1,7 +1,6 @@
 package com.dream.easy.ui.activity;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.dream.easy.base.BaseActivity;
@@ -16,10 +15,6 @@ import com.dream.library.utils.netstatus.AbNetUtils;
  * Description: EasyFrame
  */
 public class ConfigActivity extends BaseActivity {
-    @Override
-    protected boolean isApplyKitKatTranslucency() {
-        return false;
-    }
 
     @Override
     protected void getBundleExtras(Bundle extras) {

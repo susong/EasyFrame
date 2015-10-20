@@ -210,11 +210,6 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
     }
 
     @Override
-    protected boolean isApplyKitKatTranslucency() {
-        return true;
-    }
-
-    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
             if (mMainDrawer.isDrawerOpen(GravityCompat.START)) {
