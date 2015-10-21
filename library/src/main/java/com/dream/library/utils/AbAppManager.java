@@ -60,12 +60,14 @@ public class AbAppManager {
      * 获取指定的Activity
      */
     public Activity getActivity(Class<?> cls) {
-        if (mActivityStack != null)
-            for (Activity activity : mActivityStack) {
-                if (activity.getClass().equals(cls)) {
-                    return activity;
-                }
+        if (cls == null) {
+            return null;
+        }
+        for (Activity activity : mActivityStack) {
+            if (activity.getClass().equals(cls)) {
+                return activity;
             }
+        }
         return null;
     }
 
@@ -79,27 +81,37 @@ public class AbAppManager {
     /**
      * 结束指定的Activity
      */
-    public void finishActivity(Activity activity) {
-        if (activity != null && !activity.isFinishing()) {
-            mActivityStack.remove(activity);
-            activity.finish();
+    public void finishActivity(Activity... activity) {
+        if (activity == null || activity.length == 0) {
+            return;
+        }
+        for (Activity a : activity) {
+            if (!a.isFinishing()) {
+                mActivityStack.remove(a);
+                a.finish();
+            }
         }
     }
 
     /**
      * 结束指定类名的Activity，可能为多个
      */
-    public void finishActivity(Class<?> cls) {
+    public void finishActivity(Class<?>... cls) {
+        if (cls == null || cls.length == 0) {
+            return;
+        }
         Stack<Activity> activityStackTemp = new Stack<>();
-        for (Activity activity : mActivityStack) {
-            if (activity.getClass().getName().equals(cls.getName())) {
-                activityStackTemp.add(activity);
+        for (Class<?> c : cls) {
+            for (Activity a : mActivityStack) {
+                if (a.getClass().getName().equals(c.getName())) {
+                    activityStackTemp.add(a);
+                }
             }
         }
         mActivityStack.removeAll(activityStackTemp);
-        for (Activity activity : activityStackTemp) {
-            if (activity != null && !activity.isFinishing()) {
-                activity.finish();
+        for (Activity a : activityStackTemp) {
+            if (a != null && !a.isFinishing()) {
+                a.finish();
             }
         }
         activityStackTemp.clear();
@@ -109,10 +121,9 @@ public class AbAppManager {
      * 结束所有Activity
      */
     public void finishAllActivity() {
-        for (int i = 0, size = mActivityStack.size(); i < size; i++) {
-            Activity activity = mActivityStack.get(i);
-            if (activity != null && !activity.isFinishing()) {
-                activity.finish();
+        for (Activity a : mActivityStack) {
+            if (a != null && !a.isFinishing()) {
+                a.finish();
             }
         }
         mActivityStack.clear();
