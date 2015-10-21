@@ -116,7 +116,7 @@ final class LoggerPrinter implements Printer {
     }
 
     @Override
-    public void e(Exception e, Object... args) {
+    public void e(Throwable e, Object... args) {
 //        e(e.getCause(), e.getMessage(), args);
         StringWriter writer = new StringWriter();
         e.printStackTrace(new PrintWriter(writer));

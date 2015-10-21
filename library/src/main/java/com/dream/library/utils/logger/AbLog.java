@@ -53,7 +53,7 @@ public final class AbLog {
     printer.e(null, message, args);
   }
 
-  public static void e(Exception e, Object... args) {
+  public static void e(Throwable e, Object... args) {
     printer.e(e, args);
   }
 
