@@ -20,7 +20,6 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="default_image_background">#ffeeeeee</color>
-    <color name="transparent">#00000000</color>
 
     <color name="gplus_color_1">#3e802f</color>
     <color name="gplus_color_2">#f4b400</color>
@@ -36,4 +35,17 @@
 
     <color name="base_bg">#ffeeeeee</color>
     <color name="base_msg_color">#ff999999</color>
+
+
+    <!--button-->
+    <color name="btn_normal">#FDB508</color>
+    <color name="btn_pressed">#C48A19</color>
+    <color name="btn_focused">#F39700</color>
+    <color name="btn_disable">#D0C7B1</color>
+    <color name="btn_disable_focused">#F2C478</color>
+    <color name="btn_disable_normal">#F7D27C</color>
+    <!--button_text-->
+    <color name="btn_normal_text">#FFFFFF</color>
+    <color name="btn_enable_text">#858482</color>
+
 </resources>

@@ -1,0 +1,146 @@
+<resources>
+
+    <style name="ActivityInOutAnimation"
+        parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/close_enter</item>
+        <item name="android:activityCloseEnterAnimation">@anim/open_exit</item>
+        <item name="android:activityCloseExitAnimation">@anim/close_exit</item>
+    </style>
+
+    <style name="wrap_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="fullline_view">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="full_view">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="mProgressBarHorizontal">
+        <item name="android:indeterminateOnly">false</item>
+
+        <item name="android:minHeight">5dip</item>
+        <item name="android:maxHeight">5dip</item>
+    </style>
+
+    <style name="mProgressBarCircular">
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_circular</item>
+        <item name="android:minHeight">5dip</item>
+        <item name="android:maxHeight">5dip</item>
+    </style>
+
+    <!-- 加载滚动条样式 -->
+    <style name="mProgressBarLoading">
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_loading</item>
+        <item name="android:indeterminateDuration">1000</item>
+        <item name="android:indeterminateOnly">true</item>
+    </style>
+
+    <style name="mButton">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">@drawable/selector_btn_bg</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmallInverse</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">@drawable/selector_btn_text</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="mTextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="mListView">
+        <!--<item name="android:listSelector">@drawable/selector_list_bg</item>-->
+        <!--<item name="android:cacheColorHint">?android:attr/colorBackgroundCacheHint</item>-->
+        <!--<item name="android:divider">@drawable/list_divider</item>-->
+    </style>
+
+    <style name="mEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:selectAllOnFocus">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/ic_input_box_bg</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMediumInverse</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:cacheColorHint">@color/gray</item>
+        <item name="android:maxLength">140</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="mCheckBox"
+        parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:button">@drawable/selector_check_box</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="mCheckBox2"
+        parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/selector_btn_checkbox</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="mRadioButton"
+        parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="item_input_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@drawable/ic_input_box_bg</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="item_input_edit_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@null</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="item_input_clear">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:src">@drawable/selector_btn_input_clear</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:contentDescription">@null</item>
+    </style>
+
+
+</resources>

@@ -15,6 +15,8 @@ import java.io.StringWriter;
  */
 @SuppressWarnings("unused")
 public class AbSimpleLog {
+
+    private static final String DEFAULT_TAG = "SimpleLog";
     /**
      * This flag to indicate the log is enabled or disabled.
      */
@@ -33,6 +35,9 @@ public class AbSimpleLog {
 //    public static void enableLog() {
 //        isLogEnable = true;
 //    }
+    public static void d(String msg) {
+        d(DEFAULT_TAG, msg);
+    }
 
     /**
      * Debug
@@ -45,6 +50,10 @@ public class AbSimpleLog {
             StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[3];
             Log.d(tag, rebuildMsg(stackTraceElement, msg));
         }
+    }
+
+    public static void i(String msg) {
+        i(DEFAULT_TAG, msg);
     }
 
     /**
@@ -60,6 +69,11 @@ public class AbSimpleLog {
         }
     }
 
+
+    public static void v(String msg) {
+        v(DEFAULT_TAG, msg);
+    }
+
     /**
      * Verbose
      *
@@ -71,6 +85,10 @@ public class AbSimpleLog {
             StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[3];
             Log.v(tag, rebuildMsg(stackTraceElement, msg));
         }
+    }
+
+    public static void w(String msg) {
+        w(DEFAULT_TAG, msg);
     }
 
     /**
@@ -86,6 +104,10 @@ public class AbSimpleLog {
         }
     }
 
+    public static void e(String msg) {
+        e(DEFAULT_TAG, msg);
+    }
+
     /**
      * Error
      *
@@ -97,6 +119,10 @@ public class AbSimpleLog {
             StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[3];
             Log.e(tag, rebuildMsg(stackTraceElement, msg));
         }
+    }
+
+    public static void e(Throwable ex) {
+        e(DEFAULT_TAG, ex);
     }
 
     /**
