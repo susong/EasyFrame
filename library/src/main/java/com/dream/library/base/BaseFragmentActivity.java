@@ -1,5 +1,6 @@
 package com.dream.library.base;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -15,6 +16,8 @@ import android.view.WindowManager;
 
 import com.dream.library.R;
 import com.dream.library.eventbus.EventCenter;
+import com.dream.library.interf.EmptyControl;
+import com.dream.library.interf.ProgressDialogControl;
 import com.dream.library.utils.AbAppManager;
 import com.dream.library.utils.AbSmartBarUtils;
 import com.dream.library.utils.AbStringUtils;
@@ -34,7 +37,7 @@ import de.greenrobot.event.EventBus;
  * Description: EasyFrame
  */
 @SuppressWarnings("unused")
-public abstract class BaseFragmentActivity extends FragmentActivity {
+public abstract class BaseFragmentActivity extends FragmentActivity implements EmptyControl, ProgressDialogControl {
 
     /**
      * Log tag
@@ -62,6 +65,15 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
      * loading view controller
      */
     private EmptyViewHelperController mEmptyViewHelperController = null;
+
+    /**
+     * 界面是否可见
+     */
+    protected boolean mIsVisible;
+    /**
+     * 进度条
+     */
+    private ProgressDialog mProgressDialog;
 
     /**
      * overridePendingTransition mode
@@ -124,8 +136,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
         if (getContentViewLayoutId() != 0) {
             setContentView(getContentViewLayoutId());
-        } else {
-            throw new IllegalArgumentException("You must return a right contentView layout resource Id");
         }
 
         mNetChangeObserver = new NetChangeObserver() {
@@ -206,18 +216,23 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     }
 
     /**
-     * get bundle data
-     *
-     * @param extras Bundle
-     */
-    protected abstract void getBundleExtras(Bundle extras);
-
-    /**
      * bind layout resource file
      *
      * @return id of layout resource
      */
     protected abstract int getContentViewLayoutId();
+
+    /**
+     * init all views and add events
+     */
+    protected abstract void initViewsAndEvents();
+
+    /**
+     * get bundle data
+     *
+     * @param extras Bundle
+     */
+    protected abstract void getBundleExtras(Bundle extras);
 
     /**
      * when event coming
@@ -230,11 +245,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
      * get loading target view
      */
     protected abstract View getLoadingTargetView();
-
-    /**
-     * init all views and add events
-     */
-    protected abstract void initViewsAndEvents();
 
     /**
      * network connected
@@ -362,70 +372,149 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     }
 
     /**
-     * toggle show loading
-     *
-     * @param toggle boolean
+     * show loading
      */
-    protected void toggleShowLoading(boolean toggle, String msg) {
-        if (null == mEmptyViewHelperController) {
-            throw new IllegalArgumentException("You must return a right target view for loading");
-        }
-
-        if (toggle) {
-            mEmptyViewHelperController.showLoading(msg);
-        } else {
-            mEmptyViewHelperController.restore();
-        }
+    public void showLoading() {
+        showLoading(null);
     }
 
     /**
-     * toggle show empty
-     *
-     * @param toggle boolean
+     * show loading
      */
-    protected void toggleShowEmpty(boolean toggle, String msg, View.OnClickListener onClickListener) {
+    public void showLoading(String msg) {
         if (null == mEmptyViewHelperController) {
             throw new IllegalArgumentException("You must return a right target view for loading");
         }
-
-        if (toggle) {
-            mEmptyViewHelperController.showEmpty(msg, onClickListener);
-        } else {
-            mEmptyViewHelperController.restore();
-        }
+        mEmptyViewHelperController.showLoading(msg);
     }
 
     /**
-     * toggle show error
-     *
-     * @param toggle boolean
+     * show empty
      */
-    protected void toggleShowError(boolean toggle, String msg, View.OnClickListener onClickListener) {
-        if (null == mEmptyViewHelperController) {
-            throw new IllegalArgumentException("You must return a right target view for loading");
-        }
-
-        if (toggle) {
-            mEmptyViewHelperController.showError(msg, onClickListener);
-        } else {
-            mEmptyViewHelperController.restore();
-        }
+    public void showEmpty() {
+        showEmpty(null, null);
     }
 
     /**
-     * toggle show network error
-     *
-     * @param toggle boolean
+     * show empty
      */
-    protected void toggleNetworkError(boolean toggle, View.OnClickListener onClickListener) {
+    public void showEmpty(String msg) {
+        showEmpty(msg, null);
+    }
+
+    /**
+     * show empty
+     */
+    public void showEmpty(View.OnClickListener onClickListener) {
+        showEmpty(null, onClickListener);
+    }
+
+    /**
+     * show empty
+     */
+    public void showEmpty(String msg, View.OnClickListener onClickListener) {
         if (null == mEmptyViewHelperController) {
             throw new IllegalArgumentException("You must return a right target view for loading");
         }
+        mEmptyViewHelperController.showEmpty(msg, onClickListener);
+    }
 
-        if (toggle) {
-            mEmptyViewHelperController.showNetworkError(onClickListener);
-        } else {
-            mEmptyViewHelperController.restore();
+    /**
+     * show error
+     */
+    public void showError() {
+        showError(null, null);
+    }
+
+    /**
+     * show error
+     */
+    public void showError(String msg) {
+        showError(msg, null);
+    }
+
+    /**
+     * show error
+     */
+    public void showError(View.OnClickListener onClickListener) {
+        showError(null, onClickListener);
+    }
+
+    /**
+     * show error
+     */
+    public void showError(String msg, View.OnClickListener onClickListener) {
+        if (null == mEmptyViewHelperController) {
+            throw new IllegalArgumentException("You must return a right target view for loading");
+        }
+        mEmptyViewHelperController.showError(msg, onClickListener);
+    }
+
+    /**
+     * show error
+     */
+    public void showNetworkError() {
+        showNetworkError(null);
+    }
+
+    /**
+     * show network error
+     */
+    public void showNetworkError(View.OnClickListener onClickListener) {
+        if (null == mEmptyViewHelperController) {
+            throw new IllegalArgumentException("You must return a right target view for loading");
+        }
+        mEmptyViewHelperController.showNetworkError(onClickListener);
+    }
+
+    public void clearEmpty() {
+        if (null == mEmptyViewHelperController) {
+            throw new IllegalArgumentException("You must return a right target view for loading");
+        }
+        mEmptyViewHelperController.restore();
+    }
+
+    public ProgressDialog showProgressDialog() {
+        return showProgressDialog(getString(R.string.common_loading_message), true);
+    }
+
+    public ProgressDialog showNonCancelableProgressDialog() {
+        return showProgressDialog(getString(R.string.common_loading_message), false);
+    }
+
+    public ProgressDialog showProgressDialog(int resId) {
+        return showProgressDialog(getString(resId), true);
+    }
+
+    public ProgressDialog showNonCancelableProgressDialog(int resId) {
+        return showProgressDialog(getString(resId), false);
+    }
+
+    public ProgressDialog showProgressDialog(String text) {
+        return showProgressDialog(text, true);
+    }
+
+    public ProgressDialog showNonCancelableProgressDialog(String text) {
+        return showProgressDialog(text, false);
+    }
+
+    public ProgressDialog showProgressDialog(String text, boolean isCancelable) {
+        if (mIsVisible) {
+            if (mProgressDialog == null) {
+                mProgressDialog = new ProgressDialog(this);
+            }
+            mProgressDialog.setMessage(text);
+            mProgressDialog.setCanceledOnTouchOutside(false);
+            mProgressDialog.setCancelable(isCancelable);
+            mProgressDialog.show();
+            return mProgressDialog;
+        }
+        return null;
+    }
+
+    public void hideProgressDialog() {
+        if (mIsVisible && mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
         }
     }
 

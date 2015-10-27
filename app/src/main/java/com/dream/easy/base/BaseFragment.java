@@ -13,26 +13,26 @@ public abstract class BaseFragment extends BaseLibFragment implements IBaseView 
 
     @Override
     public void showError(String msg) {
-        toggleShowError(true, msg, null);
+        super.showError(msg);
     }
 
     @Override
     public void showException(String msg) {
-        toggleShowError(true, msg, null);
+        super.showError(msg);
     }
 
     @Override
     public void showNetError() {
-        toggleNetworkError(true, null);
+        super.showNetworkError();
     }
 
     @Override
     public void showLoading(String msg) {
-        toggleShowLoading(true, null);
+        super.showLoading(msg);
     }
 
     @Override
     public void hideLoading() {
-        toggleShowLoading(false, null);
+        clearEmpty();
     }
 }

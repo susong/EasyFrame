@@ -37,11 +37,11 @@
 
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowIsTranslucent">true</item>-->
         <item name="android:windowContentOverlay">@android:color/transparent</item>
         <item name="android:windowBackground">@color/base_bg</item>
         <item name="android:listViewStyle">@style/mListView</item>
-        <item name="android:buttonStyle">@style/mButton</item>
+        <!--<item name="android:buttonStyle">@style/mButton</item>-->
         <item name="android:editTextStyle">@style/mEditText</item>
         <item name="android:checkboxStyle">@style/mCheckBox</item>
         <item name="android:radioButtonStyle">@style/mRadioButton</item>

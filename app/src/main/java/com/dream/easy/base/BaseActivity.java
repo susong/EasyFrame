@@ -43,26 +43,26 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements IBas
 
     @Override
     public void showError(String msg) {
-        toggleShowError(true, msg, null);
+        super.showError(msg);
     }
 
     @Override
     public void showException(String msg) {
-        toggleShowError(true, msg, null);
+        showError(msg);
     }
 
     @Override
     public void showNetError() {
-        toggleNetworkError(true, null);
+        showNetworkError();
     }
 
     @Override
     public void showLoading(String msg) {
-        toggleShowLoading(true, null);
+        super.showLoading(msg);
     }
 
     @Override
     public void hideLoading() {
-        toggleShowLoading(false, null);
+        showLoading();
     }
 }

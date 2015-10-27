@@ -228,7 +228,7 @@ public class MainActivity extends BaseActivity implements IMainActivityView {
                 mMainDrawer.closeDrawer(GravityCompat.START);
                 return true;
             } else {
-                return mDoubleClickExitHelper.onKeyDown(keyCode);
+                return mDoubleClickExitHelper.onKeyDown(keyCode, getLoadingTargetView());
             }
         }
         return super.onKeyDown(keyCode, event);

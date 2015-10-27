@@ -84,7 +84,7 @@ public class ImageListFragment extends BaseFragment implements IImageListFragmen
                 }, ApiConstants.Integers.PAGE_LAZY_LOAD_DELAY_TIME_MS);
             }
         } else {
-            toggleNetworkError(true, new View.OnClickListener() {
+            showNetworkError(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mIImageListFragmentPresenter.loadImageList(TAG_LOG, Constants.EVENT_REFRESH_DATA, mBaseEntity.getId(), mCurrentPage, true);
@@ -155,7 +155,7 @@ public class ImageListFragment extends BaseFragment implements IImageListFragmen
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setRefreshing(false);
         }
-        toggleShowError(true, msg, new View.OnClickListener() {
+        showError(msg, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mIImageListFragmentPresenter.loadImageList(TAG_LOG, Constants.EVENT_REFRESH_DATA, mBaseEntity.getId(), mCurrentPage, false);
