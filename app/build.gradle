@@ -51,7 +51,7 @@ android {
     }
     if (project.ext.loadSign) {
         Properties p = new Properties()
-        p.load(new FileInputStream(rootProject.file('key/releaseSign.properties')))
+        p.load(new FileInputStream(rootProject.file('key/releasesign.properties')))
 
         android.signingConfigs.release.storeFile rootProject.file(p.file)
         android.signingConfigs.release.storePassword p.password
@@ -59,7 +59,7 @@ android {
         android.signingConfigs.release.keyPassword p.keyPassword
     } else {
         Properties p = new Properties()
-        p.load(new FileInputStream(rootProject.file('key/debugSign.properties')))
+        p.load(new FileInputStream(rootProject.file('key/debugsign.properties')))
 
         android.signingConfigs.debug.storeFile rootProject.file(p.file)
         android.signingConfigs.debug.storePassword p.password
