@@ -7,6 +7,7 @@ import com.dream.library.AppException;
 import com.dream.library.utils.ImageLoaderHelper;
 import com.dream.library.utils.logger.AbLog;
 import com.dream.library.utils.logger.LogLevel;
+import com.dream.library.utils.netstatus.NetStateReceiver;
 import com.dream.library.volley.VolleyHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -40,6 +41,7 @@ public abstract class BaseLibApplication extends Application {
         // 错误信息捕获
         Thread.setDefaultUncaughtExceptionHandler(AppException
             .getAppExceptionHandler(this));
+        NetStateReceiver.registerNetworkStateReceiver(this);
         initLogger(true);
         initVolley(true);
         initImageLoader(true);

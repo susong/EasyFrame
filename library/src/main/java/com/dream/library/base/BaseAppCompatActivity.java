@@ -16,12 +16,14 @@ import android.view.WindowManager;
 
 import com.dream.library.R;
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.interf.EmptyControl;
-import com.dream.library.interf.ProgressDialogControl;
+import com.dream.library.interf.IEmptyControl;
+import com.dream.library.interf.IProgressDialogControl;
+import com.dream.library.interf.IToastControl;
 import com.dream.library.utils.AbAppManager;
 import com.dream.library.utils.AbSmartBarUtils;
 import com.dream.library.utils.AbStringUtils;
 import com.dream.library.utils.AbSystemBarTintManager;
+import com.dream.library.utils.AbToastUtils;
 import com.dream.library.utils.netstatus.AbNetUtils;
 import com.dream.library.utils.netstatus.NetChangeObserver;
 import com.dream.library.utils.netstatus.NetStateReceiver;
@@ -37,7 +39,7 @@ import de.greenrobot.event.EventBus;
  * Description: EasyFrame
  */
 @SuppressWarnings("unused")
-public abstract class BaseAppCompatActivity extends AppCompatActivity implements EmptyControl, ProgressDialogControl {
+public abstract class BaseAppCompatActivity extends AppCompatActivity implements IEmptyControl, IProgressDialogControl, IToastControl {
 
     /**
      * Log tag
@@ -153,7 +155,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         };
 
         NetStateReceiver.registerNetChangeObserver(mNetChangeObserver);
-        NetStateReceiver.registerNetworkStateReceiver(this);
 
         mIsVisible = true;
 
@@ -211,7 +212,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         super.onDestroy();
         ButterKnife.unbind(this);
         mIsVisible = false;
-        NetStateReceiver.unRegisterNetworkStateReceiver(this);
         NetStateReceiver.unRegisterNetChangeObserver(mNetChangeObserver);
         if (isBindEventBus()) {
             EventBus.getDefault().unregister(this);
@@ -368,10 +368,14 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
      *
      * @param msg msg
      */
-    protected void showToast(String msg) {
+    public void showToast(String msg) {
         //防止遮盖虚拟按键
         if (null != msg && !AbStringUtils.isEmpty(msg)) {
-            Snackbar.make(getLoadingTargetView(), msg, Snackbar.LENGTH_SHORT).show();
+            if (getLoadingTargetView() != null) {
+                Snackbar.make(getLoadingTargetView(), msg, Snackbar.LENGTH_SHORT).show();
+            } else {
+                AbToastUtils.show(msg);
+            }
         }
     }
 
@@ -479,11 +483,11 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     }
 
     public ProgressDialog showProgressDialog() {
-        return showProgressDialog(getString(R.string.common_loading_message), true);
+        return showProgressDialog(getString(R.string.common_loading_msg), true);
     }
 
     public ProgressDialog showNonCancelableProgressDialog() {
-        return showProgressDialog(getString(R.string.common_loading_message), false);
+        return showProgressDialog(getString(R.string.common_loading_msg), false);
     }
 
     public ProgressDialog showProgressDialog(int resId) {

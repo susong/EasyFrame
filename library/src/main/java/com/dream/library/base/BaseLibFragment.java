@@ -17,8 +17,9 @@ import android.view.ViewGroup;
 
 import com.dream.library.R;
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.interf.EmptyControl;
-import com.dream.library.interf.ProgressDialogControl;
+import com.dream.library.interf.IEmptyControl;
+import com.dream.library.interf.IProgressDialogControl;
+import com.dream.library.interf.IToastControl;
 import com.dream.library.utils.AbStringUtils;
 import com.dream.library.widgets.empty.EmptyViewHelperController;
 
@@ -34,7 +35,7 @@ import de.greenrobot.event.EventBus;
  * Description: EasyFrame
  */
 @SuppressWarnings("unused")
-public abstract class BaseLibFragment extends Fragment implements EmptyControl {
+public abstract class BaseLibFragment extends Fragment implements IEmptyControl, IProgressDialogControl, IToastControl {
 
     /**
      * Log tag
@@ -302,7 +303,7 @@ public abstract class BaseLibFragment extends Fragment implements EmptyControl {
      *
      * @param msg String
      */
-    protected void showToast(String msg) {
+    public void showToast(String msg) {
         if (null != msg && !AbStringUtils.isEmpty(msg)) {
             Snackbar.make(((Activity) mContext).getWindow().getDecorView(), msg, Snackbar.LENGTH_SHORT).show();
         }
@@ -411,42 +412,42 @@ public abstract class BaseLibFragment extends Fragment implements EmptyControl {
         mEmptyViewHelperController.restore();
     }
 
-    protected ProgressDialog showProgressDialog() {
-        return showProgressDialog(getString(R.string.common_loading_message), true);
+    public ProgressDialog showProgressDialog() {
+        return showProgressDialog(getString(R.string.common_loading_msg), true);
     }
 
-    protected ProgressDialog showNonCancelableProgressDialog() {
-        return showProgressDialog(getString(R.string.common_loading_message), false);
+    public ProgressDialog showNonCancelableProgressDialog() {
+        return showProgressDialog(getString(R.string.common_loading_msg), false);
     }
 
-    protected ProgressDialog showProgressDialog(int resId) {
+    public ProgressDialog showProgressDialog(int resId) {
         return showProgressDialog(getString(resId), true);
     }
 
-    protected ProgressDialog showNonCancelableProgressDialog(int resId) {
+    public ProgressDialog showNonCancelableProgressDialog(int resId) {
         return showProgressDialog(getString(resId), false);
     }
 
-    protected ProgressDialog showProgressDialog(String text) {
+    public ProgressDialog showProgressDialog(String text) {
         return showProgressDialog(text, true);
     }
 
-    protected ProgressDialog showNonCancelableProgressDialog(String text) {
+    public ProgressDialog showNonCancelableProgressDialog(String text) {
         return showProgressDialog(text, false);
     }
 
-    protected ProgressDialog showProgressDialog(String text, boolean isCancelable) {
+    public ProgressDialog showProgressDialog(String text, boolean isCancelable) {
         FragmentActivity activity = getActivity();
-        if (activity instanceof ProgressDialogControl) {
-            return ((ProgressDialogControl) activity).showProgressDialog(text, isCancelable);
+        if (activity instanceof IProgressDialogControl) {
+            return ((IProgressDialogControl) activity).showProgressDialog(text, isCancelable);
         }
         return null;
     }
 
-    protected void hideProgressDialog() {
+    public void hideProgressDialog() {
         FragmentActivity activity = getActivity();
-        if (activity instanceof ProgressDialogControl) {
-            ((ProgressDialogControl) activity).hideProgressDialog();
+        if (activity instanceof IProgressDialogControl) {
+            ((IProgressDialogControl) activity).hideProgressDialog();
         }
     }
 

@@ -9,7 +9,7 @@ import android.view.View;
  * Date:        15/10/27 下午3:54
  * Description: EasyFrame
  */
-public interface EmptyControl {
+public interface IEmptyControl {
 
     void showLoading();
 

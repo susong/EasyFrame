@@ -24,7 +24,7 @@
         android:ellipsize="end"
         android:lineSpacingExtra="@dimen/common_loading_text_lines_spacing"
         android:maxLines="2"
-        android:text="@string/common_loading_message"
+        android:text="@string/common_loading_msg"
         android:textColor="@color/base_msg_color"
         android:textSize="14sp"/>
 </LinearLayout>

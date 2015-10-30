@@ -77,7 +77,6 @@ public class AbPropertiesUtils {
                 AbSimpleLog.e(TAG, e);
             }
         }
-        AbSimpleLog.i(TAG, "properties get");
         return props;
     }
 
@@ -120,7 +119,6 @@ public class AbPropertiesUtils {
         Properties props = getProps();
         props.putAll(ps);
         setProps(props);
-        AbSimpleLog.i(TAG, "properties set");
     }
 
     public void set(String key, String value) {

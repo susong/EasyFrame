@@ -9,7 +9,7 @@ import android.app.ProgressDialog;
  * Date:        15/10/27 下午3:45
  * Description: EasyFrame
  */
-public interface ProgressDialogControl {
+public interface IProgressDialogControl {
 
     ProgressDialog showProgressDialog();
 

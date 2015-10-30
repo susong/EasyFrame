@@ -2,6 +2,9 @@ package com.dream.library.utils;
 
 import android.app.Activity;
 
+import com.dream.library.base.BaseLibApplication;
+import com.dream.library.utils.netstatus.NetStateReceiver;
+
 import java.util.Stack;
 
 /**
@@ -135,6 +138,7 @@ public class AbAppManager {
     public void AppExit() {
         try {
             finishAllActivity();
+            NetStateReceiver.unRegisterNetworkStateReceiver(BaseLibApplication.getInstance());
             // 杀死该应用进程
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(0);

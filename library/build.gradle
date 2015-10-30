@@ -93,4 +93,6 @@ dependencies {
     // https://github.com/square/leakcanary
     //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
     //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
+    // https://github.com/vekexasia/android-edittext-validator
+    compile 'com.andreabaccega:android-form-edittext:1.2.1@aar'
 }

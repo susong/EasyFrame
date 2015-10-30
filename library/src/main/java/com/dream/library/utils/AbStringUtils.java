@@ -30,11 +30,11 @@ public class AbStringUtils {
     private final static Pattern URL = Pattern
         .compile("^([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~/])+$");
 
-    private final static Pattern LEGAL_NAME = Pattern
-        .compile("^[A-Za-z0-9\\u4e00-\\u9fa5_@]+$");
+    public final static Pattern LEGAL_NAME = Pattern
+        .compile("^[a-zA-Z_0-9\\.`~!@#$%^&*()+-=/\\u4e00-\\u9fa5]{4,20}$");
 
-    private final static Pattern LEGAL_PASSWORD = Pattern
-        .compile("^[A-Za-z0-9!@#]+$");
+    public final static Pattern LEGAL_PASSWORD = Pattern
+        .compile("^[a-zA-Z_0-9\\.`~!@#$%^&*()+-=/]{6,20}$");
 
     private final static ThreadLocal<SimpleDateFormat> dateFormatterLong = new ThreadLocal<SimpleDateFormat>() {
         @Override

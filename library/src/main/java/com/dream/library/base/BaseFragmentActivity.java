@@ -16,8 +16,9 @@ import android.view.WindowManager;
 
 import com.dream.library.R;
 import com.dream.library.eventbus.EventCenter;
-import com.dream.library.interf.EmptyControl;
-import com.dream.library.interf.ProgressDialogControl;
+import com.dream.library.interf.IEmptyControl;
+import com.dream.library.interf.IProgressDialogControl;
+import com.dream.library.interf.IToastControl;
 import com.dream.library.utils.AbAppManager;
 import com.dream.library.utils.AbSmartBarUtils;
 import com.dream.library.utils.AbStringUtils;
@@ -37,7 +38,7 @@ import de.greenrobot.event.EventBus;
  * Description: EasyFrame
  */
 @SuppressWarnings("unused")
-public abstract class BaseFragmentActivity extends FragmentActivity implements EmptyControl, ProgressDialogControl {
+public abstract class BaseFragmentActivity extends FragmentActivity implements IEmptyControl, IProgressDialogControl, IToastControl {
 
     /**
      * Log tag
@@ -153,7 +154,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements E
         };
 
         NetStateReceiver.registerNetChangeObserver(mNetChangeObserver);
-        NetStateReceiver.registerNetworkStateReceiver(this);
 
         initViewsAndEvents();
     }
@@ -208,7 +208,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements E
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
-        NetStateReceiver.unRegisterNetworkStateReceiver(this);
         NetStateReceiver.unRegisterNetChangeObserver(mNetChangeObserver);
         if (isBindEventBus()) {
             EventBus.getDefault().unregister(this);
@@ -365,7 +364,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements E
      *
      * @param msg String
      */
-    protected void showToast(String msg) {
+    public void showToast(String msg) {
         if (null != msg && !AbStringUtils.isEmpty(msg)) {
             Snackbar.make(getWindow().getDecorView(), msg, Snackbar.LENGTH_SHORT).show();
         }
@@ -475,11 +474,11 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements E
     }
 
     public ProgressDialog showProgressDialog() {
-        return showProgressDialog(getString(R.string.common_loading_message), true);
+        return showProgressDialog(getString(R.string.common_loading_msg), true);
     }
 
     public ProgressDialog showNonCancelableProgressDialog() {
-        return showProgressDialog(getString(R.string.common_loading_message), false);
+        return showProgressDialog(getString(R.string.common_loading_msg), false);
     }
 
     public ProgressDialog showProgressDialog(int resId) {
