@@ -148,5 +148,20 @@
         <item name="android:contentDescription">@null</item>
     </style>
 
+    <!-- =================================自定义RatingBar================================= -->
+    <style name="rating_bar_red_style"
+        parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/selector_rating_bar_red</item>
+        <item name="android:numStars">5</item>
+        <item name="android:minHeight">14dp</item>
+        <item name="android:maxHeight">18dp</item>
+    </style>
 
+    <style name="rating_bar_orange_style"
+        parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/selector_rating_bar_orange</item>
+        <item name="android:numStars">5</item>
+        <item name="android:minHeight">14dp</item>
+        <item name="android:maxHeight">22dp</item>
+    </style>
 </resources>
