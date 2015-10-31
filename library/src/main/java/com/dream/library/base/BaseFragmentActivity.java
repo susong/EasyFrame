@@ -80,7 +80,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
      * overridePendingTransition mode
      */
     public enum TransitionMode {
-        LEFT, RIGHT, TOP, BOTTOM, SCALE, FADE
+        LEFT, RIGHT, TOP, BOTTOM, SCALE, FADE, DEFAULT
     }
 
     @Override
@@ -88,10 +88,10 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
         if (toggleOverridePendingTransition()) {
             switch (getOverridePendingTransitionMode()) {
                 case LEFT:
-                    overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
                     break;
                 case RIGHT:
-                    overridePendingTransition(R.anim.right_in, R.anim.right_out);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     break;
                 case TOP:
                     overridePendingTransition(R.anim.top_in, R.anim.top_out);
@@ -104,6 +104,9 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
                     break;
                 case FADE:
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    break;
+                default:
+                    overridePendingTransition(R.anim.open_enter, R.anim.open_exit);
                     break;
             }
         }
@@ -183,10 +186,10 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
         if (toggleOverridePendingTransition()) {
             switch (getOverridePendingTransitionMode()) {
                 case LEFT:
-                    overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
                     break;
                 case RIGHT:
-                    overridePendingTransition(R.anim.right_in, R.anim.right_out);
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out);
                     break;
                 case TOP:
                     overridePendingTransition(R.anim.top_in, R.anim.top_out);
@@ -199,6 +202,9 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
                     break;
                 case FADE:
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    break;
+                default:
+                    overridePendingTransition(R.anim.close_enter, R.anim.close_exit);
                     break;
             }
         }

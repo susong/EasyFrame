@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<set xmlns:android="http://schemas.android.com/apk/res/android">
+<set xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <translate
-        android:interpolator="@android:anim/anticipate_overshoot_interpolator"
-        android:fromXDelta="10%p"
-        android:toXDelta="0"
-        android:duration="300"/>
+        android:duration="200"
+        android:fromXDelta="0"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:toXDelta="10%p" />
 
     <scale
-        android:interpolator="@android:anim/anticipate_overshoot_interpolator"
-        android:pivotX="0"
+        android:duration="200"
+        android:fromXScale="1.0"
+        android:fromYScale="1.0"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:pivotX="50%"
         android:pivotY="50%"
-        android:fromXScale=".95"
-        android:fromYScale=".95"
-        android:toXScale="1.0"
-        android:toYScale="1.0"
-        android:startOffset="200"
-        android:duration="300" />
-     <alpha android:fromAlpha="0.5" android:toAlpha="1"/>
+        android:startOffset="100"
+        android:toXScale=".95"
+        android:toYScale=".95" />
+
+    <!--<alpha-->
+        <!--android:duration="200"-->
+        <!--android:fromAlpha="1.0"-->
+        <!--android:toAlpha="0.5" />-->
+
 </set>

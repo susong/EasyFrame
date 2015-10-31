@@ -3,8 +3,8 @@
     <style name="ActivityInOutAnimation"
         parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/open_enter</item>
-        <item name="android:activityOpenExitAnimation">@anim/close_enter</item>
-        <item name="android:activityCloseEnterAnimation">@anim/open_exit</item>
+        <item name="android:activityOpenExitAnimation">@anim/open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/close_enter</item>
         <item name="android:activityCloseExitAnimation">@anim/close_exit</item>
     </style>
 
