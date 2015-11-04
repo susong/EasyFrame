@@ -37,6 +37,7 @@ import java.io.File;
  * GitHub:      https://github.com/susong0618
  * Date:        15/10/15 上午12:37
  * Description: ImageLoaderHelper
+ * https://github.com/nostra13/Android-Universal-Image-Loader
  * <p>
  * <uses-permission android:name="android.permission.INTERNET" />
  * <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
