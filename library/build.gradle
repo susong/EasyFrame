@@ -53,6 +53,8 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.19'
     // http://square.github.io/okhttp/
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+    // https://github.com/hongyangAndroid/okhttp-utils
+    compile 'com.zhy:okhttputils:2.2.0'
     // https://github.com/loopj/android-async-http
     //    compile 'com.loopj.android:android-async-http:1.4.9'
     // https://github.com/nostra13/Android-Universal-Image-Loader
